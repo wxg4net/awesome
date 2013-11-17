@@ -38,7 +38,10 @@ set laststatus=2            " 显示状态栏 (默认值为 1, 无法显示状�
 " set foldcolumn=0            " 设置折叠区域的宽度
 " setlocal foldlevel=1        " 设置折叠层数为
 " set foldclose=all           " 设置为自动关闭折叠
-colorscheme delek  " 设定配色方案
+
+set t_Co=256
+set background=dark
+colorscheme lucius  " 设定配色方案
 set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ [%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %c:%l/%L%)\
                             " 设置在状态行显示的信息
 " 显示Tab符 set list
