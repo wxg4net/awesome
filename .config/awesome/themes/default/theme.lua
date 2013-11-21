@@ -25,19 +25,11 @@ theme.fg_urgent                     = "#CC9393"
 theme.bg_urgent                     = "#2A1F1E"
 theme.border_width                  = "0"
 theme.border_normal                 = "#0E0E0E"
-theme.border_focus                  = "#F79372"
+theme.border_focus                  = "#000000"
+theme.border_marked = "#CC9393"
 -- theme.taglist_fg_focus              = "#F6784F"
 -- theme.taglist_bg_focus              = "png:" .. theme.icon_dir .. "/taglist/taglist_bg_focus.png"
 -- theme.tasklist_bg_focus             = "png:" .. theme.icon_dir .. "/tasklist/tasklist_bg_focus.png"
--- }}}
-
--- {{{ Borders
-theme.border_width  = "0"
---theme.border_normal = "#5F5F5F"
-theme.border_normal = "#3F3F3F"
---theme.border_focus  = "#FF0000"
-theme.border_focus  = "#FF0000"
-theme.border_marked = "#CC9393"
 -- }}}
 
 -- {{{ Titlebars

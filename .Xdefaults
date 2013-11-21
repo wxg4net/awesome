@@ -1,0 +1,19 @@
+! xterm settings:
+XTerm*preeditType: Root
+XTerm*metaSendsEscape: true
+XTerm*eightBitInput: false
+XTerm*altSendsEscape: true
+XTerm*utf8Title: true
+XTerm*faceName: CourierScreenplay:pixelsize=16
+XTerm*faceNameDoublesize: WenQuanYi Zen Hei Mono:pixelsize=16
+XTerm*background: #111111
+XTerm*foreground: lightgrey
+XTerm*cursorColor: OliveDrab1
+xterm*termName: xterm-256color
+xterm*vt100.initialFont: 5
+! X11 settings:
+
+XTerm*VT100.Translations: #override \
+    Ctrl <KeyPress> V: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
+    <BtnUp>: select-end(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
+    Ctrl <KeyPress> P: print() \n
