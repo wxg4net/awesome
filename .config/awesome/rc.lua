@@ -93,7 +93,7 @@ layouts =
 vars = {
    -- names  = {" ➊ ", " ➋ ", " ➌ ", " ➍ ", " ➎ ", " ➏ ", " ➐ "},
    names  = { ' 1 ', ' 2 ', ' 3 ', ' 4 ', ' 5 ', ' 6 ', ' 7 '},
-   layout = { layouts[3], layouts[2], layouts[1], layouts[2], layouts[1],layouts[3], layouts[1]}
+   layout = { layouts[3], layouts[1], layouts[1], layouts[2], layouts[1],layouts[3], layouts[1]}
    -- layout = { layouts[3], layouts[1], layouts[1], layouts[3], layouts[1],layouts[3], layouts[1]}
 }
 
@@ -168,7 +168,7 @@ myserverbox:buttons(
 )
 mytextbox:buttons( 
     awful.util.table.join(
-        awful.button({ }, 1, function() awful.util.spawn("xterm -e 'yagtd.py ~/work/archiving/todo'")  end)
+        awful.button({ }, 1, function() awful.util.spawn("xterm -e 'yagtd++.py ~/work/archiving/todo'")  end)
     ))
 
 function update_todolist()
@@ -485,7 +485,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons } },
 
-    { rule_any = { class = {"MPlayer","Gmchess", "Gnome-mplayer"}, type = {"dialog"}, name = {"Dia v0.97.2"}}, 
+    { rule_any = { class = {"MPlayer","Gmchess", "Gnome-mplayer", "Gcolor2"}, type = {"dialog"}, name = {"Dia v0.97.2"}}, 
         except_any = { class={"Wine", "Pidgin", "Opera", "Inkscape"} } , callback = function(c)
     local left_layout = wibox.layout.fixed.horizontal()
     left_layout:add(awful.titlebar.widget.iconwidget(c))
@@ -529,7 +529,7 @@ end},
         properties = { floating = true, border_width = 0 } },
     { rule_any = { name={"TM2009", "TM2013"} }, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
         properties = { floating=false } },
-    { rule = { class = "XTerm"}, properties = { opacity = 0.8 } },
+    { rule = { class = "XTerm"}, properties = { opacity = 0.8, border_width = 1 } },
     { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Pencil", "Pgadmin3"} , name = { "LibreOffice", "XMind"} },
        properties = { tag = tags[1][4], switchtotag=true } },
     { rule_any = { class = {"XTerm"} },
