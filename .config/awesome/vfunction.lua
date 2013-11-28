@@ -27,7 +27,7 @@ end
 function todo()
     local total = 0
     local active = 0
-    local todo = "--- 任务列表 早点消灭！ ---"
+    local todo = ""
     local tdfile = io.open('/home/wxg/work/archiving/todo', 'r')
 
     for line in tdfile:lines() do

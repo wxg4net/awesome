@@ -15,7 +15,7 @@ local vicious = require("vicious")
 local cairo = require("lgi").cairo
 
 require("menu")
---~ require("conky")
+require("conky")
 --~ require("revelation")
 require("vfunction")
 os.setlocale("zh_CN.UTF-8")
@@ -382,8 +382,7 @@ globalkeys = awful.util.table.join(
     awful.key({ "" }, "XF86AudioLowerVolume", function () awful.util.spawn_with_shell("amixer set Master 2%- unmute") end),
     awful.key({ "Control", "Shift" }, "Down", function () awful.util.spawn_with_shell("amixer set Master 2%- unmute") end),
     awful.key({ "" }, "Print", false, function () awful.util.spawn("scrot -s -e  'mv $f ~/work/media/screen/'") end),
-    awful.key({ modkey }, "Print", false, function () awful.util.spawn("scrot -s -e 'mv $f /home/server/core/sites/data.perhome.cn/tmp/; curl -s -F \"name=@/home/server/core/sites/data.perhome.cn/tmp/$f\" http://img.vim-cn.com/ | xsel -ib | notify-send -i /home/server/core/sites/data.perhome.cn/tmp/$f 已完成...'") end),
-    -- awful.key({ modkey }, "Print", false, function () awful.util.spawn("scrot -s -e 'mv $f /home/server/sites/static.perhome.cn/tmp/; scp /home/server/sites/static.perhome.cn/tmp/$f root@184.82.27.204:/home/server/sites/static.perhome.cn/tmp/; echo \"http://184.82.27.205/tmp/$f\" | xsel -ib | notify-send 已完成...'") end),
+    awful.key({ modkey }, "Print", false, function () awful.util.spawn("scrot -s -e 'mv $f ~/data.perhome.cn/tmp/; weibo4pic.py -f \"~/data.perhome.cn/tmp/$f\" | xsel -ib'") end),
     awful.key({ "" }, "XF86HomePage", function () awful.util.spawn_with_shell("google-chrome") end),
     awful.key({ modkey }, "t", function ()  awful.util.spawn("xterm -e 'yagtd.py ~/work/archiving/todo'") end),
     awful.key({ modkey ,  }, "v", function ()  
