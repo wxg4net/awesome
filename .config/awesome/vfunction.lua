@@ -37,12 +37,10 @@ function todo()
             active = active + 1
             i, j =string.find(line, ' ')
             --todo = todo..string.sub(line, 0, j).."\n"
-            todo = todo.."\n"..line
+            todo = todo..total..':(3.000000) '..line.."\n"
         end
     end
-    if string.len(todo) < 4 then
-        todo = todo.."\n无todo列表"
-    end
+
     tdfile:close()
     return " <span>任务: "..active.."/"..total.."</span> ",todo
 end

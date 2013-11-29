@@ -13,11 +13,12 @@ local menubar = require("menubar")
 local capi = { timer = timer }
 local vicious = require("vicious")
 local cairo = require("lgi").cairo
-
+local sss=1234
 require("menu")
-require("conky")
 --~ require("revelation")
 require("vfunction")
+require("conky")
+
 os.setlocale("zh_CN.UTF-8")
 
 -- {{{ Error handling
@@ -384,7 +385,7 @@ globalkeys = awful.util.table.join(
     awful.key({ "" }, "Print", false, function () awful.util.spawn("scrot -s -e  'mv $f ~/work/media/screen/'") end),
     awful.key({ modkey }, "Print", false, function () awful.util.spawn("scrot -s -e 'mv $f ~/data.perhome.cn/tmp/; weibo4pic.py -f \"~/data.perhome.cn/tmp/$f\" | xsel -ib'") end),
     awful.key({ "" }, "XF86HomePage", function () awful.util.spawn_with_shell("google-chrome") end),
-    awful.key({ modkey }, "t", function ()  awful.util.spawn("xterm -e 'yagtd.py ~/work/archiving/todo'") end),
+    awful.key({ modkey }, "t", function ()  awful.util.spawn("xterm -e 'yagtd++.py ~/work/archiving/todo'") end),
     awful.key({ modkey ,  }, "v", function ()  
             awful.tag.viewonly(tags[1][1])
             awful.util.spawn("firefox -new-tab file:///home/wxg/work/data/task.html") end),
@@ -634,7 +635,7 @@ autorunApps =
 {
     "fcitx",
     "ps -e | grep gnote || gnote",
---    "python2 /home/wxg/wwork/soft/python/dns4me.py",
+--    "python2 /home/wxg/work/soft/python/dns4me.py",
 --    "ps -e | grep easystroke || easystroke",
 --    "ps -e | grep ROX-Filer || rox --bottom test",
 --    "ps -e | grep compton || compton",
