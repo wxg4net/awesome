@@ -13,7 +13,7 @@ local menubar = require("menubar")
 local capi = { timer = timer }
 local vicious = require("vicious")
 local cairo = require("lgi").cairo
-local sss=1234
+
 require("menu")
 --~ require("revelation")
 require("vfunction")
@@ -383,7 +383,7 @@ globalkeys = awful.util.table.join(
     awful.key({ "" }, "XF86AudioLowerVolume", function () awful.util.spawn_with_shell("amixer set Master 2%- unmute") end),
     awful.key({ "Control", "Shift" }, "Down", function () awful.util.spawn_with_shell("amixer set Master 2%- unmute") end),
     awful.key({ "" }, "Print", false, function () awful.util.spawn("scrot -s -e  'mv $f ~/work/media/screen/'") end),
-    awful.key({ modkey }, "Print", false, function () awful.util.spawn("scrot -s -e 'mv $f ~/data.perhome.cn/tmp/; weibo4pic.py -f \"~/data.perhome.cn/tmp/$f\" | xsel -ib'") end),
+    awful.key({ modkey }, "Print", false, function () awful.util.spawn("scrot -s -e 'mv $f ~/data.perhome.cn/tmp/; weibo4pic.py -f ~/data.perhome.cn/tmp/$f | xsel -ib'") end),
     awful.key({ "" }, "XF86HomePage", function () awful.util.spawn_with_shell("google-chrome") end),
     awful.key({ modkey }, "t", function ()  awful.util.spawn("xterm -e 'yagtd++.py ~/work/archiving/todo'") end),
     awful.key({ modkey ,  }, "v", function ()  
@@ -635,11 +635,9 @@ autorunApps =
 {
     "fcitx",
     "ps -e | grep gnote || gnote",
+    "python2 /home/wxg/work/soft/python/yagtd++-dbus.py",
 --    "python2 /home/wxg/work/soft/python/dns4me.py",
---    "ps -e | grep easystroke || easystroke",
 --    "ps -e | grep ROX-Filer || rox --bottom test",
---    "ps -e | grep compton || compton",
---    "ps -e | grep conky || conky -d"
 }
 if autorun then
     for app = 1, #autorunApps do
