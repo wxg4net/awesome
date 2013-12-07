@@ -15,7 +15,7 @@ local vicious = require("vicious")
 local cairo = require("lgi").cairo
 
 require("menu")
---~ require("revelation")
+-- require("revelation")
 require("vfunction")
 require("conky")
 
@@ -57,7 +57,7 @@ if beautiful.wallpaper then
     end
 end
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "lilyterm"
 editor = os.getenv("EDITOR") or "leafpad"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -169,7 +169,7 @@ myserverbox:buttons(
 )
 mytextbox:buttons( 
     awful.util.table.join(
-        awful.button({ }, 1, function() awful.util.spawn("xterm -e 'yagtd++.py ~/work/archiving/todo'")  end)
+        awful.button({ }, 1, function() awful.util.spawn_with_shell( terminal .." -s -e yagtd++.py ~/work/archiving/todo")  end)
     ))
 
 function update_todolist()
@@ -368,13 +368,8 @@ globalkeys = awful.util.table.join(
          local cmenu = awful.menu.clients({width=245}, { keygrabber=true, coords={x=525, y=330} })
     end),
 
-    awful.key({ modkey }, "e",
-              function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
-              end),
+    awful.key({ modkey }, "e", revelation ),
+              
     awful.key({ "Shift" }, "space", function () menubar.show() end),
     awful.key({ "Control", "Shift" }, "space", function () awful.util.spawn_with_shell("dmenu_run -b") end),
     awful.key({ modkey }, "a", function ()  mymainmenu:toggle() end),
@@ -382,10 +377,10 @@ globalkeys = awful.util.table.join(
     awful.key({ "Control", "Shift" }, "Up", function () awful.util.spawn_with_shell("amixer set Master 2%+ unmute") end),
     awful.key({ "" }, "XF86AudioLowerVolume", function () awful.util.spawn_with_shell("amixer set Master 2%- unmute") end),
     awful.key({ "Control", "Shift" }, "Down", function () awful.util.spawn_with_shell("amixer set Master 2%- unmute") end),
-    awful.key({ "" }, "Print", false, function () awful.util.spawn("scrot -s -e  'mv $f ~/work/media/screen/'") end),
+    awful.key({ "" }, "Print", false, function () awful.util.spawn("scrot  -e 'mv $f ~/data.perhome.cn/tmp/; weibo4pic.py -f ~/data.perhome.cn/tmp/$f | xsel -ib'") end),
     awful.key({ modkey }, "Print", false, function () awful.util.spawn("scrot -s -e 'mv $f ~/data.perhome.cn/tmp/; weibo4pic.py -f ~/data.perhome.cn/tmp/$f | xsel -ib'") end),
     awful.key({ "" }, "XF86HomePage", function () awful.util.spawn_with_shell("google-chrome") end),
-    awful.key({ modkey }, "t", function ()  awful.util.spawn("xterm -e 'yagtd++.py ~/work/archiving/todo'") end),
+    awful.key({ modkey }, "t", function ()  awful.util.spawn_with_shell(terminal .." -s -e yagtd++.py ~/work/archiving/todo") end),
     awful.key({ modkey ,  }, "v", function ()  
             awful.tag.viewonly(tags[1][1])
             awful.util.spawn("firefox -new-tab file:///home/wxg/work/data/task.html") end),
@@ -529,10 +524,10 @@ end},
         properties = { floating = true, border_width = 0 } },
     { rule_any = { name={"TM2009", "TM2013"} }, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
         properties = { floating=false } },
-    { rule = { class = "XTerm"}, properties = { opacity = 0.8, border_width = 1 } },
+    { rule_any = { class = {"XTerm", "LilyTerm"} }, properties = { opacity = 0.9, border_width = 0 } },
     { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Pencil", "Pgadmin3"} , name = { "LibreOffice", "XMind"} },
        properties = { tag = tags[1][4], switchtotag=true } },
-    { rule_any = { class = {"XTerm"} },
+    { rule_any = { class = {"XTerm", "LilyTerm"} },
        properties = { tag = tags[1][3], switchtotag=true  } },
     { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang"}, instance={"TM.exe"} },
        properties = { tag = tags[1][2], switchtotag=true } },
@@ -635,7 +630,7 @@ autorunApps =
 {
     "fcitx",
     "ps -e | grep gnote || gnote",
-    "python2 /home/wxg/work/soft/python/yagtd++-dbus.py",
+    "python2 /home/wxg/work/soft/python/yagtd++-cli.py updateWidgetTask",
 --    "python2 /home/wxg/work/soft/python/dns4me.py",
 --    "ps -e | grep ROX-Filer || rox --bottom test",
 }
