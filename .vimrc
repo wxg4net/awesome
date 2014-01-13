@@ -10,9 +10,9 @@ set mouse=a                 " 支持鼠标
 set autoindent              " 自动缩进"
 set number                  " 显示行号
 set nocursorline            " 不突出显示当前行
-set shiftwidth=4            " 设定 << 和 >> 命令移动时的宽度为 4
-set softtabstop=4           " 使得按退格键时可以一次删掉 4 个空格
-set tabstop=4               " 设定 tab 长度为 4
+set shiftwidth=2            " 设定 << 和 >> 命令移动时的宽度为 2
+set softtabstop=2           " 使得按退格键时可以一次删掉 2 个空格
+set tabstop=2               " 设定 tab 长度为 2
 set nobackup                " 覆盖文件时不备份
 set autochdir               " 自动切换当前目录为当前文件所在的目录
 set backupcopy=yes          " 设置备份时的行为为覆盖
@@ -112,10 +112,9 @@ nmap <leader>5 :set filetype=javascript<CR>
 
 " Python 文件的一般设置，比如不要 tab 等
 autocmd FileType python set tabstop=2 shiftwidth=2
-let g:pydiction_location = '~/.vim/after/ftplugin/python-complete-dict'
-
-
 let g:user_zen_leader_key = '<c-y>'
+" Python 依赖 python-jedi
+let g:jedi#completions_command = "<C-N>"
 
 " php语法检查
 " map <C-P> :!php -l %<CR>
@@ -127,3 +126,6 @@ set guioptions-=T
 " set guifont=Bitstream_Vera_Sans_Mon
 set guifont=文泉驿等宽微米黑\ 12
 
+
+au FileType php setlocal dict+=/home/wxg/.vim/dic/php-function.txt
+au FileType php se complete+=k
