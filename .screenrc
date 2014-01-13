@@ -1,0 +1,29 @@
+setenv LC_CTYPE zh_CN.UTF-8
+setenv LANG zh_CN.UTF-8
+
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10                                                            
+screen 1
+
+
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+defbce "on"
+
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rY}%n %t%{-}%+w %=%{..G} %H(%l) %{..Y} %Y/%m/%d %c:%s "
+
+defutf8 on
+defencoding UTF-8
+encoding UTF-8 
+
+startup_message off
+
+vbell off
+vbell_msg "Bell on %t (%n)"
+
+defscrollback 4096
+altscreen off
+autodetach on

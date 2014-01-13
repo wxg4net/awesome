@@ -2192,9 +2192,8 @@ let s:zen_settings = {
 \    },
 \   'php': {
 \        'snippets': {
-\            'phpno': "<?php defined('SYSPATH') or die('No direct script access.');\n\n",
-\            'pa': "HTML::anchor('${child}', '')",
-\            'htmno': "<?php defined('SYSPATH') or die('No direct script access.');?>"
+\            'pno': "<?php defined('SYSPATH') or die('No direct script access.');\n\n",
+\            'pha': "HTML::anchor('${child}', '')"
 \        }
 \   },
 \   'sql': {
