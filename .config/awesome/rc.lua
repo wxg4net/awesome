@@ -15,7 +15,7 @@ local vicious = require("vicious")
 local cairo = require("lgi").cairo
 
 require("menu")
--- require("revelation")
+local revelation = require("revelation")
 require("vfunction")
 require("conky")
 
@@ -46,10 +46,13 @@ do
 end
 -- }}}
 
+
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 
 beautiful.init(awful.util.getdir("config").."/themes/default/theme.lua")
+revelation.init()
 
 if beautiful.wallpaper then
     for s = 1, screen.count() do
@@ -368,11 +371,11 @@ globalkeys = awful.util.table.join(
          local cmenu = awful.menu.clients({width=245}, { keygrabber=true, coords={x=525, y=330} })
     end),
 
-    awful.key({ modkey }, "e", revelation ),
+    awful.key({ modkey }, "a", revelation ),
               
     awful.key({ "Shift" }, "space", function () menubar.show() end),
     awful.key({ "Control", "Shift" }, "space", function () awful.util.spawn_with_shell("dmenu_run -b") end),
-    awful.key({ modkey }, "a", function ()  mymainmenu:toggle() end),
+    awful.key({ modkey }, "e", function ()  mymainmenu:toggle() end),
     awful.key({ "" }, "XF86AudioRaiseVolume", function () awful.util.spawn_with_shell("amixer set Master 2%+ unmute") end),
     awful.key({ "Control", "Shift" }, "Up", function () awful.util.spawn_with_shell("amixer set Master 2%+ unmute") end),
     awful.key({ "" }, "XF86AudioLowerVolume", function () awful.util.spawn_with_shell("amixer set Master 2%- unmute") end),

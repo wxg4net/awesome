@@ -10,6 +10,7 @@ set mouse=a                 " 支持鼠标
 set autoindent              " 自动缩进"
 set number                  " 显示行号
 set nocursorline            " 不突出显示当前行
+set confirm
 set shiftwidth=2            " 设定 << 和 >> 命令移动时的宽度为 2
 set softtabstop=2           " 使得按退格键时可以一次删掉 2 个空格
 set tabstop=2               " 设定 tab 长度为 2
@@ -73,6 +74,7 @@ set fileencoding=utf-8
 
 " 删除所有行未尾空格
 nmap <F12> :%s/[ \t\r]\+$//g<CR>
+
 " Buffers操作快捷方式!
 nmap <S-L> :bnext<CR>
 nmap <S-H> :bprevious<CR>
@@ -112,7 +114,9 @@ nmap <leader>5 :set filetype=javascript<CR>
 
 " Python 文件的一般设置，比如不要 tab 等
 autocmd FileType python set tabstop=2 shiftwidth=2
+
 let g:user_zen_leader_key = '<c-y>'
+
 " Python 依赖 python-jedi
 let g:jedi#completions_command = "<C-N>"
 
@@ -120,8 +124,6 @@ let g:jedi#completions_command = "<C-N>"
 " map <C-P> :!php -l %<CR>
 map <C-P> :w !php -l<CR>
 
-map <S-Left> :tabp<CR>
-map <S-Right> :tabn<CR>
 set guioptions-=T
 " set guifont=Bitstream_Vera_Sans_Mon
 set guifont=文泉驿等宽微米黑\ 12
