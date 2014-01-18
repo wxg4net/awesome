@@ -1,4 +1,4 @@
-
+local awful = require("awful")
 local button = require("awful.button")
 local util = require("awful.util")
 local wibox = require("wibox")
@@ -36,10 +36,11 @@ layout:add(tasktextmarginbox)
 
 layout:buttons(util.table.join(button({ }, 1, function(c) 
 --  conky.ontop = not conky.ontop
+  date = awful.util.pread('cdate');  
   naughty.notify({ preset = naughty.config.presets.critical,
                    title = "Oops",
                    timeout = 2,
-                   text = '此处无法点击' })
+                   text = date })
 end)))
 
 conky:set_widget(layout)

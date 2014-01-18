@@ -15,7 +15,7 @@ set shiftwidth=2            " 设定 << 和 >> 命令移动时的宽度为 2
 set softtabstop=2           " 使得按退格键时可以一次删掉 2 个空格
 set tabstop=2               " 设定 tab 长度为 2
 set nobackup                " 覆盖文件时不备份
-set autochdir               " 自动切换当前目录为当前文件所在的目录
+" set autochdir               " 自动切换当前目录为当前文件所在的目录
 set backupcopy=yes          " 设置备份时的行为为覆盖
 set ignorecase smartcase    " 搜索时忽略大小写，但在有一个或以上大写字母时仍大小写敏感
 set nowrapscan              " 禁止在搜索到文件两端时重新搜索
@@ -24,7 +24,7 @@ set hlsearch                " 搜索时高亮显示被找到的文本
 set noerrorbells            " 关闭错误信息响铃
 set novisualbell            " 关闭使用可视响铃代替呼叫
 set t_vb=                   " 置空错误铃声的终端代码
-" set showmatch               " 插入括号时，短暂地跳转到匹配的对应括号
+set showmatch               " 插入括号时，短暂地跳转到匹配的对应括号
 "set matchtime=2             " 短暂跳转到匹配括号的时间
 "set nowrap                  " 不自动换行
 set magic                  " 显示括号配对情况
@@ -84,8 +84,8 @@ nmap <S-J> :tabnext<CR>
 nmap <S-K> :tabprev<CR>
 
 " 插入模式下左右移动光标
-" inoremap <c-l> <esc>la
-" inoremap <c-h> <esc>ha
+inoremap <c-l> <esc>la
+inoremap <c-h> <esc>ha
 
 nmap <C-S> :update<CR>
 vmap <C-S> <C-C>:update<CR>
@@ -115,7 +115,20 @@ nmap <leader>5 :set filetype=javascript<CR>
 " Python 文件的一般设置，比如不要 tab 等
 autocmd FileType python set tabstop=2 shiftwidth=2
 
-let g:user_zen_leader_key = '<c-y>'
+let g:user_emmet_mode='inv'
+let g:user_emmet_leader_key = '<c-y>'
+
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_use_caching = 1
+let g:ctrlp_follow_symlinks = 0
+let g:ctrlp_mruf_include = '\.css$\|\.php$|\.html$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(so|dll)$',
+  \ 'link': '',
+  \ }
 
 " Python 依赖 python-jedi
 let g:jedi#completions_command = "<C-N>"
