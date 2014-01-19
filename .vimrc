@@ -38,7 +38,7 @@ set laststatus=2            " 显示状态栏 (默认值为 1, 无法显示状�
 " set foldmethod=syntax       " 设置语法折叠
 " set foldcolumn=0            " 设置折叠区域的宽度
 " setlocal foldlevel=1        " 设置折叠层数为
-" set foldclose=all           " 设置为自动关闭折叠
+set foldclose=all           " 设置为自动关闭折叠
 
 set t_Co=256
 set background=dark
@@ -52,6 +52,7 @@ set expandtab
 set foldmethod=manual
 "设置代码块折叠后显示的行数
 set foldexpr=1
+set whichwrap=b,s,<,>,[,]
 
 map <F3> :NERDTreeToggle<CR>
 imap <F3> <ESC>:NERDTreeToggle<CR>
@@ -133,9 +134,12 @@ let g:ctrlp_custom_ignore = {
 " Python 依赖 python-jedi
 let g:jedi#completions_command = "<C-N>"
 
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+
 " php语法检查
-" map <C-P> :!php -l %<CR>
-map <C-P> :w !php -l<CR>
+map <C-i> :w !php -l<CR>
 
 set guioptions-=T
 " set guifont=Bitstream_Vera_Sans_Mon
