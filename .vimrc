@@ -9,13 +9,13 @@ filetype plugin indent on   " 开启插件
 set mouse=a                 " 支持鼠标
 set autoindent              " 自动缩进"
 set number                  " 显示行号
-set nocursorline            " 不突出显示当前行
+set cursorline            " 不突出显示当前行
 set confirm
 set shiftwidth=2            " 设定 << 和 >> 命令移动时的宽度为 2
 set softtabstop=2           " 使得按退格键时可以一次删掉 2 个空格
 set tabstop=2               " 设定 tab 长度为 2
 set nobackup                " 覆盖文件时不备份
-" set autochdir               " 自动切换当前目录为当前文件所在的目录
+set autochdir               " 自动切换当前目录为当前文件所在的目录
 set backupcopy=yes          " 设置备份时的行为为覆盖
 set ignorecase smartcase    " 搜索时忽略大小写，但在有一个或以上大写字母时仍大小写敏感
 set nowrapscan              " 禁止在搜索到文件两端时重新搜索
