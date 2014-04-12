@@ -49,9 +49,9 @@ beautiful.init(awful.util.getdir("config").."/themes/default/theme.lua")
 revelation.init()
 
 -- This is used later as the default terminal and editor to run.
-terminal = "lilyterm"
+terminal = "sakura"
 editor = os.getenv("EDITOR") or "leafpad"
-editor_cmd = terminal .. " -e " .. editor
+editor_cmd = terminal .. " -x " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -157,7 +157,11 @@ mytextclock:buttons(
     awful.util.table.join(
         awful.button({ }, 1, 
           function() 
-            awful.util.spawn_with_shell( terminal .." -s -e yagtd++.py ~/work/archiving/todo")  
+            date = awful.util.pread('cdate');  
+            naughty.notify({ 
+                             title = "农历日期",
+                             timeout = 2,
+                             text = date })
           end)
     ))
 --
@@ -372,7 +376,7 @@ clientkeys = awful.util.table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 7 do
+for i = 1, 9 do
     globalkeys = awful.util.table.join(globalkeys,
         awful.key({ modkey }, "#" .. i + 9,
                   function ()
@@ -431,7 +435,7 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
     { rule_any = { class = {"Xephyr", "Lightsoff", "Firefox", "Pidgin", "Opera", "Xulrunner", "rdesktop", "Inkscape"}}, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
         properties = { floating=false } },
-    { rule_any = { class = {"Gcolor2", "MPlayer","Gnome-mplayer", "Plugin-container", "Exe", "operapluginwrapper-native", "Gmchess", "Main.py"},  skip_taskbar={true}, above={true}, name={"TXMenuWindow", "Dia v0.97.2"}, type={"splash", "dialog", "dropdown_menu", "popup_menu"}},   
+    { rule_any = { class = {"Gcolor2", 'doubanfm-qt', "MPlayer","Gnome-mplayer", "Plugin-container", "Exe", "operapluginwrapper-native", "Gmchess", "Main.py"},  skip_taskbar={true}, above={true}, name={"TXMenuWindow", "Dia v0.97.2"}, type={"splash", "dialog", "dropdown_menu", "popup_menu"}},   
         callback = awful.placement.centered,
         properties = { floating = true, border_width = 0 } },
     { rule_any = { name={"TM2009", "TM2013"} , class={'JavaEmbeddedFrame'} }, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
@@ -439,7 +443,7 @@ awful.rules.rules = {
     { rule_any = { class = {"XTerm", "LilyTerm"} }, properties = {  border_width = 0 } },
     { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Pencil", "Pgadmin3"} , name = { "LibreOffice", "XMind"} },
        properties = { tag = tags[1][4], switchtotag=true } },
-    { rule_any = { class = {"XTerm", "LilyTerm"} },
+    { rule_any = { class = {"XTerm", "LilyTerm", 'Sakura'} },
        properties = { tag = tags[1][3], switchtotag=true  } },
     { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang"}, instance={"TM.exe"} },
        properties = { tag = tags[1][2], switchtotag=true } },
@@ -488,7 +492,7 @@ client.connect_signal("manage", function (c, startup)
 
     local titlebars_enabled = true
     if titlebars_enabled and (awful.client.floating.get(c) and c.type ~= 'splash' and c.type ~= 'dock' and c.type ~= 'dialog') 
-      and c.name ~= 'ROX-Filer' and c.name ~= 'TXFloatingWnd' then
+      and c.name ~= 'ROX-Filer' and c.name ~= 'TXFloatingWnd' and c.class ~= 'Wine' then
         -- buttons for the titlebar
         local buttons = awful.util.table.join(
                 awful.button({ }, 1, function()
@@ -555,5 +559,6 @@ if autorun then
 end
 
 naughty.config.defaults.timeout = 5
-naughty.config.defaults.position = "top_right"
+naughty.config.defaults.icon_size = 900
+naughty.config.defaults.position = "bottom_right"
 naughty.config.defaults.font = "WenQuanYi Zen Hei Sharp  12"

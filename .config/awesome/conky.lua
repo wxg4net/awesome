@@ -9,7 +9,7 @@ local capi = { screen = screen,
                
 local M_PI  = math.pi
 
-local conky = wibox({ fg = '#ffffff55',
+local conky = wibox({ fg = '#ffffff66',
                                bg = '#354A70ff',
                                type = "desktop" })
 conky.ontop = false
@@ -23,15 +23,15 @@ local cr = cairo.Context(surface)
 cr:set_source_rgba(0, 0, 0, 0)
 cr:paint()
 cr:set_line_width(6);
-cr:set_source_rgba (0.96, 0.47, 0.31, 0.5)
-cr:arc (100, 48, 40, 0, M_PI*5/3);
+cr:set_source_rgba (0.878, 0.274, 0.078, 0.5)
+cr:arc (200, 44, 40, 0, M_PI*5/3);
 cr:stroke()
 cr:set_source_rgba (1, 1, 1, 0.3)
-cr:arc (100, 48, 40, M_PI*5/3, M_PI*2);
+cr:arc(200, 44, 40, M_PI*5/3, M_PI*2);
 cr:stroke()
 
-cr:set_line_width(2);
-cr:set_source_rgba (1, 1, 1, 0.3)
+cr:set_line_width(6);
+cr:set_source_rgba (0.878, 0.274, 0.078, 0.5)
 cr:move_to(0, 100)
 cr:curve_to (480, 60, 960, 140, 1440, 100);
 cr:stroke()
@@ -40,10 +40,11 @@ conky:set_bg(pat)
 
 local tb_task = wibox.widget.textbox()
 local tb_task_margin = wibox.layout.margin()
-tb_task:set_font('WenQuanYi Micro Hei Mono 12')
-tb_task:set_text('Keep It Simple, Stupid!')
+tb_task:set_font('WenQuanYi Micro Hei Mono 14')
+tb_task:set_text('......')
 tb_task:set_align('left')
-tb_task_margin:set_margins(30)
+tb_task_margin:set_top(30)
+tb_task_margin:set_left(50)
 tb_task_margin:set_widget(tb_task)
 
 local tb_kiss = wibox.widget.textbox()
@@ -61,13 +62,8 @@ local layout = wibox.layout.fixed.vertical()
 layout:add(tb_kiss_margin)
 layout:add(tb_task_margin)
 
-layout:buttons(util.table.join(button({ }, 1, function(c) 
---  conky.ontop = not conky.ontop
-  date = awful.util.pread('cdate');  
-  naughty.notify({ 
-                   title = "农历日期",
-                   timeout = 2,
-                   text = date })
+tb_task:buttons(util.table.join(button({ }, 1, function(c) 
+  awful.util.spawn_with_shell( terminal .." -s -e yagtd++.py ~/work/archiving/todo")  
 end)))
 
 conky:set_widget(layout)
