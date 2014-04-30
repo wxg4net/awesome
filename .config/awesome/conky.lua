@@ -9,7 +9,7 @@ local capi = { screen = screen,
                
 local M_PI  = math.pi
 
-local conky = wibox({ fg = '#ffffff66',
+local conky = wibox({ fg = '#ffffff55',
                                bg = '#354A70ff',
                                type = "desktop" })
 conky.ontop = false
@@ -23,15 +23,15 @@ local cr = cairo.Context(surface)
 cr:set_source_rgba(0, 0, 0, 0)
 cr:paint()
 cr:set_line_width(6);
-cr:set_source_rgba (0.878, 0.274, 0.078, 0.5)
+cr:set_source_rgba (0.0784, 0.396, 0.647, 1)
 cr:arc (200, 44, 40, 0, M_PI*5/3);
 cr:stroke()
-cr:set_source_rgba (1, 1, 1, 0.3)
+cr:set_source_rgba (0.0784, 0.396, 0.647, 0.5)
 cr:arc(200, 44, 40, M_PI*5/3, M_PI*2);
 cr:stroke()
 
 cr:set_line_width(6);
-cr:set_source_rgba (0.878, 0.274, 0.078, 0.5)
+cr:set_source_rgba (0.0784, 0.396, 0.647, 1)
 cr:move_to(0, 100)
 cr:curve_to (480, 60, 960, 140, 1440, 100);
 cr:stroke()
@@ -63,7 +63,7 @@ layout:add(tb_kiss_margin)
 layout:add(tb_task_margin)
 
 tb_task:buttons(util.table.join(button({ }, 1, function(c) 
-  awful.util.spawn_with_shell( terminal .." -s -e yagtd++.py ~/work/archiving/todo")  
+  awful.util.spawn_with_shell( terminal .." -e myagtd.py ~/work/archiving/todo")  
 end)))
 
 conky:set_widget(layout)

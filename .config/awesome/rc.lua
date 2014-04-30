@@ -61,7 +61,7 @@ editor_cmd = terminal .. " -x " .. editor
 modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
-local layouts =
+awful.layout.layouts =
 {
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.right,
@@ -86,17 +86,24 @@ local layouts =
 -- {{{ Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
-        gears.wallpaper.set('#354A70')
-        -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        -- gears.wallpaper.set('#354A70')
+        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
     end
 end
 -- }}}
 
-vars = {
+local vars = {
    -- names  = {" ➊ ", " ➋ ", " ➌ ", " ➍ ", " ➎ ", " ➏ ", " ➐ "},
    names  = { ' 1 ', ' 2 ', ' 3 ', ' 4 ', ' 5 ', ' 6 ', ' 7 '},
-   layout = { layouts[3], layouts[1], layouts[1], layouts[2], layouts[1],layouts[3], layouts[1]}
-   -- layout = { layouts[3], layouts[1], layouts[1], layouts[3], layouts[1],layouts[3], layouts[1]}
+   layout = { 
+      awful.layout.layouts[3], 
+      awful.layout.layouts[4], 
+      awful.layout.layouts[1], 
+      awful.layout.layouts[2], 
+      awful.layout.layouts[1],
+      awful.layout.layouts[3], 
+      awful.layout.layouts[1]
+    }
 }
 
 -- {{{ Tags
@@ -104,7 +111,6 @@ vars = {
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    -- tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
     tags[s] = awful.tag(vars.names, s, vars.layout)
 end
 -- }}}
@@ -125,9 +131,10 @@ mymainmenu = awful.menu({ items = {
                                     { "文件浏览器p", "pcmanfm" },
                                     { "文件浏览器r", "rox" },
                                     { "Firefox浏览器", "firefox" },
+                                    { "Firefox最新版", "firefox-nightly" },
                                     { "(&C)Chromium", "chromium" },
                                     { "(&G)Chrome", "google-chrome" },
-                                    { "邮件", "thunderbird" },
+                                    { "订阅", "liferea" },
                                     { "TM2009", "work/soft/wine-tm2009.sh" },
                                     { "TM2013", "work/soft/wine-tm2013.sh" },
                                     { "QQ游戏", "work/soft/wine-qqgame.sh" },
@@ -235,10 +242,10 @@ for s = 1, screen.count() do
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
     mylayoutbox[s]:buttons(awful.util.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-                           awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+                           awful.button({ }, 1, function () awful.layout.inc( 1) end),
+                           awful.button({ }, 3, function () awful.layout.inc(-1) end),
+                           awful.button({ }, 4, function () awful.layout.inc( 1) end),
+                           awful.button({ }, 5, function () awful.layout.inc(-1) end)))
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
@@ -326,8 +333,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
     awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
+    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1) end),
+    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1) end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
@@ -335,22 +342,39 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
     awful.key({ modkey }, "t", 
               function ()  
-                awful.util.spawn_with_shell(terminal .." -s -e yagtd++.py ~/work/archiving/todo") 
+                awful.util.spawn_with_shell(terminal .." -e myagtd.py ~/work/archiving/todo") 
+              end),
+    awful.key({ modkey }, "q", 
+              function ()  
+                awful.util.spawn_with_shell(terminal .." -e ~/work/soft/bash/post-qqweibo.sh") 
+              end),
+    awful.key({ modkey, "Shift" }, "p", 
+              function ()  
+                awful.util.spawn_with_shell(terminal .." -e ~/work/soft/bash/svn-plan-commit.sh") 
+              end),
+    awful.key({ modkey }, "p", 
+              function ()  
+                awful.util.spawn_with_shell("planner ~/work/archiving/future.planner") 
+              end),
+    awful.key({ modkey }, "s", 
+              function ()  
+                awful.util.spawn_with_shell(terminal .." -e offlineimap -o") 
               end),
 
     awful.key({ modkey }, "x",
               function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
+                awful.util.spawn_with_shell(terminal .." -e newsbeuter") 
               end),
     -- Menubar
-    awful.key({ "" }, "Print", false, function () awful.util.spawn("scrot  -e 'mv $f ~/data.perhome.cn/tmp/; weibo4pic.py -f ~/data.perhome.cn/tmp/$f | xsel -ib'") end),
-    awful.key({ modkey }, "Print", false, function () awful.util.spawn("scrot -s -e 'mv $f ~/data.perhome.cn/tmp/; weibo4pic.py -f ~/data.perhome.cn/tmp/$f | xsel -ib'") end),
+    awful.key({ "" }, "Print", false, function () awful.util.spawn("scrot  -e 'mv $f ~/tmp/; weibo4pic.py -f ~/tmp/$f | xsel -ib'") end),
+    awful.key({ modkey }, "Print", false, function () awful.util.spawn("scrot -s -e 'mv $f ~/tmp/; weibo4pic.py -f ~/tmp/$f | xsel -ib'") end),
     awful.key({ modkey }, "a", revelation ),
     awful.key({ "Control", "Shift" }, "space", function () awful.util.spawn_with_shell("dmenu_run -b") end),
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey, "Shift" }, "m", function() menubar.show() end),
+    awful.key({ modkey,           }, "m",
+        function (c)
+            awful.util.spawn_with_shell(terminal .." -e mutt -y") 
+        end)
 )
 
 clientkeys = awful.util.table.join(
@@ -365,11 +389,6 @@ clientkeys = awful.util.table.join(
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
             c.minimized = true
-        end),
-    awful.key({ modkey,           }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c.maximized_vertical   = not c.maximized_vertical
         end)
 )
 
@@ -440,11 +459,10 @@ awful.rules.rules = {
         properties = { floating = true, border_width = 0 } },
     { rule_any = { name={"TM2009", "TM2013"} , class={'JavaEmbeddedFrame'} }, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
         properties = { floating=false } },
-    { rule_any = { class = {"XTerm", "LilyTerm"} }, properties = {  border_width = 0 } },
     { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Pencil", "Pgadmin3"} , name = { "LibreOffice", "XMind"} },
        properties = { tag = tags[1][4], switchtotag=true } },
     { rule_any = { class = {"XTerm", "LilyTerm", 'Sakura'} },
-       properties = { tag = tags[1][3], switchtotag=true  } },
+       properties = { tag = tags[1][3], switchtotag=true , border_width = 0 } },
     { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang"}, instance={"TM.exe"} },
        properties = { tag = tags[1][2], switchtotag=true } },
     { rule_any = { class = {"Chromium", "Firefox", "Opera", "Google-chrome-unstable", "Google-chrome-beta", "Google-chrome"} },
@@ -492,7 +510,8 @@ client.connect_signal("manage", function (c, startup)
 
     local titlebars_enabled = true
     if titlebars_enabled and (awful.client.floating.get(c) and c.type ~= 'splash' and c.type ~= 'dock' and c.type ~= 'dialog') 
-      and c.name ~= 'ROX-Filer' and c.name ~= 'TXFloatingWnd' and c.class ~= 'Wine' then
+      and c.name ~= 'ROX-Filer' and c.name ~= 'TXFloatingWnd' and c.class ~= 'Wine'
+      and c.class ~= "Plugin-container" and c.class ~= "Exe" and  c.class ~= 'Sakura' then
         -- buttons for the titlebar
         local buttons = awful.util.table.join(
                 awful.button({ }, 1, function()
@@ -547,8 +566,8 @@ autorun = true
 autorunApps =
 {
     "fcitx",
-    "ps -e | grep gnote || gnote",
-    "python2 /home/wxg/work/soft/python/yagtd++-cli.py updateWidgetTask",
+--    "ps -e | grep gnote || gnote",
+    "python2 /home/wxg/work/soft/python/myagtd-cli.py updateWidgetTask",
 --    "python2 /home/wxg/work/soft/python/dns4me.py",
 --    "ps -e | grep ROX-Filer || rox --bottom test",
 }
