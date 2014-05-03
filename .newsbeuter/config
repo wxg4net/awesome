@@ -1,0 +1,51 @@
+# ----------------------------------------------------------------------
+# file:    ~/.config/newsbeuter/config
+# author:  moparx     - http://moparx.com/configs
+# date:    05/08/2013 - 18:12 EDT
+# vim: set ai et fenc=utf-8 ft=conf nu si sts=0 sw=4 ts=8 tw=0 :
+# ----------------------------------------------------------------------
+
+auto-reload yes
+browser "/usr/bin/xterm -e w3m "
+cleanup-on-quit yes
+download-path "/home/wxg/downloads/"
+feed-sort-order title-dec
+max-downloads 4
+notify-always yes
+notify-format "订阅: %n 未读条目 %f 未读类目"
+notify-program notify-send
+notify-xterm no
+notify-screen no
+player mplayer
+refresh-on-startup yes
+reload-time 20
+reload-threads 2
+show-read-articles no
+show-read-feeds no
+
+
+# binds ----------------------------------------------------------------
+
+unbind-key t
+unbind-key R
+bind-key \ reload-all
+bind-key "RIGHT" select-tag
+bind-key "SPACE" open
+
+
+# hide articles matching: ---------------------------------------------
+
+#ignore-article "*" "title =~ \"Sponsor\""
+#ignore-article "*" "title =~ \"Advertisement\""
+ignore-mode "display"
+
+
+# formatting and colorization ------------------------------------------
+
+articlelist-format "%4i %f %D  %?T?|%-17T| ?%t"
+
+color listnormal                                            cyan    default
+color info                                                  black   white
+color listnormal_unread   magenta default
+color listfocus_unread    white  blue   bold
+color listfocus           white  blue   bold

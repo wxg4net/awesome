@@ -1,0 +1,3 @@
+debug 3
+set ftp:charset UTF-8
+set file:charset UTF-8

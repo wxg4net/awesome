@@ -131,7 +131,6 @@ mymainmenu = awful.menu({ items = {
                                     { "文件浏览器p", "pcmanfm" },
                                     { "文件浏览器r", "rox" },
                                     { "Firefox浏览器", "firefox" },
-                                    { "Firefox最新版", "firefox-nightly" },
                                     { "(&C)Chromium", "chromium" },
                                     { "(&G)Chrome", "google-chrome" },
                                     { "订阅", "liferea" },
@@ -348,7 +347,7 @@ globalkeys = awful.util.table.join(
               function ()  
                 awful.util.spawn_with_shell(terminal .." -e ~/work/soft/bash/post-qqweibo.sh") 
               end),
-    awful.key({ modkey, "Shift" }, "p", 
+    awful.key({ modkey, "Control" }, "p", 
               function ()  
                 awful.util.spawn_with_shell(terminal .." -e ~/work/soft/bash/svn-plan-commit.sh") 
               end),
@@ -476,7 +475,7 @@ awful.rules.rules = {
     { rule_any = { class = {"ROX-Filer", "ROX-Panel"}},
        properties = { border_width = 0 } },
        -- properties = { border_width = 0, border_color = "#EDEDED", sticky = false } },
-    { rule_any = { class = {"Feh", 'sxiv'} },
+    { rule_any = { class = {"feh", 'Sxiv', 'XTerm'} },
        properties = { maximized_vertical = true, maximized_horizontal = true  } },
 
     -- Set Firefox to always map on tags number 2 of screen 1.
@@ -509,9 +508,8 @@ client.connect_signal("manage", function (c, startup)
     end
 
     local titlebars_enabled = true
-    if titlebars_enabled and (awful.client.floating.get(c) and c.type ~= 'splash' and c.type ~= 'dock' and c.type ~= 'dialog') 
-      and c.name ~= 'ROX-Filer' and c.name ~= 'TXFloatingWnd' and c.class ~= 'Wine'
-      and c.class ~= "Plugin-container" and c.class ~= "Exe" and  c.class ~= 'Sakura' then
+    if titlebars_enabled and awful.client.floating.get(c) and c.type ~= 'splash' and c.type ~= 'dock' and c.type ~= 'dialog' 
+      and c.name ~= 'ROX-Filer' and c.name ~= 'TXFloatingWnd' and c.class ~= 'Wine' and c.maximized_horizontal ~= true and c.maximized_vertical ~= true and c.fullscreen ~= true then
         -- buttons for the titlebar
         local buttons = awful.util.table.join(
                 awful.button({ }, 1, function()
@@ -560,7 +558,7 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-require("conky")
+-- require("conky")
 
 autorun = true
 autorunApps =

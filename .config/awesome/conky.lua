@@ -9,7 +9,7 @@ local capi = { screen = screen,
                
 local M_PI  = math.pi
 
-local conky = wibox({ fg = '#ffffff55',
+local conky = wibox({ fg = '#33333399',
                                bg = '#354A70ff',
                                type = "desktop" })
 conky.ontop = false

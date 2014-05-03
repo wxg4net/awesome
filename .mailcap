@@ -1,0 +1,12 @@
+image/*; feh %s; test=test -n "$DISPLAY"
+
+# portable document format
+application/pdf; evince %s
+application/x-gtar; file-roller %s
+application/x-rar; file-roller %s
+application/x-gtarz; file-roller %s
+application/zip; file-roller %s
+application/gzip; file-roller %s
+
+video/*; mplayer %s
+text/html; w3m -o display_link_number=1 -dump -ppc 9 -I %{charset} -T text/html %s|sed -e "s:^[[:space:]]$::"|cat -s; copiousoutput
