@@ -11,6 +11,8 @@ set autoindent              " 自动缩进"
 set number                  " 显示行号
 set cursorline            " 不突出显示当前行
 set confirm
+set undodir=/tmp/
+set undofile
 set shiftwidth=2            " 设定 << 和 >> 命令移动时的宽度为 2
 set softtabstop=2           " 使得按退格键时可以一次删掉 2 个空格
 set tabstop=2               " 设定 tab 长度为 2

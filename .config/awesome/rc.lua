@@ -94,7 +94,8 @@ end
 
 local vars = {
    -- names  = {" ➊ ", " ➋ ", " ➌ ", " ➍ ", " ➎ ", " ➏ ", " ➐ "},
-   names  = { ' 1 ', ' 2 ', ' 3 ', ' 4 ', ' 5 ', ' 6 ', ' 7 '},
+   -- names  = { ' 1 ', ' 2 ', ' 3 ', ' 4 ', ' 5 ', ' 6 ', ' 7 '},
+   names  = { ' 网络 ', ' 聊天 ', ' 终端 ', ' 编辑 ', ' 文件管理 ', ' 阅读 ', ' 其它 '},
    layout = { 
       awful.layout.layouts[3], 
       awful.layout.layouts[4], 
@@ -368,7 +369,7 @@ globalkeys = awful.util.table.join(
     awful.key({ "" }, "Print", false, function () awful.util.spawn("scrot  -e 'mv $f ~/tmp/; weibo4pic.py -f ~/tmp/$f | xsel -ib'") end),
     awful.key({ modkey }, "Print", false, function () awful.util.spawn("scrot -s -e 'mv $f ~/tmp/; weibo4pic.py -f ~/tmp/$f | xsel -ib'") end),
     awful.key({ modkey }, "a", revelation ),
-    awful.key({ "Control", "Shift" }, "space", function () awful.util.spawn_with_shell("dmenu_run -b") end),
+    awful.key({ "Control", "Shift" }, "space", function () awful.util.spawn("dmenu_run -b") end),
     awful.key({ modkey, "Shift" }, "m", function() menubar.show() end),
     awful.key({ modkey,           }, "m",
         function (c)

@@ -28,10 +28,10 @@ export LC_ALL="zh_CN.UTF-8"
 
 #export VDPAU_NVIDIA_NO_OVERLAY=1 
 
-xset s 0
-xset dpms 0 0 0
+xset s 0 &
+xset dpms 0 0 0 &
 # compton  --backend glx  --vsync opengl --config ~/.compton.conf -b
 # nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan:0]/GPUCurrentFanSpeed=90"
-numlockx on &
-setxkbmap -option ctrl:nocaps &
+# numlockx on &
+# setxkbmap -option ctrl:nocaps &
 exec  awesome
