@@ -4,16 +4,57 @@ XTerm*metaSendsEscape: true
 XTerm*eightBitInput: false
 XTerm*altSendsEscape: true
 XTerm*utf8Title: true
-XTerm*faceName: CourierScreenplay:pixelsize=16
-XTerm*faceNameDoublesize: WenQuanYi Zen Hei Mono:pixelsize=16
+XTerm*faceName: CourierScreenplay:pixelsize=14
+XTerm*faceNameDoublesize: Microsoft YaHei:pixelsize=14
 XTerm*background: #111111
 XTerm*foreground: lightgrey
 XTerm*cursorColor: OliveDrab1
 xterm*termName: xterm-256color
 xterm*vt100.initialFont: 5
-! X11 settings:
 
 XTerm*VT100.Translations: #override \
     Ctrl <KeyPress> V: insert-selection(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
     <BtnUp>: select-end(CLIPBOARD,PRIMARY,CUT_BUFFER0) \n\
     Ctrl <KeyPress> P: print() \n
+
+
+URxvt.preeditType:Root
+!!调整此处设置输入法
+!!颜色设置
+URxvt.depth:32
+!!中括号内数表示透明度
+URxvt.background:[90]#242424
+URxvt.foreground:#ffffff
+URxvt.colorBD:Gray95
+URxvt.colorUL:Green
+URxvt.color1:Red2
+URxvt.color4:RoyalBlue
+URxvt.color5:Magenta2
+URxvt.color8:Gray50
+URxvt.color10:Green2
+URxvt.color12:DodgerBlue
+URxvt.color14:Cyan2
+URxvt.color15:Gray95
+!!URL操作
+URxvt.urlLauncher:chromium
+URxvt.matcher.button:1
+Urxvt.perl-ext-common:matcher
+!!滚动条设置
+URxvt.scrollBar:False
+URxvt.scrollBar_right:True
+URxvt.scrollBar_floating:False
+URxvt.scrollstyle:plain
+!!滚屏设置
+URxvt.mouseWheelScrollPage:True
+URxvt.scrollTtyOutput:False
+URxvt.scrollWithBuffer:True
+URxvt.scrollTtyKeypress:True
+!!光标闪烁
+URxvt.cursorBlink:True
+URxvt.saveLines:3000
+!!边框
+URxvt.borderLess:False
+!!字体设置
+Xft.dpi:96
+URxvt.font: xft:WenQuanYi Micro Hei Mono:size=12
+

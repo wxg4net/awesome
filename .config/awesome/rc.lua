@@ -9,7 +9,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
+-- local menubar = require("menubar")
 
 local vicious = require("vicious")
 require("menu")
@@ -93,12 +93,12 @@ end
 -- }}}
 
 local vars = {
-   -- names  = {" ➊ ", " ➋ ", " ➌ ", " ➍ ", " ➎ ", " ➏ ", " ➐ "},
+   names  = {" ➊ ", " ➋ ", " ➌ ", " ➍ ", " ➎ ", " ➏ ", " ➐ "},
    -- names  = { ' 1 ', ' 2 ', ' 3 ', ' 4 ', ' 5 ', ' 6 ', ' 7 '},
-   names  = { ' 网络 ', ' 聊天 ', ' 终端 ', ' 编辑 ', ' 文件管理 ', ' 阅读 ', ' 其它 '},
+   -- names  = { '网络', '聊天', '终端', '编辑','文件', '阅读', '其它'},
    layout = { 
       awful.layout.layouts[3], 
-      awful.layout.layouts[4], 
+      awful.layout.layouts[2], 
       awful.layout.layouts[1], 
       awful.layout.layouts[2], 
       awful.layout.layouts[1],
@@ -128,18 +128,17 @@ myawesomemenu = {
 -- { "awesome", myawesomemenu },
 mymainmenu = awful.menu({ items = { 
                                     { "选择软件", xdgmenu },
-                                    { "文件浏览器n", "nautilus" },
                                     { "文件浏览器p", "pcmanfm" },
                                     { "文件浏览器r", "rox" },
                                     { "Firefox浏览器", "firefox" },
-                                    { "(&C)Chromium", "chromium" },
+--                                    { "(&C)Chromium", "chromium" },
+                                    { "(&D)Chromium-dev", "chromium-dev" },
                                     { "(&G)Chrome", "google-chrome" },
                                     { "订阅", "liferea" },
                                     { "TM2009", "work/soft/wine-tm2009.sh" },
                                     { "TM2013", "work/soft/wine-tm2013.sh" },
                                     { "QQ游戏", "work/soft/wine-qqgame.sh" },
                                     { "矢量设计", "inkscape" },
-                                    { "原型设计", "pencil" },
                                     { "gnote文本", "gnote" },
                                     { "启动Window Xp", "VBoxManage startvm winxp"},
                                     { "注销", awesome.quit },
@@ -154,7 +153,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
 -- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+-- menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
 -- {{{ Wibox
@@ -179,7 +178,8 @@ cpuwidget = wibox.widget.textbox()
 
 -- -- Register widget
 vicious.register(volumewidget, vicious.widgets.volume, " $1% ", 2, "Master")
-vicious.register(netwidget, vicious.widgets.net, '↑${eth0 up_kb} ↓${eth0 down_kb}')
+-- vicious.register(netwidget, vicious.widgets.net, '↑${eth0 up_kb}} ↓${eth0 down_kb}')
+vicious.register(netwidget, vicious.widgets.net, '↑${wlan0 up_kb} ↓${wlan0 down_kb}')
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1%")
 
 local netlayout = wibox.layout.constraint()
@@ -201,9 +201,7 @@ mytaglist.buttons = awful.util.table.join(
                     awful.button({ }, 1, awful.tag.viewonly),
                     awful.button({ modkey }, 1, awful.client.movetotag),
                     awful.button({ }, 3, awful.tag.viewtoggle),
-                    awful.button({ modkey }, 3, awful.client.toggletag),
-                    awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
-                    awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
+                    awful.button({ modkey }, 3, awful.client.toggletag) 
                     )
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
@@ -225,14 +223,6 @@ mytasklist.buttons = awful.util.table.join(
                                           end),
                      awful.button({ }, 3, function (c)
                                               c:kill()
-                                          end),
-                     awful.button({ }, 4, function ()
-                                              awful.client.focus.byidx(1)
-                                              if client.focus then client.focus:raise() end
-                                          end),
-                     awful.button({ }, 5, function ()
-                                              awful.client.focus.byidx(-1)
-                                              if client.focus then client.focus:raise() end
                                           end))
 
 for s = 1, screen.count() do
@@ -348,10 +338,6 @@ globalkeys = awful.util.table.join(
               function ()  
                 awful.util.spawn_with_shell(terminal .." -e ~/work/soft/bash/post-qqweibo.sh") 
               end),
-    awful.key({ modkey, "Control" }, "p", 
-              function ()  
-                awful.util.spawn_with_shell(terminal .." -e ~/work/soft/bash/svn-plan-commit.sh") 
-              end),
     awful.key({ modkey }, "p", 
               function ()  
                 awful.util.spawn_with_shell("planner ~/work/archiving/future.planner") 
@@ -366,15 +352,15 @@ globalkeys = awful.util.table.join(
                 awful.util.spawn_with_shell(terminal .." -e newsbeuter") 
               end),
     -- Menubar
-    awful.key({ "" }, "Print", false, function () awful.util.spawn("scrot  -e 'mv $f ~/tmp/; weibo4pic.py -f ~/tmp/$f | xsel -ib'") end),
-    awful.key({ modkey }, "Print", false, function () awful.util.spawn("scrot -s -e 'mv $f ~/tmp/; weibo4pic.py -f ~/tmp/$f | xsel -ib'") end),
+    awful.key({ "" }, "Print", false, function () awful.util.spawn_with_shell("cd /tmp/; scrot -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") end),
+    awful.key({ modkey }, "Print", false, function () awful.util.spawn_with_shell("cd /tmp/; scrot -s -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") end),
     awful.key({ modkey }, "a", revelation ),
     awful.key({ "Control", "Shift" }, "space", function () awful.util.spawn("dmenu_run -b") end),
-    awful.key({ modkey, "Shift" }, "m", function() menubar.show() end),
-    awful.key({ modkey,           }, "m",
-        function (c)
-            awful.util.spawn_with_shell(terminal .." -e mutt -y") 
-        end)
+    -- awful.key({ modkey, "Shift" }, "m", function() menubar.show() end),
+    awful.key({ modkey,           }, "Up", function() awful.util.spawn_with_shell('amixer -q set Master 2%+')  end),
+    awful.key({ modkey,           }, "Down", function() awful.util.spawn_with_shell('amixer -q set Master 2%-')  end),
+    awful.key({ modkey,  'Control'}, "Down", function() awful.util.spawn_with_shell('amixer -q set Master toggle')  end),
+    awful.key({ modkey,           }, "m", function (c) awful.util.spawn_with_shell("urxvt -e mutt -y") end)
 )
 
 clientkeys = awful.util.table.join(
@@ -454,7 +440,7 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
     { rule_any = { class = {"Xephyr", "Lightsoff", "Firefox", "Pidgin", "Opera", "Xulrunner", "rdesktop", "Inkscape"}}, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
         properties = { floating=false } },
-    { rule_any = { class = {"Gcolor2", 'doubanfm-qt', "MPlayer","Gnome-mplayer", "Plugin-container", "Exe", "operapluginwrapper-native", "Gmchess", "Main.py"},  skip_taskbar={true}, above={true}, name={"TXMenuWindow", "Dia v0.97.2"}, type={"splash", "dialog", "dropdown_menu", "popup_menu"}},   
+    { rule_any = { class = {"Gcolor2", 'doubanfm-qt', "MPlayer","Gnome-mplayer", "Plugin-container", "Exe", "operapluginwrapper-native", "Gmchess", "Main.py"},  skip_taskbar={true}, above={true}, name={"TXMenuWindow"}, type={"splash", "dialog", "dropdown_menu", "popup_menu"}},   
         callback = awful.placement.centered,
         properties = { floating = true, border_width = 0 } },
     { rule_any = { name={"TM2009", "TM2013"} , class={'JavaEmbeddedFrame'} }, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
@@ -463,13 +449,13 @@ awful.rules.rules = {
        properties = { tag = tags[1][4], switchtotag=true } },
     { rule_any = { class = {"XTerm", "LilyTerm", 'Sakura'} },
        properties = { tag = tags[1][3], switchtotag=true , border_width = 0 } },
-    { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang"}, instance={"TM.exe"} },
+    { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang", "Xchat"}, instance={"TM.exe"} },
        properties = { tag = tags[1][2], switchtotag=true } },
     { rule_any = { class = {"Chromium", "Firefox", "Opera", "Google-chrome-unstable", "Google-chrome-beta", "Google-chrome"} },
        properties = { tag = tags[1][1], switchtotag=true } },
     { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "JavaEmbeddedFrame"}},
        properties = { tag = tags[1][5], switchtotag=true } },
-    { rule_any = { class = {"Evince", "Liferea", "rdesktop"} },
+    { rule_any = { class = {"Evince", "Liferea", "Genymotion", 'Player', "rdesktop"} },
        properties = { tag = tags[1][6], switchtotag=true } },
     { rule_any = { class = {"Transmission", "Planner", "VirtualBox", "Thunderbird"}, name={"QQ游戏"}, instance={"Thunder5.exe"} },
        properties = { tag = tags[1][7], switchtotag=true } },
@@ -559,7 +545,7 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
--- require("conky")
+require("conky")
 
 autorun = true
 autorunApps =

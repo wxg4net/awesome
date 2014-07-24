@@ -9,15 +9,15 @@
 
 -- {{{ Main
 theme = {}
-theme.wallpaper = "/home/wxg/pictures/default"
+theme.wallpaper = "/home/wxg/Pictures/default"
 theme.icon_dir  = os.getenv("HOME") .. "/.config/awesome/themes/default"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "WenQuanYi Zen Hei Sharp  9"
 
+theme.font      = "WenQuanYi Zen Hei Sharp 9"
 -- {{{ Colors
-theme.fg_normal                     = "#D7D7D7"
+theme.fg_normal                     = "#bbbbbb"
 theme.fg_focus                      = "#F6784F"
 theme.bg_normal                     = "#242424"
 theme.bg_focus                      = "#242424"
