@@ -6,7 +6,7 @@ XTerm*altSendsEscape: true
 XTerm*utf8Title: true
 XTerm*faceName: CourierScreenplay:pixelsize=14
 XTerm*faceNameDoublesize: Microsoft YaHei:pixelsize=14
-XTerm*background: #111111
+XTerm*background: #242424
 XTerm*foreground: lightgrey
 XTerm*cursorColor: OliveDrab1
 xterm*termName: xterm-256color

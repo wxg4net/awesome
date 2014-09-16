@@ -87,7 +87,8 @@ awful.layout.layouts =
 if beautiful.wallpaper then
     for s = 1, screen.count() do
         -- gears.wallpaper.set('#354A70')
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        gears.wallpaper.centered(beautiful.wallpaper, s, '#242424')
     end
 end
 -- }}}
@@ -131,14 +132,16 @@ mymainmenu = awful.menu({ items = {
                                     { "文件浏览器p", "pcmanfm" },
                                     { "文件浏览器r", "rox" },
                                     { "Firefox浏览器", "firefox" },
---                                    { "(&C)Chromium", "chromium" },
-                                    { "(&D)Chromium-dev", "chromium-dev" },
+                                    { "(&C)Chromium", "chromium" },
+--                                    { "(&D)Chromium-dev", "chromium-dev" },
                                     { "(&G)Chrome", "google-chrome" },
                                     { "订阅", "liferea" },
                                     { "TM2009", "work/soft/wine-tm2009.sh" },
                                     { "TM2013", "work/soft/wine-tm2013.sh" },
                                     { "QQ游戏", "work/soft/wine-qqgame.sh" },
                                     { "矢量设计", "inkscape" },
+                                    { "音乐播放", "mocp -o shuffle -f --play" },
+                                    { "音乐暂停", "mocp --pause" },
                                     { "gnote文本", "gnote" },
                                     { "启动Window Xp", "VBoxManage startvm winxp"},
                                     { "注销", awesome.quit },
@@ -178,8 +181,8 @@ cpuwidget = wibox.widget.textbox()
 
 -- -- Register widget
 vicious.register(volumewidget, vicious.widgets.volume, " $1% ", 2, "Master")
--- vicious.register(netwidget, vicious.widgets.net, '↑${eth0 up_kb}} ↓${eth0 down_kb}')
-vicious.register(netwidget, vicious.widgets.net, '↑${wlan0 up_kb} ↓${wlan0 down_kb}')
+vicious.register(netwidget, vicious.widgets.net, '↑${eth0 up_kb} ↓${eth0 down_kb}')
+-- vicious.register(netwidget, vicious.widgets.net, '↑${wlan0 up_kb} ↓${wlan0 down_kb}')
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1%")
 
 local netlayout = wibox.layout.constraint()
@@ -340,11 +343,11 @@ globalkeys = awful.util.table.join(
               end),
     awful.key({ modkey }, "p", 
               function ()  
-                awful.util.spawn_with_shell("planner ~/work/archiving/future.planner") 
+                awful.util.spawn_with_shell("planner ~/work/archiving/todo.planner") 
               end),
     awful.key({ modkey }, "s", 
               function ()  
-                awful.util.spawn_with_shell(terminal .." -e offlineimap -o") 
+                awful.util.spawn_with_shell(terminal .." -e offlineimap -o -q ") 
               end),
 
     awful.key({ modkey }, "x",
@@ -449,13 +452,13 @@ awful.rules.rules = {
        properties = { tag = tags[1][4], switchtotag=true } },
     { rule_any = { class = {"XTerm", "LilyTerm", 'Sakura'} },
        properties = { tag = tags[1][3], switchtotag=true , border_width = 0 } },
-    { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang", "Xchat"}, instance={"TM.exe"} },
+    { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang", "Xchat"}, instance={"TM.exe"}, mame={"好友列表"} },
        properties = { tag = tags[1][2], switchtotag=true } },
     { rule_any = { class = {"Chromium", "Firefox", "Opera", "Google-chrome-unstable", "Google-chrome-beta", "Google-chrome"} },
        properties = { tag = tags[1][1], switchtotag=true } },
     { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "JavaEmbeddedFrame"}},
        properties = { tag = tags[1][5], switchtotag=true } },
-    { rule_any = { class = {"Evince", "Liferea", "Genymotion", 'Player', "rdesktop"} },
+    { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop"} },
        properties = { tag = tags[1][6], switchtotag=true } },
     { rule_any = { class = {"Transmission", "Planner", "VirtualBox", "Thunderbird"}, name={"QQ游戏"}, instance={"Thunder5.exe"} },
        properties = { tag = tags[1][7], switchtotag=true } },
@@ -551,7 +554,8 @@ autorun = true
 autorunApps =
 {
     "fcitx",
---    "ps -e | grep gnote || gnote",
+    "ps -e | grep gnote || gnote",
+    "mocp -S",
     "python2 /home/wxg/work/soft/python/myagtd-cli.py updateWidgetTask",
 --    "python2 /home/wxg/work/soft/python/dns4me.py",
 --    "ps -e | grep ROX-Filer || rox --bottom test",
@@ -564,5 +568,5 @@ end
 
 naughty.config.defaults.timeout = 5
 naughty.config.defaults.icon_size = 900
-naughty.config.defaults.position = "bottom_right"
+naughty.config.defaults.position = "top_right"
 naughty.config.defaults.font = "WenQuanYi Zen Hei Sharp  12"

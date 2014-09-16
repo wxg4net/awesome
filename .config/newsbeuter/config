@@ -1,4 +1,4 @@
-# ----------------------------------------------------------------------
+## ----------------------------------------------------------------------
 # file:    ~/.config/newsbeuter/config
 # author:  moparx     - http://moparx.com/configs
 # date:    05/08/2013 - 18:12 EDT
@@ -6,9 +6,10 @@
 # ----------------------------------------------------------------------
 
 auto-reload yes
-browser "/usr/bin/xterm -e w3m "
+#browser "/usr/bin/xterm -e w3m "
+browser "/usr/bin/dwb -R "
 cleanup-on-quit yes
-download-path "/home/wxg/downloads/"
+download-path "/home/wxg/Downloads/"
 feed-sort-order title-dec
 max-downloads 4
 notify-always yes
@@ -20,8 +21,8 @@ player mplayer
 refresh-on-startup yes
 reload-time 20
 reload-threads 2
-show-read-articles no
-show-read-feeds no
+show-read-articles yes
+show-read-feeds yes
 
 
 # binds ----------------------------------------------------------------
@@ -47,5 +48,5 @@ articlelist-format "%4i %f %D  %?T?|%-17T| ?%t"
 color listnormal                                            cyan    default
 color info                                                  black   white
 color listnormal_unread   magenta default
-color listfocus_unread    white  blue   bold
-color listfocus           white  blue   bold
+color listfocus_unread    white  cyan  
+color listfocus           white  cyan   
