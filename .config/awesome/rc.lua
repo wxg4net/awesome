@@ -66,7 +66,8 @@ awful.layout.layouts =
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.right,
     awful.layout.suit.max,
-    awful.layout.suit.fair
+    awful.layout.suit.fair,
+    awful.layout.suit.floating
 --[[    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
@@ -99,7 +100,7 @@ local vars = {
    -- names  = { '网络', '聊天', '终端', '编辑','文件', '阅读', '其它'},
    layout = { 
       awful.layout.layouts[3], 
-      awful.layout.layouts[2], 
+      awful.layout.layouts[5], 
       awful.layout.layouts[1], 
       awful.layout.layouts[2], 
       awful.layout.layouts[1],
@@ -133,16 +134,14 @@ mymainmenu = awful.menu({ items = {
                                     { "文件浏览器r", "rox" },
                                     { "Firefox浏览器", "firefox" },
                                     { "(&C)Chromium", "chromium" },
---                                    { "(&D)Chromium-dev", "chromium-dev" },
                                     { "(&G)Chrome", "google-chrome" },
-                                    { "订阅", "liferea" },
                                     { "TM2009", "work/soft/wine-tm2009.sh" },
-                                    { "TM2013", "work/soft/wine-tm2013.sh" },
                                     { "QQ游戏", "work/soft/wine-qqgame.sh" },
                                     { "矢量设计", "inkscape" },
-                                    { "音乐播放", "mocp -o shuffle -f --play" },
+                                    { "音乐启动", "mocp -S" },
+                                    { "音乐播放", "mocp --play" },
+                                    { "换个听听", "mocp --next" },
                                     { "音乐暂停", "mocp --pause" },
-                                    { "gnote文本", "gnote" },
                                     { "启动Window Xp", "VBoxManage startvm winxp"},
                                     { "注销", awesome.quit },
                                     { "挂起", 'systemctl suspend'},
@@ -443,21 +442,19 @@ awful.rules.rules = {
                      buttons = clientbuttons } },
     { rule_any = { class = {"Xephyr", "Lightsoff", "Firefox", "Pidgin", "Opera", "Xulrunner", "rdesktop", "Inkscape"}}, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
         properties = { floating=false } },
-    { rule_any = { class = {"Gcolor2", 'doubanfm-qt', "MPlayer","Gnome-mplayer", "Plugin-container", "Exe", "operapluginwrapper-native", "Gmchess", "Main.py"},  skip_taskbar={true}, above={true}, name={"TXMenuWindow"}, type={"splash", "dialog", "dropdown_menu", "popup_menu"}},   
+    { rule_any = { class = {"Gcolor2", 'doubanfm-qt', "MPlayer","Gnome-mplayer", "Plugin-container", "Exe", "operapluginwrapper-native", "Gmchess", "Main.py"},  skip_taskbar={true}, above={true}, name={"TXMenuWindow"}, type={"splash", "dialog", "dropdown_menu", "popup_menu"}}, 
         callback = awful.placement.centered,
         properties = { floating = true, border_width = 0 } },
-    { rule_any = { name={"TM2009", "TM2013"} , class={'JavaEmbeddedFrame'} }, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
-        properties = { floating=false } },
     { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Pencil", "Pgadmin3"} , name = { "LibreOffice", "XMind"} },
        properties = { tag = tags[1][4], switchtotag=true } },
-    { rule_any = { class = {"XTerm", "LilyTerm", 'Sakura'} },
+    { rule_any = { class = {"XTerm", 'Sakura'} },
        properties = { tag = tags[1][3], switchtotag=true , border_width = 0 } },
-    { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang", "Xchat"}, instance={"TM.exe"}, mame={"好友列表"} },
-       properties = { tag = tags[1][2], switchtotag=true } },
+    { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang", "Xchat", "Wine"} },
+       properties = { tag = tags[1][2], switchtotag=true, border_width=1 } },
     { rule_any = { class = {"Chromium", "Firefox", "Opera", "Google-chrome-unstable", "Google-chrome-beta", "Google-chrome"} },
        properties = { tag = tags[1][1], switchtotag=true } },
     { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "JavaEmbeddedFrame"}},
-       properties = { tag = tags[1][5], switchtotag=true } },
+       properties = { tag = tags[1][5], switchtotag=true, sticky=false} },
     { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop"} },
        properties = { tag = tags[1][6], switchtotag=true } },
     { rule_any = { class = {"Transmission", "Planner", "VirtualBox", "Thunderbird"}, name={"QQ游戏"}, instance={"Thunder5.exe"} },
@@ -481,7 +478,7 @@ client.connect_signal("manage", function (c, startup)
     c:connect_signal("mouse::enter", function(c)
         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
             and awful.client.focus.filter(c) then
-            -- client.focus = c
+          -- client.focus = c
         end
     end)
 
@@ -553,12 +550,8 @@ require("conky")
 autorun = true
 autorunApps =
 {
-    "fcitx",
-    "ps -e | grep gnote || gnote",
-    "mocp -S",
-    "python2 /home/wxg/work/soft/python/myagtd-cli.py updateWidgetTask",
---    "python2 /home/wxg/work/soft/python/dns4me.py",
---    "ps -e | grep ROX-Filer || rox --bottom test",
+    "ps -e | grep fcitx || fcitx",
+    "ps -e | grep gnote || gnote"
 }
 if autorun then
     for app = 1, #autorunApps do

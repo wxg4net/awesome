@@ -18,7 +18,7 @@ conky.visible = true
 
 local tb_task = wibox.widget.textbox()
 local tb_task_margin = wibox.layout.margin()
-tb_task:set_font('WenQuanYi Micro Hei Mono 8')
+tb_task:set_font('WenQuanYi Micro Hei Mono 11')
 tb_task:set_text('......')
 tb_task:set_align('right')
 tb_task_margin:set_margins(30)
@@ -40,11 +40,13 @@ layout:add(tb_kiss_margin)
 layout:add(tb_task_margin)
 
 tb_task:buttons(util.table.join(button({ }, 1, function(c) 
-  awful.util.spawn_with_shell( terminal .." -e myagtd.py ~/work/archiving/todo")  
+  awful.util.spawn_with_shell(terminal .. " -e myagtd.py ~/work/archiving/todo")  
   return false
 end)))
 
 tb_kiss:buttons(util.table.join(button({ }, 1, function(c) 
+  awful.util.spawn_with_shell("/usr/bin/python2 /home/wxg/work/soft/python/myagtd-cli.py updateWidgetTask")  
+  return false
 end)))
 
 conky:set_widget(layout)
@@ -60,10 +62,6 @@ capi.dbus.connect_signal("org.freedesktop.AwesomeWidget.Notice", function (data)
     if data.member == "Top" then
       if conky.ontop == false then
         conky.ontop = true
-        conky.x = 400
-        conky.y = 300
-        conky.border_width = 1
-        conky.border_color ='#3f3f3f'
       end
       return "b", true
     end
