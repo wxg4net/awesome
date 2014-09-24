@@ -13,7 +13,6 @@ local naughty = require("naughty")
 
 local vicious = require("vicious")
 require("menu")
-local revelation = require("revelation")
 require("vfunction")
 
 os.setlocale("zh_CN.UTF-8")
@@ -46,7 +45,6 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init(awful.util.getdir("config").."/themes/default/theme.lua")
-revelation.init()
 
 -- This is used later as the default terminal and editor to run.
 terminal = "sakura"
@@ -134,7 +132,7 @@ mymainmenu = awful.menu({ items = {
                                     { "文件浏览器r", "rox" },
                                     { "Firefox浏览器", "firefox" },
                                     { "(&C)Chromium", "chromium" },
-                                    { "(&G)Chrome", "google-chrome" },
+                                    { "(&G)Google-Chrome", "google-chrome" },
                                     { "TM2009", "work/soft/wine-tm2009.sh" },
                                     { "QQ游戏", "work/soft/wine-qqgame.sh" },
                                     { "矢量设计", "inkscape" },
@@ -356,7 +354,7 @@ globalkeys = awful.util.table.join(
     -- Menubar
     awful.key({ "" }, "Print", false, function () awful.util.spawn_with_shell("cd /tmp/; scrot -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") end),
     awful.key({ modkey }, "Print", false, function () awful.util.spawn_with_shell("cd /tmp/; scrot -s -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") end),
-    awful.key({ modkey }, "a", revelation ),
+    -- awful.key({ modkey }, "a", revelation ),
     awful.key({ "Control", "Shift" }, "space", function () awful.util.spawn("dmenu_run -b") end),
     -- awful.key({ modkey, "Shift" }, "m", function() menubar.show() end),
     awful.key({ modkey,           }, "Up", function() awful.util.spawn_with_shell('amixer -q set Master 2%+')  end),
@@ -450,7 +448,7 @@ awful.rules.rules = {
     { rule_any = { class = {"XTerm", 'Sakura'} },
        properties = { tag = tags[1][3], switchtotag=true , border_width = 0 } },
     { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang", "Xchat", "Wine"} },
-       properties = { tag = tags[1][2], switchtotag=true, border_width=1 } },
+       properties = { tag = tags[1][2], switchtotag=true } },
     { rule_any = { class = {"Chromium", "Firefox", "Opera", "Google-chrome-unstable", "Google-chrome-beta", "Google-chrome"} },
        properties = { tag = tags[1][1], switchtotag=true } },
     { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "JavaEmbeddedFrame"}},
@@ -464,6 +462,8 @@ awful.rules.rules = {
        -- properties = { border_width = 0, border_color = "#EDEDED", sticky = false } },
     { rule_any = { class = {"feh", 'Sxiv', 'XTerm'} },
        properties = { maximized_vertical = true, maximized_horizontal = true  } },
+    { rule_any = { class = { "Pidgin" } },
+       properties = { border_width = 1 } },
 
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
@@ -494,9 +494,17 @@ client.connect_signal("manage", function (c, startup)
         end
     end
 
-    local titlebars_enabled = true
-    if titlebars_enabled and awful.client.floating.get(c) and c.type ~= 'splash' and c.type ~= 'dock' and c.type ~= 'dialog' 
-      and c.name ~= 'ROX-Filer' and c.name ~= 'TXFloatingWnd' and c.class ~= 'Wine' and c.maximized_horizontal ~= true and c.maximized_vertical ~= true and c.fullscreen ~= true then
+    local titlebars_enabled = false
+    local titlebars_clients = {"Pidgin", "Gcolor2", "MPlayer", "Gnome-mplayer", "Xmradio"}
+
+    for _, tc in pairs(titlebars_clients) do
+      if c.class == tc then
+        titlebars_enabled = true
+        break
+      end
+    end
+
+    if titlebars_enabled then
         -- buttons for the titlebar
         local buttons = awful.util.table.join(
                 awful.button({ }, 1, function()
