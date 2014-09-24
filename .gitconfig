@@ -1,0 +1,12 @@
+[user]
+	name = wxg4dev
+	email = wxg4dev@gmail.com
+[core]
+	quotepath = false
+	filemode = true
+[i18n]
+	commitencoding = utf-8
+[push]
+	default = simple
+[gui]
+  spellingdictionary = none
