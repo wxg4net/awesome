@@ -93,7 +93,8 @@ end
 -- }}}
 
 local vars = {
-   names  = {" ➊ ", " ➋ ", " ➌ ", " ➍ ", " ➎ ", " ➏ ", " ➐ "},
+   -- names  = {" ➊ ", " ➋ ", " ➌ ", " ➍ ", " ➎ ", " ➏ ", " ➐ "},
+   names = { "  ", "  ","  ", "  ", "  ", " ", "  " },
    -- names  = { ' 1 ', ' 2 ', ' 3 ', ' 4 ', ' 5 ', ' 6 ', ' 7 '},
    -- names  = { '网络', '聊天', '终端', '编辑','文件', '阅读', '其它'},
    layout = { 
@@ -131,14 +132,15 @@ mymainmenu = awful.menu({ items = {
                                     { "文件浏览器p", "pcmanfm" },
                                     { "文件浏览器r", "rox" },
                                     { "Firefox浏览器", "firefox" },
-                                    { "(&C)Chromium", "chromium" },
                                     { "(&G)Google-Chrome", "google-chrome" },
                                     { "TM2009", "work/soft/wine-tm2009.sh" },
-                                    { "QQ游戏", "work/soft/wine-qqgame.sh" },
+                                    { "网络电视", "gsopcast" },
+                                    { "账单管理", "homebank" },
                                     { "矢量设计", "inkscape" },
                                     { "音乐启动", "mocp -S" },
-                                    { "音乐播放", "mocp --play" },
+                                    { "音乐播放", "mocp --play -o shuffle" },
                                     { "换个听听", "mocp --next" },
+                                    { "音乐恢复", "mocp --unpause" },
                                     { "音乐暂停", "mocp --pause" },
                                     { "启动Window Xp", "VBoxManage startvm winxp"},
                                     { "注销", awesome.quit },
@@ -177,8 +179,8 @@ netwidget = wibox.widget.textbox()
 cpuwidget = wibox.widget.textbox()
 
 -- -- Register widget
-vicious.register(volumewidget, vicious.widgets.volume, " $1% ", 2, "Master")
-vicious.register(netwidget, vicious.widgets.net, '↑${eth0 up_kb} ↓${eth0 down_kb}')
+vicious.register(volumewidget, vicious.widgets.volume, "  $1% ", 2, "Master")
+vicious.register(netwidget, vicious.widgets.net, ' ${eth0 up_kb}  ${eth0 down_kb}')
 -- vicious.register(netwidget, vicious.widgets.net, '↑${wlan0 up_kb} ↓${wlan0 down_kb}')
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1%")
 
@@ -342,6 +344,10 @@ globalkeys = awful.util.table.join(
               function ()  
                 awful.util.spawn_with_shell("planner ~/work/archiving/todo.planner") 
               end),
+    awful.key({ modkey }, "v", 
+              function ()  
+                awful.util.spawn_with_shell(terminal .." -t weechat -e weechat") 
+              end),
     awful.key({ modkey }, "s", 
               function ()  
                 awful.util.spawn_with_shell(terminal .." -e offlineimap -o -q ") 
@@ -349,18 +355,17 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey }, "x",
               function ()
-                awful.util.spawn_with_shell(terminal .." -e newsbeuter") 
+                awful.util.spawn_with_shell(terminal .." -t newsbeuter -e newsbeuter") 
               end),
     -- Menubar
     awful.key({ "" }, "Print", false, function () awful.util.spawn_with_shell("cd /tmp/; scrot -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") end),
     awful.key({ modkey }, "Print", false, function () awful.util.spawn_with_shell("cd /tmp/; scrot -s -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") end),
-    -- awful.key({ modkey }, "a", revelation ),
     awful.key({ "Control", "Shift" }, "space", function () awful.util.spawn("dmenu_run -b") end),
     -- awful.key({ modkey, "Shift" }, "m", function() menubar.show() end),
     awful.key({ modkey,           }, "Up", function() awful.util.spawn_with_shell('amixer -q set Master 2%+')  end),
     awful.key({ modkey,           }, "Down", function() awful.util.spawn_with_shell('amixer -q set Master 2%-')  end),
     awful.key({ modkey,  'Control'}, "Down", function() awful.util.spawn_with_shell('amixer -q set Master toggle')  end),
-    awful.key({ modkey,           }, "m", function (c) awful.util.spawn_with_shell("urxvt -e mutt -y") end)
+    awful.key({ modkey,           }, "m", function (c) awful.util.spawn_with_shell(terminal .." -e mutt -y") end)
 )
 
 clientkeys = awful.util.table.join(
@@ -445,7 +450,7 @@ awful.rules.rules = {
         properties = { floating = true, border_width = 0 } },
     { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Pencil", "Pgadmin3"} , name = { "LibreOffice", "XMind"} },
        properties = { tag = tags[1][4], switchtotag=true } },
-    { rule_any = { class = {"XTerm", 'Sakura'} },
+    { rule_any = { class = {"XTerm", 'Sakura', "URxvt"} },
        properties = { tag = tags[1][3], switchtotag=true , border_width = 0 } },
     { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang", "Xchat", "Wine"} },
        properties = { tag = tags[1][2], switchtotag=true } },
@@ -453,16 +458,16 @@ awful.rules.rules = {
        properties = { tag = tags[1][1], switchtotag=true } },
     { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "JavaEmbeddedFrame"}},
        properties = { tag = tags[1][5], switchtotag=true, sticky=false} },
-    { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop"} },
+    { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop"}, name = { "newsbeuter" } },
        properties = { tag = tags[1][6], switchtotag=true } },
-    { rule_any = { class = {"Transmission", "Planner", "VirtualBox", "Thunderbird"}, name={"QQ游戏"}, instance={"Thunder5.exe"} },
+    { rule_any = { class = {"Transmission", "Planner", "VirtualBox", "Gsopcast", "Homebank"} },
        properties = { tag = tags[1][7], switchtotag=true } },
     { rule_any = { class = {"ROX-Filer", "ROX-Panel"}},
        properties = { border_width = 0 } },
        -- properties = { border_width = 0, border_color = "#EDEDED", sticky = false } },
     { rule_any = { class = {"feh", 'Sxiv', 'XTerm'} },
        properties = { maximized_vertical = true, maximized_horizontal = true  } },
-    { rule_any = { class = { "Pidgin" } },
+    { rule_any = { class = { "Pidgin", "Skype", "MPlayer" } },
        properties = { border_width = 1 } },
 
     -- Set Firefox to always map on tags number 2 of screen 1.
@@ -495,7 +500,7 @@ client.connect_signal("manage", function (c, startup)
     end
 
     local titlebars_enabled = false
-    local titlebars_clients = {"Pidgin", "Gcolor2", "MPlayer", "Gnome-mplayer", "Xmradio"}
+    local titlebars_clients = {"Pidgin", "Gcolor2", "MPlayer", "Gnome-mplayer", "Xmradio", "Skype"}
 
     for _, tc in pairs(titlebars_clients) do
       if c.class == tc then
@@ -553,13 +558,14 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-require("conky")
+-- require("conky")
 
 autorun = true
 autorunApps =
 {
     "ps -e | grep fcitx || fcitx",
     "ps -e | grep gnote || gnote"
+--  "python2 /home/wxg/work/soft/python/myagtd-cli.py updateWidgetTask"
 }
 if autorun then
     for app = 1, #autorunApps do
@@ -570,4 +576,3 @@ end
 naughty.config.defaults.timeout = 5
 naughty.config.defaults.icon_size = 900
 naughty.config.defaults.position = "top_right"
-naughty.config.defaults.font = "WenQuanYi Zen Hei Sharp  12"

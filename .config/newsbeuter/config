@@ -7,9 +7,9 @@
 
 auto-reload yes
 #browser "/usr/bin/xterm -e w3m "
-browser "/usr/bin/dwb -R "
+browser "/usr/bin/surf -n "
 cleanup-on-quit yes
-download-path "/home/wxg/Downloads/"
+download-path "~/Downloads/"
 feed-sort-order title-dec
 max-downloads 4
 notify-always yes

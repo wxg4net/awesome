@@ -8,18 +8,13 @@
      {"Firefox", "/usr/lib/firefox/firefox ", "/usr/share/icons/hicolor/16x16/apps/firefox.png" },
      {"Google Chrome (unstable)", "/usr/bin/google-chrome-unstable ", "/usr/share/icons/hicolor/16x16/apps/google-chrome-unstable.png" },
      {"Google Earth", "/opt/google/earth/free/google-earth ", "/usr/share/icons/hicolor/16x16/apps/google-earth.png" },
-     {"Mumble", "mumble"},
      {"Pidgin 互联网通讯程序", "pidgin", "/usr/share/icons/hicolor/16x16/apps/pidgin.png" },
-     {"PyBitmessage", "pybitmessage ", "/usr/share/icons/hicolor/24x24/apps/pybitmessage.png" },
      {"Skype", "skype ", "/usr/share/icons/hicolor/16x16/apps/skype.png" },
-     {"Steam", "/usr/bin/steam ", "/usr/share/icons/hicolor/16x16/apps/steam.png" },
      {"Transmission", "transmission-gtk ", "/usr/share/icons/hicolor/16x16/apps/transmission.png" },
      {"X11VNC Server", "x11vnc -gui tray=setpass -rfbport PROMPT -bg -o %HOME/.x11vnc.log.%VNCDISPLAY", "/usr/share/icons/gnome/16x16/devices/computer.png" },
      {"Zenmap", "zenmap ", "///usr/share/zenmap/pixmaps/zenmap.png" },
      {"Zenmap (as root)", "/usr/share/zenmap/su-to-zenmap.sh ", "///usr/share/zenmap/pixmaps/zenmap.png" },
      {"bcloud", "bcloud-gui", "/usr/share/icons/hicolor/16x16/apps/bcloud.png" },
-     {"dwb", "dwb ", "/usr/share/pixmaps/dwb.png" },
-     {"uGet", "uget-gtk ", "/usr/share/icons/hicolor/16x16/apps/uget-icon.png" },
      {"xmradio", "xmradio", "/usr/share/icons/hicolor/16x16/apps/xmradio.png" },
      {"豆瓣FM", "doubanfm-qt", "///usr/share/pixmaps/QDoubanFM.png" },
      {"远程桌面查看器", "vinagre ", "/usr/share/icons/gnome/16x16/apps/preferences-desktop-remote-desktop.png" },
@@ -28,7 +23,6 @@
 
  local menudb53804b7d726967c58fcc8c9ca03d27 = {
      {"Foxit Reader", "foxitreader ", "/usr/share/pixmaps/foxitreader.png" },
-     {"GnuCash", "gnucash ", "/usr/share/icons/hicolor/16x16/apps/gnucash-icon.png" },
      {"HomeBank", "homebank ", "/usr/share/icons/hicolor/16x16/apps/homebank.png" },
      {"LibreOffice", "libreoffice ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-startcenter.png" },
      {"LibreOffice Base", "libreoffice --base ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-base.png" },
@@ -54,14 +48,11 @@
      {"FontForge", "fontforge ", "/usr/share/icons/hicolor/16x16/apps/fontforge.png" },
      {"GNU 图像处理程序", "gimp-2.8 ", "/usr/share/icons/hicolor/16x16/apps/gimp.png" },
      {"Gcolor2", "gcolor2", "///usr/share/pixmaps/gcolor2/icon.png" },
-     {"Google Web Designer", "/usr/bin/google-webdesigner", "/usr/share/icons/hicolor/16x16/apps/google-webdesigner.png" },
      {"Inkscape", "inkscape ", "/usr/share/icons/hicolor/16x16/apps/inkscape.png" },
      {"LibreOffice Draw", "libreoffice --draw ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-draw.png" },
      {"Scribus", "scribus ", "///usr/share/scribus/icons/scribus.png" },
      {"Tiled", "tiled", "/usr/share/icons/hicolor/16x16/apps/tiled.png" },
      {"Viewnior", "viewnior ", "/usr/share/icons/hicolor/16x16/apps/viewnior.png" },
-     {"xgps", "xgps", "///usr/share/gpsd/gpsd-logo.png" },
-     {"xgpsspeed", "xgpsspeed", "///usr/share/gpsd/gpsd-logo.png" },
      {"图像查看器", "eog ", "/usr/share/icons/hicolor/16x16/apps/eog.png" },
      {"文档查看器", "evince ", "/usr/share/icons/hicolor/16x16/apps/evince.png" },
  }
@@ -70,8 +61,8 @@
      {"Adobe Flash Player", "flashplayer", "/usr/share/icons/hicolor/16x16/apps/flash.png" },
      {"Audacity", "audacity ", "/usr/share/icons/hicolor/16x16/apps/audacity.png" },
      {"DeaDBeeF", "deadbeef ", "/usr/share/icons/hicolor/16x16/apps/deadbeef.png" },
-     {"GMLive", "gmlive", "/usr/share/pixmaps/gmlive.png" },
      {"GNOME MPlayer", "gnome-mplayer ", "/usr/share/icons/hicolor/16x16/apps/gnome-mplayer.png" },
+     {"Gsopcast", "gsopcast", "/usr/share/pixmaps/gsopcast.png" },
      {"KW 音乐", "kwplayer", "/usr/share/icons/hicolor/24x24/apps/kwplayer.png" },
      {"PulseAudio Volume Control", "pavucontrol", "/usr/share/icons/gnome/16x16/apps/multimedia-volume-control.png" },
      {"Qt V4L2 test Utility", "qv4l2", "/usr/share/icons/hicolor/16x16/apps/qv4l2.png" },
@@ -84,7 +75,6 @@
 
  local menu8640cb1581c2ae2de5a1462405b2943b = {
      {"Cycle", "cycle", "/usr/share/pixmaps/cycle.xpm" },
-     {"GeoGebra", "geogebra ", "/usr/share/icons/hicolor/16x16/apps/geogebra.png" },
      {"LibreOffice Math", "libreoffice --math ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-math.png" },
      {"Marble", "marble-qt ", "/usr/share/icons/hicolor/16x16/apps/marble.png" },
      {"Marble", "marble-touch ", "/usr/share/icons/hicolor/16x16/apps/marble.png" },
@@ -92,8 +82,7 @@
  }
 
  local menuba08216f13dd1742157412386eee1225 = {
-     {"Steam", "/usr/bin/steam ", "/usr/share/icons/hicolor/16x16/apps/steam.png" },
-     {"Urban Terror", "urbanterror", "/usr/share/pixmaps/urbanterror.png" },
+     {"Minecraft", "minecraft", "///usr/share/pixmaps/minecraft.png" },
      {"天书棋谈", "gmchess", "/usr/share/pixmaps/gmchess.png" },
  }
 
@@ -122,17 +111,14 @@
  }
 
  local menu41282bf95e43c64d579757573a03cdde = {
-     {"Android SDK", "android", "/usr/share/pixmaps/android-sdk.png" },
      {"CMake", "cmake-gui ", "/usr/share/pixmaps/CMakeSetup32.png" },
-     {"Eclipse", "eclipse", "/usr/share/icons/hicolor/16x16/apps/eclipse.png" },
      {"GHex", "ghex ", "/usr/share/icons/hicolor/16x16/apps/ghex.png" },
      {"Geany", "geany ", "/usr/share/icons/hicolor/16x16/apps/geany.png" },
      {"Giggle", "giggle ", "/usr/share/icons/hicolor/16x16/apps/giggle.png" },
      {"Glade", "glade ", "/usr/share/icons/hicolor/16x16/apps/glade.png" },
-     {"Google Web Designer", "/usr/bin/google-webdesigner", "/usr/share/icons/hicolor/16x16/apps/google-webdesigner.png" },
-     {"Java Mission Control", "jmc", "/usr/share/icons/hicolor/16x16/apps/sun-java.png" },
-     {"Java Monitoring and Management Console", "jconsole", "/usr/share/icons/hicolor/16x16/apps/sun-java.png" },
-     {"Java VisualVM", "jvisualvm", "/usr/share/icons/hicolor/16x16/apps/sun-java.png" },
+     {"Java Mission Control", "/usr/lib/jvm/java-8-jdk/bin/jmc", "/usr/share/icons/hicolor/16x16/apps/sun-java-jdk8.png" },
+     {"Java Monitoring and Management Console", "/usr/lib/jvm/java-8-jdk/bin/jconsole", "/usr/share/icons/hicolor/16x16/apps/sun-java-jdk8.png" },
+     {"Java VisualVM", "/usr/lib/jvm/java-8-jdk/bin/jvisualvm", "/usr/share/icons/hicolor/16x16/apps/sun-java-jdk8.png" },
      {"Qt Assistant", "/usr/lib/qt/bin/assistant", "/usr/share/icons/hicolor/32x32/apps/assistant.png" },
      {"Qt Designer", "/usr/lib/qt/bin/designer", "/usr/share/icons/hicolor/128x128/apps/designer.png" },
      {"Qt Linguist", "/usr/lib/qt/bin/linguist", "/usr/share/icons/hicolor/16x16/apps/linguist.png" },
@@ -141,7 +127,6 @@
      {"Qt4 Designer", "designer-qt4", "/usr/share/icons/hicolor/128x128/apps/designer-qt4.png" },
      {"Qt4 Linguist ", "linguist-qt4", "/usr/share/icons/hicolor/16x16/apps/linguist-qt4.png" },
      {"Qt4 QDbusViewer ", "qdbusviewer-qt4", "/usr/share/icons/hicolor/32x32/apps/qdbusviewer-qt4.png" },
-     {"Work Bench", "workbench", "/usr/share/pixmaps/wb.png" },
      {"bpython", "xterm -e /usr/bin/bpython"},
      {"bpython2", "xterm -e /usr/bin/bpython2"},
      {"pgAdmin III", "/usr/bin/pgadmin3", "///usr/share/pgadmin3/pgAdmin3.png" },
@@ -161,8 +146,10 @@
      {"bpython", "xterm -e /usr/bin/bpython"},
      {"bpython2", "xterm -e /usr/bin/bpython2"},
      {"compton", "compton"},
+     {"gedit", "gedit ", "/usr/share/icons/gnome/16x16/apps/accessories-text-editor.png" },
      {"地图", "gnome-maps", "/usr/share/icons/hicolor/16x16/apps/gnome-maps.png" },
      {"天气", "gapplication launch org.gnome.Weather.Application", "/usr/share/icons/hicolor/16x16/apps/org.gnome.Weather.Application.png" },
+     {"字符映射表", "gucharmap", "/usr/share/icons/gnome/16x16/apps/accessories-character-map.png" },
      {"归档管理器", "file-roller ", "/usr/share/icons/hicolor/16x16/apps/file-roller.png" },
      {"星际译王", "stardict", "/usr/share/pixmaps/stardict.png" },
      {"磁盘", "gnome-disks", "/usr/share/icons/hicolor/16x16/apps/gnome-disks.png" },

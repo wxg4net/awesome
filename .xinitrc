@@ -13,7 +13,8 @@ fi
 
 export EDITOR="vim"
 #export BROWSER="google-chrome"
-export BROWSER="firefox"
+export BROWSER="chromium"
+#export BROWSER="firefox"
 
 export LC_CTYPE="zh_CN.UTF-8"
 export XMODIFIERS="@im=fcitx"
