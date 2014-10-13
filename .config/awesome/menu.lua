@@ -33,9 +33,6 @@
      {"LibreOffice Writer", "libreoffice --writer ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-writer.png" },
      {"Planner", "planner ", "/usr/share/pixmaps/gnome-planner.png" },
      {"ReText", "retext ", "/usr/share/icons/hicolor/16x16/apps/retext.png" },
-     {"WPS 文字", "/usr/bin/wps ", "/usr/share/icons/hicolor/48x48/apps/wps-office-wpsmain.png" },
-     {"WPS 演示", "/usr/bin/wpp ", "/usr/share/icons/hicolor/48x48/apps/wps-office-wppmain.png" },
-     {"WPS 表格", "/usr/bin/et ", "/usr/share/icons/hicolor/48x48/apps/wps-office-etmain.png" },
      {"XMind", "/usr/share/xmind/XMind", "/usr/share/pixmaps/xmind.png" },
      {"文档查看器", "evince ", "/usr/share/icons/hicolor/16x16/apps/evince.png" },
      {"星际译王", "stardict", "/usr/share/pixmaps/stardict.png" },
@@ -82,7 +79,6 @@
  }
 
  local menuba08216f13dd1742157412386eee1225 = {
-     {"Minecraft", "minecraft", "///usr/share/pixmaps/minecraft.png" },
      {"天书棋谈", "gmchess", "/usr/share/pixmaps/gmchess.png" },
  }
 

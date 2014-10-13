@@ -10,11 +10,11 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 -- local menubar = require("menubar")
-
 local vicious = require("vicious")
+local revelation = require("revelation")
+
 require("menu")
 require("vfunction")
-
 os.setlocale("zh_CN.UTF-8")
 
 -- {{{ Error handling
@@ -45,6 +45,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init(awful.util.getdir("config").."/themes/default/theme.lua")
+revelation.init()
 
 -- This is used later as the default terminal and editor to run.
 terminal = "sakura"
@@ -98,7 +99,7 @@ local vars = {
    -- names  = { ' 1 ', ' 2 ', ' 3 ', ' 4 ', ' 5 ', ' 6 ', ' 7 '},
    -- names  = { '网络', '聊天', '终端', '编辑','文件', '阅读', '其它'},
    layout = { 
-      awful.layout.layouts[3], 
+      awful.layout.layouts[1], 
       awful.layout.layouts[5], 
       awful.layout.layouts[1], 
       awful.layout.layouts[2], 
@@ -129,17 +130,16 @@ myawesomemenu = {
 -- { "awesome", myawesomemenu },
 mymainmenu = awful.menu({ items = { 
                                     { "选择软件", xdgmenu },
-                                    { "文件浏览器p", "pcmanfm" },
                                     { "文件浏览器r", "rox" },
-                                    { "Firefox浏览器", "firefox" },
+                                    { "文件浏览器p", "pcmanfm" },
                                     { "(&G)Google-Chrome", "google-chrome" },
+                                    { "Firefox浏览器", "firefox" },
                                     { "TM2009", "work/soft/wine-tm2009.sh" },
                                     { "网络电视", "gsopcast" },
                                     { "账单管理", "homebank" },
                                     { "矢量设计", "inkscape" },
-                                    { "音乐启动", "mocp -S" },
-                                    { "音乐播放", "mocp --play -o shuffle" },
-                                    { "换个听听", "mocp --next" },
+                                    { "便笺Gnote", "gnote" },
+                                    { "音乐播放", "work/soft/bash/mocp" },
                                     { "音乐恢复", "mocp --unpause" },
                                     { "音乐暂停", "mocp --pause" },
                                     { "启动Window Xp", "VBoxManage startvm winxp"},
@@ -160,15 +160,16 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock("%e号 %A %I:%M ")
+mytextclock = awful.widget.textclock(" %e %V %a %I:%M")
 mytextclock:buttons( 
     awful.util.table.join(
         awful.button({ }, 1, 
           function() 
             date = awful.util.pread('cdate');  
             naughty.notify({ 
+                             icon =  os.getenv("HOME")..'/Pictures/cdate',
                              title = "农历日期",
-                             timeout = 2,
+                             timeout = 9,
                              text = date })
           end)
     ))
@@ -192,7 +193,7 @@ netlayout:set_width(100)
 local cpulayout = wibox.layout.constraint()
 cpulayout:set_widget(cpuwidget)
 cpulayout:set_strategy('exact')
-cpulayout:set_width(25)
+cpulayout:set_width(35)
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -275,8 +276,8 @@ end
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 1, function () mymainmenu:toggle() end),
-    awful.button({ }, 2, function () awful.util.spawn_with_shell("/home/wxg/work/soft/bash/clock.sh")   end),
-    awful.button({ }, 3, function () awful.util.spawn_with_shell("/home/wxg/work/soft/bash/weather.sh")   end),
+    awful.button({ }, 2, function () awful.util.spawn_with_shell("~/work/soft/bash/clock.sh")   end),
+    awful.button({ }, 3, function () awful.util.spawn_with_shell("~/work/soft/bash/weather.sh")   end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -332,40 +333,45 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey },            "a",   revelation ),
     awful.key({ modkey }, "t", 
               function ()  
-                awful.util.spawn_with_shell(terminal .." -e myagtd.py ~/work/archiving/todo") 
+                awful.util.spawn(terminal .." -e /usr/bin/myagtd.py /home/wxg/work/archiving/todo") 
               end),
     awful.key({ modkey }, "q", 
               function ()  
-                awful.util.spawn_with_shell(terminal .." -e ~/work/soft/bash/post-qqweibo.sh") 
+                awful.util.spawn(terminal .." -e work/soft/bash/post-qqweibo.sh") 
               end),
     awful.key({ modkey }, "p", 
               function ()  
-                awful.util.spawn_with_shell("planner ~/work/archiving/todo.planner") 
+                awful.util.spawn("planner work/archiving/todo.planner") 
               end),
     awful.key({ modkey }, "v", 
               function ()  
-                awful.util.spawn_with_shell(terminal .." -t weechat -e weechat") 
+                awful.util.spawn(terminal .." -t weechat -e weechat") 
               end),
     awful.key({ modkey }, "s", 
               function ()  
-                awful.util.spawn_with_shell(terminal .." -e offlineimap -o -q ") 
+                awful.util.spawn(terminal .." -e offlineimap -o -q ") 
               end),
 
     awful.key({ modkey }, "x",
               function ()
-                awful.util.spawn_with_shell(terminal .." -t newsbeuter -e newsbeuter") 
+                awful.util.spawn(terminal .." -t newsbeuter -e newsbeuter") 
               end),
     -- Menubar
-    awful.key({ "" }, "Print", false, function () awful.util.spawn_with_shell("cd /tmp/; scrot -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") end),
-    awful.key({ modkey }, "Print", false, function () awful.util.spawn_with_shell("cd /tmp/; scrot -s -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") end),
+    awful.key({ "" }, "Print", false, function () 
+        awful.util.spawn_with_shell("cd /tmp/; scrot -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") 
+      end),
+    awful.key({ modkey }, "Print", false, function () 
+        awful.util.spawn_with_shell("cd /tmp/; scrot -s -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") 
+      end),
     awful.key({ "Control", "Shift" }, "space", function () awful.util.spawn("dmenu_run -b") end),
     -- awful.key({ modkey, "Shift" }, "m", function() menubar.show() end),
     awful.key({ modkey,           }, "Up", function() awful.util.spawn_with_shell('amixer -q set Master 2%+')  end),
     awful.key({ modkey,           }, "Down", function() awful.util.spawn_with_shell('amixer -q set Master 2%-')  end),
     awful.key({ modkey,  'Control'}, "Down", function() awful.util.spawn_with_shell('amixer -q set Master toggle')  end),
-    awful.key({ modkey,           }, "m", function (c) awful.util.spawn_with_shell(terminal .." -e mutt -y") end)
+    awful.key({ modkey,           }, "m", function (c) awful.util.spawn(terminal .." -e mutt -y") end)
 )
 
 clientkeys = awful.util.table.join(
@@ -443,22 +449,22 @@ awful.rules.rules = {
                      keys = clientkeys,
                      size_hints_honor = false,
                      buttons = clientbuttons } },
-    { rule_any = { class = {"Xephyr", "Lightsoff", "Firefox", "Pidgin", "Opera", "Xulrunner", "rdesktop", "Inkscape"}}, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
+    { rule_any = { class = {"Xephyr", "Lightsoff", "Firefox", "Xulrunner", "rdesktop", "Inkscape"} } , 
         properties = { floating=false } },
-    { rule_any = { class = {"Gcolor2", 'doubanfm-qt', "MPlayer","Gnome-mplayer", "Plugin-container", "Exe", "operapluginwrapper-native", "Gmchess", "Main.py"},  skip_taskbar={true}, above={true}, name={"TXMenuWindow"}, type={"splash", "dialog", "dropdown_menu", "popup_menu"}}, 
+    { rule_any = { class = {"Gcolor2", 'doubanfm-qt', "MPlayer","Gnome-mplayer", "Plugin-container", "Exe", "operapluginwrapper-native", "Gmchess", "Main.py"},  skip_taskbar={true}, above={true}, type={"splash", "dialog", "dropdown_menu", "popup_menu"}}, 
         callback = awful.placement.centered,
         properties = { floating = true, border_width = 0 } },
     { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Pencil", "Pgadmin3"} , name = { "LibreOffice", "XMind"} },
        properties = { tag = tags[1][4], switchtotag=true } },
     { rule_any = { class = {"XTerm", 'Sakura', "URxvt"} },
        properties = { tag = tags[1][3], switchtotag=true , border_width = 0 } },
-    { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang", "Xchat", "Wine"} },
+    { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang", "Gmchess", "Wine"} },
        properties = { tag = tags[1][2], switchtotag=true } },
     { rule_any = { class = {"Chromium", "Firefox", "Opera", "Google-chrome-unstable", "Google-chrome-beta", "Google-chrome"} },
        properties = { tag = tags[1][1], switchtotag=true } },
     { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "JavaEmbeddedFrame"}},
        properties = { tag = tags[1][5], switchtotag=true, sticky=false} },
-    { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop"}, name = { "newsbeuter" } },
+    { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop", "Xchm"}, name = { "newsbeuter" } },
        properties = { tag = tags[1][6], switchtotag=true } },
     { rule_any = { class = {"Transmission", "Planner", "VirtualBox", "Gsopcast", "Homebank"} },
        properties = { tag = tags[1][7], switchtotag=true } },
@@ -480,13 +486,14 @@ awful.rules.rules = {
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c, startup)
     -- Enable sloppy focus
+    --[[
     c:connect_signal("mouse::enter", function(c)
         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
             and awful.client.focus.filter(c) then
-          -- client.focus = c
+            client.focus = c
         end
     end)
-
+    ]]--
     if not startup then
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
@@ -500,7 +507,7 @@ client.connect_signal("manage", function (c, startup)
     end
 
     local titlebars_enabled = false
-    local titlebars_clients = {"Pidgin", "Gcolor2", "MPlayer", "Gnome-mplayer", "Xmradio", "Skype"}
+    local titlebars_clients = {"Pidgin", "Gcolor2", "MPlayer", "Gnome-mplayer", "Xmradio", "Skype", "Gmchess"}
 
     for _, tc in pairs(titlebars_clients) do
       if c.class == tc then
@@ -564,7 +571,7 @@ autorun = true
 autorunApps =
 {
     "ps -e | grep fcitx || fcitx",
-    "ps -e | grep gnote || gnote"
+--  "ps -e | grep gnote || gnote" 
 --  "python2 /home/wxg/work/soft/python/myagtd-cli.py updateWidgetTask"
 }
 if autorun then
