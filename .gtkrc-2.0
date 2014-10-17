@@ -1,0 +1,20 @@
+# DO NOT EDIT! This file will be overwritten by LXAppearance.
+# Any customization should be done in ~/.gtkrc-2.0.mine instead.
+
+gtk-theme-name="Zukitwo"
+gtk-icon-theme-name="nouveGnome"
+gtk-font-name="文泉驿微米黑 11"
+gtk-cursor-theme-name="Adwaita"
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_ICONS
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=0
+gtk-menu-images=1
+gtk-enable-event-sounds=0
+gtk-enable-input-feedback-sounds=0
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle="hintfull"
+gtk-xft-rgba="rgb"
+gtk-color-scheme="tooltip_fg_color:#000000\nlink_color:#08c\nbase_color:#F7F7F7\nselected_fg_color:#ffffffffffff\ntext_color:#2c2c2c\nbg_color_dark:#3f3f3f\ntext_color_dark:#FFF\nbg_color:#d4d4d4\ntooltip_bg_color:#F5F5B5\nselected_bg_color:#6d6d8c8cc7c7\nfg_color:#2c2c2c\n"
+include "/home/wxg/.gtkrc-2.0.mine"

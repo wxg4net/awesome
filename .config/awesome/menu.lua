@@ -1,7 +1,6 @@
  local menuc8205c7636e728d448c2774e6a4a944b = {
      {"Avahi SSH服务器浏览器", "/usr/bin/bssh", "/usr/share/icons/gnome/16x16/devices/network-wired.png" },
      {"Avahi VNC服务器浏览器", "/usr/bin/bvnc", "/usr/share/icons/gnome/16x16/devices/network-wired.png" },
-     {"Chromium", "chromium ", "/usr/share/icons/hicolor/16x16/apps/chromium.png" },
      {"Dropbox", "dropboxd", "/usr/share/pixmaps/dropbox.png" },
      {"Ettercap", "ettercap-pkexec -G", "/usr/share/pixmaps/ettercap.svg" },
      {"FileZilla", "filezilla", "/usr/share/icons/hicolor/16x16/apps/filezilla.png" },
@@ -112,9 +111,6 @@
      {"Geany", "geany ", "/usr/share/icons/hicolor/16x16/apps/geany.png" },
      {"Giggle", "giggle ", "/usr/share/icons/hicolor/16x16/apps/giggle.png" },
      {"Glade", "glade ", "/usr/share/icons/hicolor/16x16/apps/glade.png" },
-     {"Java Mission Control", "/usr/lib/jvm/java-8-jdk/bin/jmc", "/usr/share/icons/hicolor/16x16/apps/sun-java-jdk8.png" },
-     {"Java Monitoring and Management Console", "/usr/lib/jvm/java-8-jdk/bin/jconsole", "/usr/share/icons/hicolor/16x16/apps/sun-java-jdk8.png" },
-     {"Java VisualVM", "/usr/lib/jvm/java-8-jdk/bin/jvisualvm", "/usr/share/icons/hicolor/16x16/apps/sun-java-jdk8.png" },
      {"Qt Assistant", "/usr/lib/qt/bin/assistant", "/usr/share/icons/hicolor/32x32/apps/assistant.png" },
      {"Qt Designer", "/usr/lib/qt/bin/designer", "/usr/share/icons/hicolor/128x128/apps/designer.png" },
      {"Qt Linguist", "/usr/lib/qt/bin/linguist", "/usr/share/icons/hicolor/16x16/apps/linguist.png" },

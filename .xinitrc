@@ -13,6 +13,8 @@ fi
 
 export EDITOR="vim"
 export BROWSER="google-chrome"
+export TERM="sakura"
+
 #export BROWSER="chromium"
 #export BROWSER="firefox"
 

@@ -15,7 +15,7 @@ theme.icon_dir  = os.getenv("HOME") .. "/.config/awesome/themes/default"
 
 -- {{{ Styles
 
-theme.font      = "WenQuanYi Zen Hei Sharp 9"
+theme.font      = "WenQuanYi Micro Hei 10"
 -- {{{ Colors
 theme.fg_normal                     = "#bbbbbb"
 theme.fg_focus                      = "#F6784F"
@@ -24,8 +24,8 @@ theme.bg_focus                      = "#242424"
 theme.fg_urgent                     = "#CC9393"
 theme.bg_urgent                     = "#2A1F1E"
 theme.border_width                  = "0"
-theme.border_normal                 = "#0E0E0E"
-theme.border_focus                  = "#666666"
+theme.border_normal                 = "#3F3F3F"
+theme.border_focus                  = "#3F3F3F"
 theme.border_marked = "#CC9393"
 -- theme.taglist_fg_focus              = "#F6784F"
 -- theme.taglist_bg_focus              = "png:" .. theme.icon_dir .. "/taglist/taglist_bg_focus.png"
@@ -131,7 +131,5 @@ theme.titlebar_maximized_button_focus_inactive  = theme.icon_dir .. "/titlebar/m
 theme.titlebar_maximized_button_normal_inactive = theme.icon_dir .. "/titlebar/maximized_normal_inactive.png"
 -- }}}
 -- }}}
-
-theme.calendar_icon  = "/usr/share/icons/Faenza/apps/16/gnome-calendar.png"
 
 return theme

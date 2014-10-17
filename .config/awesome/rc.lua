@@ -132,8 +132,8 @@ mymainmenu = awful.menu({ items = {
                                     { "选择软件", xdgmenu },
                                     { "文件浏览器r", "rox" },
                                     { "文件浏览器p", "pcmanfm" },
-                                    { "(&G)Google-Chrome", "google-chrome" },
-                                    { "Firefox浏览器", "firefox" },
+                                    { "Chrome", "google-chrome" },
+                                    { "Firefox", "firefox" },
                                     { "TM2009", "work/soft/wine-tm2009.sh" },
                                     { "网络电视", "gsopcast" },
                                     { "账单管理", "homebank" },
@@ -181,7 +181,7 @@ cpuwidget = wibox.widget.textbox()
 
 -- -- Register widget
 vicious.register(volumewidget, vicious.widgets.volume, "  $1% ", 2, "Master")
-vicious.register(netwidget, vicious.widgets.net, ' ${eth0 up_kb}  ${eth0 down_kb}')
+vicious.register(netwidget, vicious.widgets.net, ' ${eth0 up_kb}  ${eth0 down_kb} Kb')
 -- vicious.register(netwidget, vicious.widgets.net, '↑${wlan0 up_kb} ↓${wlan0 down_kb}')
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1%")
 
@@ -336,7 +336,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey },            "a",   revelation ),
     awful.key({ modkey }, "t", 
               function ()  
-                awful.util.spawn(terminal .." -e /usr/bin/myagtd.py /home/wxg/work/archiving/todo") 
+                awful.util.spawn(terminal .." -e /usr/bin/myagtd.py -c work/archiving/todo") 
               end),
     awful.key({ modkey }, "q", 
               function ()  
@@ -439,6 +439,8 @@ clientbuttons = awful.util.table.join(
 root.keys(globalkeys)
 -- }}}
 
+local titlebars_clients = {"Pidgin", "Gcolor2", "MPlayer", "Gnome-mplayer", "Xmradio", "Gmchess"}
+
 -- {{{ Rules
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -453,7 +455,7 @@ awful.rules.rules = {
         properties = { floating=false } },
     { rule_any = { class = {"Gcolor2", 'doubanfm-qt', "MPlayer","Gnome-mplayer", "Plugin-container", "Exe", "operapluginwrapper-native", "Gmchess", "Main.py"},  skip_taskbar={true}, above={true}, type={"splash", "dialog", "dropdown_menu", "popup_menu"}}, 
         callback = awful.placement.centered,
-        properties = { floating = true, border_width = 0 } },
+        properties = { floating = true } },
     { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Pencil", "Pgadmin3"} , name = { "LibreOffice", "XMind"} },
        properties = { tag = tags[1][4], switchtotag=true } },
     { rule_any = { class = {"XTerm", 'Sakura', "URxvt"} },
@@ -462,18 +464,15 @@ awful.rules.rules = {
        properties = { tag = tags[1][2], switchtotag=true } },
     { rule_any = { class = {"Chromium", "Firefox", "Opera", "Google-chrome-unstable", "Google-chrome-beta", "Google-chrome"} },
        properties = { tag = tags[1][1], switchtotag=true } },
-    { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "JavaEmbeddedFrame"}},
+    { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer"}},
        properties = { tag = tags[1][5], switchtotag=true, sticky=false} },
     { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop", "Xchm"}, name = { "newsbeuter" } },
        properties = { tag = tags[1][6], switchtotag=true } },
     { rule_any = { class = {"Transmission", "Planner", "VirtualBox", "Gsopcast", "Homebank"} },
        properties = { tag = tags[1][7], switchtotag=true } },
-    { rule_any = { class = {"ROX-Filer", "ROX-Panel"}},
-       properties = { border_width = 0 } },
-       -- properties = { border_width = 0, border_color = "#EDEDED", sticky = false } },
     { rule_any = { class = {"feh", 'Sxiv', 'XTerm'} },
        properties = { maximized_vertical = true, maximized_horizontal = true  } },
-    { rule_any = { class = { "Pidgin", "Skype", "MPlayer" } },
+    { rule_any = { class = titlebars_clients },
        properties = { border_width = 1 } },
 
     -- Set Firefox to always map on tags number 2 of screen 1.
@@ -507,7 +506,6 @@ client.connect_signal("manage", function (c, startup)
     end
 
     local titlebars_enabled = false
-    local titlebars_clients = {"Pidgin", "Gcolor2", "MPlayer", "Gnome-mplayer", "Xmradio", "Skype", "Gmchess"}
 
     for _, tc in pairs(titlebars_clients) do
       if c.class == tc then
@@ -582,4 +580,5 @@ end
 
 naughty.config.defaults.timeout = 5
 naughty.config.defaults.icon_size = 900
+naughty.config.defaults.font = "WenQuanYi Micro Hei 12"
 naughty.config.defaults.position = "top_right"

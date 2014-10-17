@@ -28,7 +28,7 @@ set novisualbell            " 关闭使用可视响铃代替呼叫
 set t_vb=                   " 置空错误铃声的终端代码
 set showmatch               " 插入括号时，短暂地跳转到匹配的对应括号
 "set matchtime=2             " 短暂跳转到匹配括号的时间
-"set nowrap                  " 不自动换行
+set nowrap                  " 不自动换行
 set magic                   " 显示括号配对情况
 set hidden                  " 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
 set smartindent             " 开启新行时使用智能自动缩进
@@ -143,7 +143,11 @@ let g:indent_guides_start_level = 2
 " php语法检查
 map <C-i> :w !php -l<CR>
 
-" set guioptions-=T
+set guioptions-=b
+set guioptions-=r
+set guioptions-=l
+set guioptions-=L
+set guioptions-=T
 " set guifont=Bitstream_Vera_Sans_Mon
 set guifont=文泉驿等宽微米黑\ 12
 
