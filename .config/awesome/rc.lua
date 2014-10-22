@@ -102,8 +102,8 @@ local vars = {
       awful.layout.layouts[1], 
       awful.layout.layouts[5], 
       awful.layout.layouts[1], 
-      awful.layout.layouts[2], 
-      awful.layout.layouts[1],
+      awful.layout.layouts[1], 
+      awful.layout.layouts[4],
       awful.layout.layouts[3], 
       awful.layout.layouts[1]
     }
@@ -160,7 +160,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock(" %e %V %a %I:%M")
+mytextclock = awful.widget.textclock(" %eD %VW %a %I:%M")
 mytextclock:buttons( 
     awful.util.table.join(
         awful.button({ }, 1, 
@@ -277,9 +277,9 @@ end
 root.buttons(awful.util.table.join(
     awful.button({ }, 1, function () mymainmenu:toggle() end),
     awful.button({ }, 2, function () awful.util.spawn_with_shell("~/work/soft/bash/clock.sh")   end),
-    awful.button({ }, 3, function () awful.util.spawn_with_shell("~/work/soft/bash/weather.sh")   end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+    awful.button({ }, 3, function () awful.util.spawn_with_shell("~/work/soft/bash/weather.sh")   end)
+    -- awful.button({ }, 4, awful.tag.viewnext),
+    -- awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
 
@@ -371,7 +371,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Up", function() awful.util.spawn_with_shell('amixer -q set Master 2%+')  end),
     awful.key({ modkey,           }, "Down", function() awful.util.spawn_with_shell('amixer -q set Master 2%-')  end),
     awful.key({ modkey,  'Control'}, "Down", function() awful.util.spawn_with_shell('amixer -q set Master toggle')  end),
-    awful.key({ modkey,           }, "m", function (c) awful.util.spawn(terminal .." -e mutt -y") end)
+    awful.key({ modkey,           }, "o", function () awful.util.spawn(terminal .." -e mutt -y") end) 
 )
 
 clientkeys = awful.util.table.join(
@@ -386,6 +386,11 @@ clientkeys = awful.util.table.join(
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
             c.minimized = true
+        end),
+    awful.key({ modkey,           }, "m", 
+      function (c) 
+          c.maximized_horizontal = not c.maximized_horizontal
+          c.maximized_vertical   = not c.maximized_vertical
         end)
 )
 
@@ -456,7 +461,7 @@ awful.rules.rules = {
     { rule_any = { class = {"Gcolor2", 'doubanfm-qt', "MPlayer","Gnome-mplayer", "Plugin-container", "Exe", "operapluginwrapper-native", "Gmchess", "Main.py"},  skip_taskbar={true}, above={true}, type={"splash", "dialog", "dropdown_menu", "popup_menu"}}, 
         callback = awful.placement.centered,
         properties = { floating = true } },
-    { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Pencil", "Pgadmin3"} , name = { "LibreOffice", "XMind"} },
+    { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Pencil"} , name = { "LibreOffice", "XMind"} },
        properties = { tag = tags[1][4], switchtotag=true } },
     { rule_any = { class = {"XTerm", 'Sakura', "URxvt"} },
        properties = { tag = tags[1][3], switchtotag=true , border_width = 0 } },
@@ -464,7 +469,7 @@ awful.rules.rules = {
        properties = { tag = tags[1][2], switchtotag=true } },
     { rule_any = { class = {"Chromium", "Firefox", "Opera", "Google-chrome-unstable", "Google-chrome-beta", "Google-chrome"} },
        properties = { tag = tags[1][1], switchtotag=true } },
-    { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer"}},
+    { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "Pgadmin3"}},
        properties = { tag = tags[1][5], switchtotag=true, sticky=false} },
     { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop", "Xchm"}, name = { "newsbeuter" } },
        properties = { tag = tags[1][6], switchtotag=true } },
@@ -580,5 +585,5 @@ end
 
 naughty.config.defaults.timeout = 5
 naughty.config.defaults.icon_size = 900
-naughty.config.defaults.font = "WenQuanYi Micro Hei 12"
+naughty.config.defaults.font = "WenQuanYi Micro Hei 14"
 naughty.config.defaults.position = "top_right"

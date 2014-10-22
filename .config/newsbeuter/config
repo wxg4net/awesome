@@ -5,7 +5,7 @@
 # vim: set ai et fenc=utf-8 ft=conf nu si sts=0 sw=4 ts=8 tw=0 :
 # ----------------------------------------------------------------------
 
-auto-reload yes
+auto-reload no
 #browser "/usr/bin/xterm -e w3m "
 browser "/usr/bin/surf -n "
 cleanup-on-quit yes
@@ -18,7 +18,7 @@ notify-program notify-send
 notify-xterm no
 notify-screen no
 player mplayer
-refresh-on-startup yes
+refresh-on-startup no
 reload-time 20
 reload-threads 2
 show-read-articles yes

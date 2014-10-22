@@ -1,4 +1,5 @@
 " 设置leader为,
+let g:miniBufExplStatusLineText = "isssssss"
 let mapleader=";"
 let g:mapleader=";"
 set noswapfile
@@ -58,6 +59,7 @@ set whichwrap=b,s,<,>,[,]
 
 map <F3> :NERDTreeToggle<CR>
 imap <F3> <ESC>:NERDTreeToggle<CR>
+map <F4> :exec("NERDTree ".expand('%:h'))<CR>
 map <F6> :BufExplorer<CR>
 imap <F6> <ESC>:BufExplorer<CR>
 
@@ -115,6 +117,13 @@ nmap <leader>3 :set filetype=css<CR>
 nmap <leader>4 :set filetype=sql<CR>
 nmap <leader>5 :set filetype=javascript<CR>
 
+map <Leader>mbe :MBEOpen<cr>
+map <Leader>mbc :MBEClose<cr>
+map <Leader>mbt :MBEToggle<cr>
+let g:miniBufExplUseSingleClick = 1
+let g:miniBufExplorerAutoStart = 0
+let g:miniBufExplStatusLineText = "-MiniBufExplorer-"
+
 " Python 文件的一般设置，比如不要 tab 等
 autocmd FileType python set tabstop=2 shiftwidth=2
 
@@ -142,6 +151,13 @@ let g:indent_guides_start_level = 2
 
 " php语法检查
 map <C-i> :w !php -l<CR>
+
+" ConqueTerm
+" let g:ConqueTerm_TERM = 'xterm'
+noremap ,tb :ConqueTermSplit zsh<CR>
+
+vnoremap <C-c><C-c> :<C-u>call conque_term#send_selected(visualmode())<CR><Esc><C-w>p
+noremap <C-c><C-c> V:call conque_term#send_selected(visualmode())<CR><Esc><C-w>p
 
 set guioptions-=b
 set guioptions-=r
