@@ -13,6 +13,9 @@ local naughty = require("naughty")
 local vicious = require("vicious")
 local revelation = require("revelation")
 
+local ldbus = require("ldbus")
+local conn = ldbus.bus.get ( "session" )
+  
 require("menu")
 require("vfunction")
 os.setlocale("zh_CN.UTF-8")
@@ -100,7 +103,7 @@ local vars = {
    -- names  = { '网络', '聊天', '终端', '编辑','文件', '阅读', '其它'},
    layout = { 
       awful.layout.layouts[1], 
-      awful.layout.layouts[5], 
+      awful.layout.layouts[1], 
       awful.layout.layouts[1], 
       awful.layout.layouts[1], 
       awful.layout.layouts[4],
@@ -135,10 +138,14 @@ mymainmenu = awful.menu({ items = {
                                     { "Chrome", "google-chrome" },
                                     { "Firefox", "firefox" },
                                     { "TM2009", "work/soft/wine-tm2009.sh" },
+                                    { "Pidgin", "pidgin" },
                                     { "网络电视", "gsopcast" },
+                                    { "Skype", "skype" },
                                     { "账单管理", "homebank" },
                                     { "矢量设计", "inkscape" },
-                                    { "便笺Gnote", "gnote" },
+                                    { "便笺", "gnote" },
+                                    { "百度云", "bcloud-gui" },
+                                    { "任务", "work/soft/python/zbj_net.py" },
                                     { "音乐播放", "work/soft/bash/mocp" },
                                     { "音乐恢复", "mocp --unpause" },
                                     { "音乐暂停", "mocp --pause" },
@@ -181,7 +188,7 @@ cpuwidget = wibox.widget.textbox()
 
 -- -- Register widget
 vicious.register(volumewidget, vicious.widgets.volume, "  $1% ", 2, "Master")
-vicious.register(netwidget, vicious.widgets.net, ' ${eth0 up_kb}  ${eth0 down_kb} Kb')
+vicious.register(netwidget, vicious.widgets.net, ' ${eth0 down_kb}  ${eth0 up_kb} Kb')
 -- vicious.register(netwidget, vicious.widgets.net, '↑${wlan0 up_kb} ↓${wlan0 down_kb}')
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1%")
 
@@ -332,7 +339,18 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey },            "x",     function () 
+      awful.util.spawn("work/soft/bash/contact-for-me.sh") 
+      awful.util.spawn("google-chrome file:///home/wxg/work/data/task/task.html") 
+      awful.tag.viewonly(awful.tag.gettags(mouse.screen)[1])
+      -- mypromptbox[mouse.screen]:run() 
+    end),
+    awful.key({ modkey },            "z",     function () 
+      awful.util.spawn("work/soft/bash/contact-for-me.sh") 
+      awful.util.spawn("firefox file:///home/wxg/work/data/task/task.html") 
+      awful.tag.viewonly(awful.tag.gettags(mouse.screen)[1])
+      -- mypromptbox[mouse.screen]:run() 
+    end),
     awful.key({ modkey },            "a",   revelation ),
     awful.key({ modkey }, "t", 
               function ()  
@@ -348,22 +366,22 @@ globalkeys = awful.util.table.join(
               end),
     awful.key({ modkey }, "v", 
               function ()  
-                awful.util.spawn(terminal .." -t weechat -e weechat") 
+                awful.util.spawn(terminal .." -t weechat -e \"sh -c 'sleep 0.5;weechat'\"") 
               end),
     awful.key({ modkey }, "s", 
               function ()  
                 awful.util.spawn(terminal .." -e offlineimap -o -q ") 
               end),
 
-    awful.key({ modkey }, "x",
+    awful.key({ modkey }, "r",
               function ()
                 awful.util.spawn(terminal .." -t newsbeuter -e newsbeuter") 
               end),
     -- Menubar
-    awful.key({ "" }, "Print", false, function () 
+    awful.key({ modkey }, "Print", false, function () 
         awful.util.spawn_with_shell("cd /tmp/; scrot -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") 
       end),
-    awful.key({ modkey }, "Print", false, function () 
+    awful.key({ "" }, "Print", false, function () 
         awful.util.spawn_with_shell("cd /tmp/; scrot -s -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") 
       end),
     awful.key({ "Control", "Shift" }, "space", function () awful.util.spawn("dmenu_run -b") end),
@@ -371,7 +389,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Up", function() awful.util.spawn_with_shell('amixer -q set Master 2%+')  end),
     awful.key({ modkey,           }, "Down", function() awful.util.spawn_with_shell('amixer -q set Master 2%-')  end),
     awful.key({ modkey,  'Control'}, "Down", function() awful.util.spawn_with_shell('amixer -q set Master toggle')  end),
-    awful.key({ modkey,           }, "o", function () awful.util.spawn(terminal .." -e mutt -y") end) 
+    awful.key({ modkey,           }, "o", function () awful.util.spawn(terminal .. " -e \"sh -c 'sleep 0.5;mutt -y'\"") end) 
 )
 
 clientkeys = awful.util.table.join(
@@ -444,7 +462,7 @@ clientbuttons = awful.util.table.join(
 root.keys(globalkeys)
 -- }}}
 
-local titlebars_clients = {"Pidgin", "Gcolor2", "MPlayer", "Gnome-mplayer", "Xmradio", "Gmchess"}
+local titlebars_clients = {"Gcolor2", "MPlayer", "Gnome-mplayer", "Xmradio", "Gmchess"}
 
 -- {{{ Rules
 awful.rules.rules = {
@@ -461,7 +479,9 @@ awful.rules.rules = {
     { rule_any = { class = {"Gcolor2", 'doubanfm-qt', "MPlayer","Gnome-mplayer", "Plugin-container", "Exe", "operapluginwrapper-native", "Gmchess", "Main.py"},  skip_taskbar={true}, above={true}, type={"splash", "dialog", "dropdown_menu", "popup_menu"}}, 
         callback = awful.placement.centered,
         properties = { floating = true } },
-    { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Pencil"} , name = { "LibreOffice", "XMind"} },
+    { rule_any = { name={"TM2009", "TM2013"} }, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
+        properties = { floating=false } },
+    { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Blender"} , name = { "LibreOffice", "XMind", "Pencil"} },
        properties = { tag = tags[1][4], switchtotag=true } },
     { rule_any = { class = {"XTerm", 'Sakura', "URxvt"} },
        properties = { tag = tags[1][3], switchtotag=true , border_width = 0 } },
@@ -469,7 +489,7 @@ awful.rules.rules = {
        properties = { tag = tags[1][2], switchtotag=true } },
     { rule_any = { class = {"Chromium", "Firefox", "Opera", "Google-chrome-unstable", "Google-chrome-beta", "Google-chrome"} },
        properties = { tag = tags[1][1], switchtotag=true } },
-    { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "Pgadmin3"}},
+    { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "Pgadmin3", "Bcloud-gui"}},
        properties = { tag = tags[1][5], switchtotag=true, sticky=false} },
     { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop", "Xchm"}, name = { "newsbeuter" } },
        properties = { tag = tags[1][6], switchtotag=true } },
@@ -564,11 +584,29 @@ client.connect_signal("manage", function (c, startup)
     end
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
+require("conky")
 
--- require("conky")
+client.connect_signal("focus", function(c) 
+    local msg = ldbus.message.new_method_call ( "org.freedesktop.AwesomeWidget" , "/org/freedesktop/AwesomeWidget/Log" , "org.freedesktop.AwesomeWidget.Log" , "focus" ) 
+    local iter = ldbus.message.iter.new ( )
+    msg:iter_init_append ( iter )
+    iter:append_basic ( c.class )
+    conn:send ( msg )
+    
+    c.border_color = beautiful.border_focus 
+  end)
+  
+client.connect_signal("unfocus", function(c) 
+    local msg = ldbus.message.new_method_call ( "org.freedesktop.AwesomeWidget" , "/org/freedesktop/AwesomeWidget/Log" , "org.freedesktop.AwesomeWidget.Log" , "unfocus" ) 
+    local iter = ldbus.message.iter.new ( )
+    msg:iter_init_append ( iter )
+    iter:append_basic ( c.class )
+    conn:send ( msg )
+    
+    c.border_color = beautiful.border_normal 
+  end)
+  
+-- }}}
 
 autorun = true
 autorunApps =
@@ -583,7 +621,7 @@ if autorun then
     end
 end
 
-naughty.config.defaults.timeout = 5
+naughty.config.defaults.timeout = 10
 naughty.config.defaults.icon_size = 900
 naughty.config.defaults.font = "WenQuanYi Micro Hei 14"
 naughty.config.defaults.position = "top_right"

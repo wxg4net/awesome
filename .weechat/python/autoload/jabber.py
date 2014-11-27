@@ -1711,8 +1711,11 @@ if __name__ == "__main__" and import_ok:
         jabber_config_read()
         for server in jabber_servers:
             if weechat.config_boolean(server.options['autoreconnect']):
-                server.ping()               # This will connect and update ping status
-                server.add_ping_timer()
+                try:
+                    server.ping()               # This will connect and update ping status
+                    server.add_ping_timer()
+                except:
+                    pass
             else:
                 if weechat.config_boolean(server.options['autoconnect']):
                     server.connect()

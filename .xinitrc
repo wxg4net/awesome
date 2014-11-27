@@ -1,4 +1,4 @@
-#!/bin/sh
+##!/bin/sh
 #
 # ~/.xinitrc
 #
@@ -14,7 +14,6 @@ fi
 export EDITOR="vim"
 export BROWSER="google-chrome"
 export TERM="sakura"
-
 #export BROWSER="chromium"
 #export BROWSER="firefox"
 
@@ -29,7 +28,7 @@ export QT_IM_MODULE="fcitx"
 export LANG="zh_CN.UTF-8"
 export LC_ALL="zh_CN.UTF-8"
 
-#export VDPAU_NVIDIA_NO_OVERLAY=1 
+export VDPAU_NVIDIA_NO_OVERLAY=1 
 
 # xset s 0 &
 # xset dpms 0 0 0 &
@@ -38,5 +37,6 @@ export LC_ALL="zh_CN.UTF-8"
 # setxkbmap -option ctrl:nocaps &
 
 # numlockx on &
+# /usr/bin/xscreensaver -no-splash &
 /usr/bin/start-pulseaudio-x11 &
 exec  awesome

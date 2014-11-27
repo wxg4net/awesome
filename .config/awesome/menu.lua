@@ -5,6 +5,7 @@
      {"Ettercap", "ettercap-pkexec -G", "/usr/share/pixmaps/ettercap.svg" },
      {"FileZilla", "filezilla", "/usr/share/icons/hicolor/16x16/apps/filezilla.png" },
      {"Firefox", "/usr/lib/firefox/firefox ", "/usr/share/icons/hicolor/16x16/apps/firefox.png" },
+     {"Google Chrome (beta)", "/usr/bin/google-chrome-beta ", "/usr/share/icons/hicolor/16x16/apps/google-chrome-beta.png" },
      {"Google Chrome (unstable)", "/usr/bin/google-chrome-unstable ", "/usr/share/icons/hicolor/16x16/apps/google-chrome-unstable.png" },
      {"Google Earth", "/opt/google/earth/free/google-earth ", "/usr/share/icons/hicolor/16x16/apps/google-earth.png" },
      {"Pidgin 互联网通讯程序", "pidgin", "/usr/share/icons/hicolor/16x16/apps/pidgin.png" },
@@ -39,6 +40,7 @@
 
  local menue1b7cee794666669f55acead93513971 = {
      {"Agave", "agave", "/usr/share/icons/hicolor/16x16/apps/agave.png" },
+     {"Blender", "blender", "/usr/share/icons/hicolor/16x16/apps/blender.png" },
      {"Dia 图表编辑器", "dia ", "/usr/share/icons/hicolor/16x16/apps/dia.png" },
      {"Feh", "feh ", "///usr/share/feh/images/feh.png" },
      {"FontForge", "fontforge ", "/usr/share/icons/hicolor/16x16/apps/fontforge.png" },
@@ -63,6 +65,7 @@
      {"PulseAudio Volume Control", "pavucontrol", "/usr/share/icons/gnome/16x16/apps/multimedia-volume-control.png" },
      {"Qt V4L2 test Utility", "qv4l2", "/usr/share/icons/hicolor/16x16/apps/qv4l2.png" },
      {"Radio Tray", "radiotray", "/usr/share/pixmaps/radiotray.png" },
+     {"VLC media player", "/usr/bin/vlc --started-from-file ", "/usr/share/icons/hicolor/16x16/apps/vlc.png" },
      {"gtk-recordMyDesktop", "gtk-recordMyDesktop", "/usr/share/pixmaps/gtk-recordmydesktop.png" },
      {"xmradio", "xmradio", "/usr/share/icons/hicolor/16x16/apps/xmradio.png" },
      {"录音机", "gnome-sound-recorder", "/usr/share/icons/hicolor/16x16/apps/gnome-sound-recorder.png" },
@@ -78,6 +81,7 @@
  }
 
  local menuba08216f13dd1742157412386eee1225 = {
+     {"Urban Terror", "urbanterror", "/usr/share/pixmaps/urbanterror.png" },
      {"天书棋谈", "gmchess", "/usr/share/pixmaps/gmchess.png" },
  }
 
@@ -137,7 +141,6 @@
      {"Xpad", "xpad"},
      {"bpython", "xterm -e /usr/bin/bpython"},
      {"bpython2", "xterm -e /usr/bin/bpython2"},
-     {"compton", "compton"},
      {"gedit", "gedit ", "/usr/share/icons/gnome/16x16/apps/accessories-text-editor.png" },
      {"地图", "gnome-maps", "/usr/share/icons/hicolor/16x16/apps/gnome-maps.png" },
      {"天气", "gapplication launch org.gnome.Weather.Application", "/usr/share/icons/hicolor/16x16/apps/org.gnome.Weather.Application.png" },

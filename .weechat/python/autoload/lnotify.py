@@ -8,7 +8,7 @@
 import weechat as weechat
 import dbus
 
-lnotify_name = "lnotify2"
+lnotify_name = "lnotify"
 lnotify_version = "0.2.1"
 lnotify_license = "GPL3"
 
@@ -19,6 +19,10 @@ true = { "on": True, "off": False }
 # but is initialized in __main__
 cfg = None
 
+sessionBus = dbus.SessionBus()
+awesomeObject = sessionBus.get_object('org.freedesktop.Notifications', '/')
+awesomeNotify = awesomeObject.get_dbus_method('Notify', 'org.freedesktop.Notifications')
+
 class config(object):
     def __init__(self):
         # default options for lnotify
@@ -26,9 +30,11 @@ class config(object):
             "highlight": "on",
             "query": "on",
             "notify_away": "off",
-            "icon": "weechat",
-            "timeout": "5000",
-            "instance": 0,
+            "icon": "/usr/share/icons/hicolor/32x32/apps/weechat.png",
+            "timeout": '5000',
+            "public": 'on',
+            "ignore": 'wxg4irc wxg4net wph xg wxg wxg4ph weechat',
+            "instance": '2',
         }
 
         self.init_config()
@@ -54,29 +60,36 @@ def handle_msg(data, pbuffer, date, tags, displayed, highlight, prefix, message)
     highlight = bool(highlight) and cfg["highlight"]
     query = true[cfg["query"]]
     notify_away = true[cfg["notify_away"]]
+    public = true[cfg["public"]]
     buffer_type = weechat.buffer_get_string(pbuffer, "localvar_type")
     away = weechat.buffer_get_string(pbuffer, "localvar_away")
-
-    if pbuffer == weechat.current_buffer():
-        return weechat.WEECHAT_RC_OK
-
+    
+    prefix_join = weechat.config_string(weechat.config_get("weechat.look.prefix_join"))
+    prefix_network = weechat.config_string(weechat.config_get("weechat.look.prefix_network"))
+    prefix_quit = weechat.config_string(weechat.config_get("weechat.look.prefix_quit"))
+    
     if away and not notify_away:
         return weechat.WEECHAT_RC_OK
 
+    
+    
+    ignore = cfg["ignore"].split(' ')
+    if prefix in ignore:
+        return weechat.WEECHAT_RC_OK
+        
     buffer_name = weechat.buffer_get_string(pbuffer, "short_name")
-
+    
     if buffer_type == "private" and query:
         notify_user(buffer_name, message)
     elif buffer_type == "channel" and highlight:
+        notify_user("{} @ {}".format(prefix, buffer_name), message)
+    elif public and prefix != prefix_quit and prefix != prefix_join and prefix != prefix_network:
         notify_user("{} @ {}".format(prefix, buffer_name), message)
 
     return weechat.WEECHAT_RC_OK
 
 def notify_user(origin, message):
-    sessionBus = dbus.SessionBus()
-    awesomeObject = sessionBus.get_object('org.freedesktop.Notifications', '/')
-    awesomeNotify = awesomeObject.get_dbus_method('Notify', 'org.freedesktop.Notifications')
-    awesomeNotify("weechat", dbus.UInt32(cfg['instance']), cfg['icon'], origin, message, [], {}, cfg['timeout'])
+    awesomeNotify("weechat", dbus.UInt32(cfg['instance']), cfg['icon'], origin, message, [], {}, dbus.UInt32(cfg['timeout']))
     return weechat.WEECHAT_RC_OK
 
 # execute initializations in order

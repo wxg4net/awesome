@@ -9,6 +9,8 @@ auto-reload no
 #browser "/usr/bin/xterm -e w3m "
 browser "/usr/bin/surf -n "
 cleanup-on-quit yes
+keep-articles-days 3
+max-items 200
 download-path "~/Downloads/"
 feed-sort-order title-dec
 max-downloads 4

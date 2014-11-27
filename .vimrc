@@ -8,7 +8,8 @@ syntax on                   " 自动语法高亮
 
 filetype plugin indent on   " 开启插件
 set mouse=a                 " 支持鼠标
-set autoindent              " 自动缩进"
+set smartindent             " 自动缩进"
+set modelines=5
 set number                  " 显示行号
 set cursorline              " 突出显示当前行
 set confirm
@@ -29,7 +30,7 @@ set novisualbell            " 关闭使用可视响铃代替呼叫
 set t_vb=                   " 置空错误铃声的终端代码
 set showmatch               " 插入括号时，短暂地跳转到匹配的对应括号
 "set matchtime=2             " 短暂跳转到匹配括号的时间
-set nowrap                  " 不自动换行
+set wrap                    " 不自动换行
 set magic                   " 显示括号配对情况
 set hidden                  " 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
 set smartindent             " 开启新行时使用智能自动缩进
@@ -170,3 +171,6 @@ set guifont=文泉驿等宽微米黑\ 12
 
 au FileType php setlocal dict+=/home/wxg/.vim/dic/php-function.txt
 au FileType php se complete+=k
+
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
