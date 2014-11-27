@@ -33,7 +33,7 @@ class config(object):
             "icon": "/usr/share/icons/hicolor/32x32/apps/weechat.png",
             "timeout": '5000',
             "public": 'on',
-            "ignore": 'wxg4irc wxg4net wph xg wxg wxg4ph weechat',
+            "ignore": 'weechat',
             "instance": '2',
         }
 

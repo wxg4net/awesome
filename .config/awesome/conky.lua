@@ -8,17 +8,17 @@ local capi = { screen = screen,
 local sqlite3 = require("lsqlite3")
 local db = sqlite3.open('./work/data/awesome.sqlite')
 
-local conky = wibox({ fg = '#ffffff77',
+local conky = wibox({ fg = '#ffffff99',
                                bg = '#00000000',
                                type = "desktop" })
 -- my screen size 1440x900
-conky:geometry({ width = 900, height = 400, x = 500, y = 500 })
+conky:geometry({ width = 900, height = 600, x = 500, y = 300 })
 conky.visible = true
 
 local tb_task = wibox.widget.textbox()
 local tb_task_margin = wibox.layout.margin()
 
-tb_task:set_font('WenQuanYi Micro Hei Mono 12')
+tb_task:set_font('WenQuanYi Micro Hei Mono 15')
 tb_task:set_text('......')
 tb_task:set_align('right')
 tb_task_margin:set_margins(10)
@@ -26,11 +26,11 @@ tb_task_margin:set_widget(tb_task)
 
 tb_task:buttons(util.table.join(
   button({ }, 1, function(c) 
-    awful.util.spawn_with_shell(terminal .. " -e myagtd.py ~/work/archiving/todo")  
+    awful.util.spawn_with_shell(terminal .. " -e myagtd.py ~/work/archiving/todo", false)  
     return false
   end),
   button({ }, 3, function(c) 
-    awful.util.spawn("./work/soft/python/awesome-log.py")  
+    awful.util.spawn("./work/soft/python/awesome-log.py", false)  
     return false
   end)
 ))

@@ -31,10 +31,18 @@ for r in lists:
     res[r[0]][2] += m
     
 message = []
+total_time = 0
 for r in res:
+  
+  if res[r][0] != 'Firefox' and res[r][0] != 'Google-chrome':
+    total_time += res[r][2]
   message.append('%10s %5s %5s' % (res[r][0], res[r][1], res[r][2]/60))
+  
+message.append('非浏览器使用时间 (%s) 分钟' % (total_time/60, ))
 
 sessionBus = dbus.SessionBus()
 awesomeWidgetObject = sessionBus.get_object('org.freedesktop.AwesomeWidget', '/')
 awesomeWidgetTaskUpdate = awesomeWidgetObject.get_dbus_method('Update', 'org.freedesktop.AwesomeWidget.Task')
 awesomeWidgetTaskUpdate('\n'.join(message))
+
+exit(0)
