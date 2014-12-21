@@ -135,10 +135,10 @@ mymainmenu = awful.menu({ items = {
                                     { "选择软件", xdgmenu },
                                     { "文件浏览器r", "rox" },
                                     { "文件浏览器p", "pcmanfm" },
-                                    { "Chrome", "google-chrome" },
                                     { "Firefox", "firefox" },
+                                    { "Chrome", "google-chrome" },
                                     { "TM2009", "work/soft/wine-tm2009.sh" },
-                                    { "Pidgin", "pidgin" },
+                                    { "Weechat", "sakura -e weechat" },
                                     { "网络电视", "gsopcast" },
                                     { "Skype", "skype" },
                                     { "账单管理", "homebank" },
@@ -366,7 +366,7 @@ globalkeys = awful.util.table.join(
               end),
     awful.key({ modkey }, "v", 
               function ()  
-                awful.util.spawn(terminal .." -t weechat -e \"sh -c 'sleep 0.5;weechat'\"") 
+                awful.util.spawn(terminal .." -t Weechat -e weechat") 
               end),
     awful.key({ modkey }, "s", 
               function ()  
@@ -584,7 +584,7 @@ client.connect_signal("manage", function (c, startup)
     end
 end)
 
-require("conky")
+require("vconky")
 
 client.connect_signal("focus", function(c) 
     local msg = ldbus.message.new_method_call ( "org.freedesktop.AwesomeWidget" , "/org/freedesktop/AwesomeWidget/Log" , "org.freedesktop.AwesomeWidget.Log" , "focus" ) 
@@ -623,5 +623,5 @@ end
 
 naughty.config.defaults.timeout = 10
 naughty.config.defaults.icon_size = 900
-naughty.config.defaults.font = "WenQuanYi Micro Hei 14"
+-- naughty.config.defaults.font = "WenQuanYi Micro Hei 14"
 naughty.config.defaults.position = "top_right"
