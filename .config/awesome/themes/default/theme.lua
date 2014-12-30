@@ -15,7 +15,7 @@ theme.icon_dir  = os.getenv("HOME") .. "/.config/awesome/themes/default"
 
 -- {{{ Styles
 
-theme.font      = "WenQuanYi Micro Hei 10"
+theme.font      = "WenQuanYi Micro Hei 11"
 -- {{{ Colors
 theme.fg_normal                     = "#bbbbbb"
 theme.fg_focus                      = "#F6784F"
@@ -74,7 +74,7 @@ theme.mouse_finder_color = "#CC9393"
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_height = "18"
+theme.menu_height = "20"
 theme.menu_width  = "160"
 -- }}}
 

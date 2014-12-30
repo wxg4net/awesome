@@ -1,4 +1,4 @@
-#  Project: lnotify2
+#  Project: lnotify
 #  Description: forked from lnotify. A libnotify script for weechat. Uses
 #  dbus org.freedesktop.Notifications:Notify
 #  Author: wxg4dev <wxg4dev@gmail.com>
@@ -19,9 +19,7 @@ true = { "on": True, "off": False }
 # but is initialized in __main__
 cfg = None
 
-sessionBus = dbus.SessionBus()
-awesomeObject = sessionBus.get_object('org.freedesktop.Notifications', '/')
-awesomeNotify = awesomeObject.get_dbus_method('Notify', 'org.freedesktop.Notifications')
+
 
 class config(object):
     def __init__(self):
@@ -72,7 +70,9 @@ def handle_msg(data, pbuffer, date, tags, displayed, highlight, prefix, message)
         return weechat.WEECHAT_RC_OK
 
     
-    
+    if prefix == "":
+        return weechat.WEECHAT_RC_OK
+        
     ignore = cfg["ignore"].split(' ')
     if prefix in ignore:
         return weechat.WEECHAT_RC_OK
@@ -89,6 +89,9 @@ def handle_msg(data, pbuffer, date, tags, displayed, highlight, prefix, message)
     return weechat.WEECHAT_RC_OK
 
 def notify_user(origin, message):
+    sessionBus = dbus.SessionBus()
+    awesomeObject = sessionBus.get_object('org.freedesktop.Notifications', '/')
+    awesomeNotify = awesomeObject.get_dbus_method('Notify', 'org.freedesktop.Notifications')
     awesomeNotify("weechat", dbus.UInt32(cfg['instance']), cfg['icon'], origin, message, [], {}, dbus.UInt32(cfg['timeout']))
     return weechat.WEECHAT_RC_OK
 

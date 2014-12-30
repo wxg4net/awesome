@@ -383,6 +383,7 @@ globalkeys = awful.util.table.join(
       end),
     awful.key({ "" }, "Print", false, function () 
         awful.util.spawn_with_shell("cd /tmp/; scrot -s -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") 
+        -- awful.util.spawn_with_shell("cd /tmp/; scrot -s -e 'curl -F \"name=@/tmp/$f\" https://img.vim-cn.com/ | xsel -ib'") 
       end),
     awful.key({ "Control", "Shift" }, "space", function () awful.util.spawn("dmenu_run -b") end),
     -- awful.key({ modkey, "Shift" }, "m", function() menubar.show() end),
@@ -495,7 +496,7 @@ awful.rules.rules = {
        properties = { tag = tags[1][6], switchtotag=true } },
     { rule_any = { class = {"Transmission", "Planner", "VirtualBox", "Gsopcast", "Homebank"} },
        properties = { tag = tags[1][7], switchtotag=true } },
-    { rule_any = { class = {"feh", 'Sxiv', 'XTerm'} },
+    { rule_any = { class = {"Unkown"} },
        properties = { maximized_vertical = true, maximized_horizontal = true  } },
     { rule_any = { class = titlebars_clients },
        properties = { border_width = 1 } },
