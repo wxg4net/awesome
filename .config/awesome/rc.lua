@@ -362,7 +362,7 @@ globalkeys = awful.util.table.join(
               end),
     awful.key({ modkey }, "p", 
               function ()  
-                awful.util.spawn("planner work/archiving/todo.planner") 
+                awful.util.spawn("planner") 
               end),
     awful.key({ modkey }, "v", 
               function ()  

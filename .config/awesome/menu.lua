@@ -5,11 +5,11 @@
      {"Ettercap", "ettercap-pkexec -G", "/usr/share/pixmaps/ettercap.svg" },
      {"FileZilla", "filezilla", "/usr/share/icons/hicolor/16x16/apps/filezilla.png" },
      {"Firefox", "/usr/lib/firefox/firefox ", "/usr/share/icons/hicolor/16x16/apps/firefox.png" },
-     {"Google Chrome (beta)", "/usr/bin/google-chrome-beta ", "/usr/share/icons/hicolor/16x16/apps/google-chrome-beta.png" },
      {"Google Chrome (unstable)", "/usr/bin/google-chrome-unstable ", "/usr/share/icons/hicolor/16x16/apps/google-chrome-unstable.png" },
      {"Google Earth", "/opt/google/earth/free/google-earth ", "/usr/share/icons/hicolor/16x16/apps/google-earth.png" },
      {"Pidgin 互联网通讯程序", "pidgin", "/usr/share/icons/hicolor/16x16/apps/pidgin.png" },
      {"Skype", "skype ", "/usr/share/icons/hicolor/16x16/apps/skype.png" },
+     {"TeamViewer 10", "/opt/teamviewer/tv_bin/script/teamviewer", "///opt/teamviewer/tv_bin/desktop/teamviewer.png" },
      {"Transmission", "transmission-gtk ", "/usr/share/icons/hicolor/16x16/apps/transmission.png" },
      {"X11VNC Server", "x11vnc -gui tray=setpass -rfbport PROMPT -bg -o %HOME/.x11vnc.log.%VNCDISPLAY", "/usr/share/icons/gnome/16x16/devices/computer.png" },
      {"Zenmap", "zenmap ", "///usr/share/zenmap/pixmaps/zenmap.png" },
@@ -22,6 +22,7 @@
  }
 
  local menudb53804b7d726967c58fcc8c9ca03d27 = {
+     {"CoolReader3", "cr3 ", "/usr/share/pixmaps/cr3.png" },
      {"Foxit Reader", "foxitreader ", "/usr/share/pixmaps/foxitreader.png" },
      {"HomeBank", "homebank ", "/usr/share/icons/hicolor/16x16/apps/homebank.png" },
      {"LibreOffice", "libreoffice ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-startcenter.png" },
@@ -32,8 +33,9 @@
      {"LibreOffice Math", "libreoffice --math ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-math.png" },
      {"LibreOffice Writer", "libreoffice --writer ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-writer.png" },
      {"Planner", "planner ", "/usr/share/pixmaps/gnome-planner.png" },
+     {"ProjectLibre", "/usr/bin/projectlibre ", "///usr/share/pixmaps/projectlibre.png" },
      {"ReText", "retext ", "/usr/share/icons/hicolor/16x16/apps/retext.png" },
-     {"XMind", "/usr/share/xmind/XMind", "/usr/share/pixmaps/xmind.png" },
+     {"XMind", "XMind", "/usr/share/pixmaps/XMind.png" },
      {"文档查看器", "evince ", "/usr/share/icons/hicolor/16x16/apps/evince.png" },
      {"星际译王", "stardict", "/usr/share/pixmaps/stardict.png" },
  }
@@ -48,6 +50,7 @@
      {"Gcolor2", "gcolor2", "///usr/share/pixmaps/gcolor2/icon.png" },
      {"Inkscape", "inkscape ", "/usr/share/icons/hicolor/16x16/apps/inkscape.png" },
      {"LibreOffice Draw", "libreoffice --draw ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-draw.png" },
+     {"Pencil", "/usr/bin/pencil", "///usr/share/pencil/skin/classic/icon.svg" },
      {"Scribus", "scribus ", "///usr/share/scribus/icons/scribus.png" },
      {"Tiled", "tiled", "/usr/share/icons/hicolor/16x16/apps/tiled.png" },
      {"Viewnior", "viewnior ", "/usr/share/icons/hicolor/16x16/apps/viewnior.png" },
@@ -61,15 +64,17 @@
      {"DeaDBeeF", "deadbeef ", "/usr/share/icons/hicolor/16x16/apps/deadbeef.png" },
      {"GNOME MPlayer", "gnome-mplayer ", "/usr/share/icons/hicolor/16x16/apps/gnome-mplayer.png" },
      {"Gsopcast", "gsopcast", "/usr/share/pixmaps/gsopcast.png" },
-     {"KW 音乐", "kwplayer", "/usr/share/icons/hicolor/24x24/apps/kwplayer.png" },
+     {"KW 音乐", "kwplayer", "/usr/share/icons/hicolor/16x16/apps/kwplayer.png" },
      {"PulseAudio Volume Control", "pavucontrol", "/usr/share/icons/gnome/16x16/apps/multimedia-volume-control.png" },
      {"Qt V4L2 test Utility", "qv4l2", "/usr/share/icons/hicolor/16x16/apps/qv4l2.png" },
      {"Radio Tray", "radiotray", "/usr/share/pixmaps/radiotray.png" },
+     {"Rhythmbox", "rhythmbox ", "/usr/share/icons/hicolor/16x16/apps/rhythmbox.png" },
      {"VLC media player", "/usr/bin/vlc --started-from-file ", "/usr/share/icons/hicolor/16x16/apps/vlc.png" },
      {"gtk-recordMyDesktop", "gtk-recordMyDesktop", "/usr/share/pixmaps/gtk-recordmydesktop.png" },
      {"xmradio", "xmradio", "/usr/share/icons/hicolor/16x16/apps/xmradio.png" },
      {"录音机", "gnome-sound-recorder", "/usr/share/icons/hicolor/16x16/apps/gnome-sound-recorder.png" },
      {"茄子", "cheese", "/usr/share/icons/hicolor/16x16/apps/cheese.png" },
+     {"视频", "totem ", "/usr/share/icons/hicolor/16x16/apps/totem.png" },
  }
 
  local menu8640cb1581c2ae2de5a1462405b2943b = {
@@ -110,11 +115,15 @@
  }
 
  local menu41282bf95e43c64d579757573a03cdde = {
+     {"Android Studio", "android-studio ", "/usr/share/pixmaps/android-studio.png" },
      {"CMake", "cmake-gui ", "/usr/share/pixmaps/CMakeSetup32.png" },
      {"GHex", "ghex ", "/usr/share/icons/hicolor/16x16/apps/ghex.png" },
      {"Geany", "geany ", "/usr/share/icons/hicolor/16x16/apps/geany.png" },
      {"Giggle", "giggle ", "/usr/share/icons/hicolor/16x16/apps/giggle.png" },
      {"Glade", "glade ", "/usr/share/icons/hicolor/16x16/apps/glade.png" },
+     {"OpenJDK Monitoring & Management Console", "/usr/bin/jconsole", "/usr/share/icons/hicolor/16x16/apps/java.png" },
+     {"OpenJDK Policy Tool", "/usr/bin/policytool", "/usr/share/icons/hicolor/16x16/apps/java.png" },
+     {"Pencil", "/usr/bin/pencil", "///usr/share/pencil/skin/classic/icon.svg" },
      {"Qt Assistant", "/usr/lib/qt/bin/assistant", "/usr/share/icons/hicolor/32x32/apps/assistant.png" },
      {"Qt Designer", "/usr/lib/qt/bin/designer", "/usr/share/icons/hicolor/128x128/apps/designer.png" },
      {"Qt Linguist", "/usr/lib/qt/bin/linguist", "/usr/share/icons/hicolor/16x16/apps/linguist.png" },
@@ -130,6 +139,7 @@
 
  local menuc9a6ee90f5d43732e3f6cf4dcaa8493c = {
      {"7-Zip FM", "7zFM", "/usr/share/icons/hicolor/32x32/apps/p7zip.png" },
+     {"Byobu Terminal", "xterm -e env TERM=xterm-256color byobu"},
      {"Catfish File Search", "catfish", "/usr/share/pixmaps/catfish.svg" },
      {"Galculator", "galculator", "/usr/share/icons/hicolor/48x48/apps/galculator.png" },
      {"Gnote", "gnote ", "/usr/share/icons/hicolor/16x16/apps/gnote.png" },
@@ -138,9 +148,9 @@
      {"ScreenRuler", "/usr/bin/screenruler", "///usr/share/pixmaps/screenruler.png" },
      {"Vi IMproved", "gvim -f ", "/usr/share/pixmaps/gvim.png" },
      {"Xchm", "xchm ", "/usr/share/pixmaps/xchm-48.png" },
-     {"Xpad", "xpad"},
      {"bpython", "xterm -e /usr/bin/bpython"},
      {"bpython2", "xterm -e /usr/bin/bpython2"},
+     {"compton", "compton"},
      {"gedit", "gedit ", "/usr/share/icons/gnome/16x16/apps/accessories-text-editor.png" },
      {"地图", "gnome-maps", "/usr/share/icons/hicolor/16x16/apps/gnome-maps.png" },
      {"天气", "gapplication launch org.gnome.Weather.Application", "/usr/share/icons/hicolor/16x16/apps/org.gnome.Weather.Application.png" },

@@ -8,8 +8,8 @@ local capi = { screen = screen,
 local sqlite3 = require("lsqlite3")
 local db = sqlite3.open('./work/data/awesome.sqlite')
 
-local conky = wibox({ fg = '#ffffff99',
-                               bg = '#00000000',
+local conky = wibox({ fg = '#ffffff'
+                               bg = '#000000',
                                type = "desktop" })
 -- my screen size 1440x900
 conky:geometry({ width = 900, height = 600, x = 500, y = 300 })

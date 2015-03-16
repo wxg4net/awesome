@@ -10,3 +10,5 @@
 	default = simple
 [gui]
   spellingdictionary = none
+[rerere]
+	enabled = true
