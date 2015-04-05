@@ -89,9 +89,9 @@ awful.layout.layouts =
 -- {{{ Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
-        -- gears.wallpaper.set('#354A70')
-        -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-        gears.wallpaper.centered(beautiful.wallpaper, s, '#242424')
+        -- gears.wallpaper.set('#444444')
+        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        --gears.wallpaper.centered(beautiful.wallpaper, s, '#242424')
     end
 end
 -- }}}
@@ -340,10 +340,10 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     awful.key({ modkey },            "x",     function () 
-      awful.util.spawn("work/soft/bash/contact-for-me.sh") 
-      awful.util.spawn("google-chrome file:///home/wxg/work/data/task/task.html") 
-      awful.tag.viewonly(awful.tag.gettags(mouse.screen)[1])
-      -- mypromptbox[mouse.screen]:run() 
+      -- awful.util.spawn("work/soft/bash/contact-for-me.sh") 
+      -- awful.util.spawn("google-chrome file:///home/wxg/work/data/task/task.html") 
+      -- awful.tag.viewonly(awful.tag.gettags(mouse.screen)[1])
+      mypromptbox[mouse.screen]:run() 
     end),
     awful.key({ modkey },            "z",     function () 
       awful.util.spawn("work/soft/bash/contact-for-me.sh") 
@@ -588,6 +588,7 @@ end)
 require("vconky")
 
 client.connect_signal("focus", function(c) 
+    if c.class == nil then return end
     local msg = ldbus.message.new_method_call ( "org.freedesktop.AwesomeWidget" , "/org/freedesktop/AwesomeWidget/Log" , "org.freedesktop.AwesomeWidget.Log" , "focus" ) 
     local iter = ldbus.message.iter.new ( )
     msg:iter_init_append ( iter )
@@ -598,6 +599,7 @@ client.connect_signal("focus", function(c)
   end)
   
 client.connect_signal("unfocus", function(c) 
+    if c.class == nil then return end
     local msg = ldbus.message.new_method_call ( "org.freedesktop.AwesomeWidget" , "/org/freedesktop/AwesomeWidget/Log" , "org.freedesktop.AwesomeWidget.Log" , "unfocus" ) 
     local iter = ldbus.message.iter.new ( )
     msg:iter_init_append ( iter )
@@ -613,6 +615,8 @@ autorun = true
 autorunApps =
 {
     "ps -e | grep fcitx || fcitx",
+    "/usr/bin/start-pulseaudio-x11",
+    "ps -e | grep compton || /usr/bin/compton  --config ~/.compton.conf -b"
 --  "ps -e | grep gnote || gnote" 
 --  "python2 /home/wxg/work/soft/python/myagtd-cli.py updateWidgetTask"
 }

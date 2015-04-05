@@ -1,1 +1,0 @@
-../imagelink.pl

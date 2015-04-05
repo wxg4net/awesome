@@ -29,14 +29,14 @@ export LANG="zh_CN.UTF-8"
 export LC_ALL="zh_CN.UTF-8"
 
 export VDPAU_NVIDIA_NO_OVERLAY=1 
-
-xset s 0 &
-xset dpms 0 0 0 &
-# compton  --backend glx  --vsync opengl --config ~/.compton.conf -b
+# /usr/bin/feh --bg-scale /home/wxg/Pictures/default
+# xset s 0 
+# xset dpms 0 0 0 
+# /usr/bin/compton  --config ~/.compton.conf -b 
 # nvidia-settings -a "[gpu:0]/GPUFanControlState=1" -a "[fan:0]/GPUCurrentFanSpeed=90"
 # setxkbmap -option ctrl:nocaps &
 
 # numlockx on &
 # /usr/bin/xscreensaver -no-splash &
-/usr/bin/start-pulseaudio-x11 &
+# /usr/bin/start-pulseaudio-x11 
 exec  awesome
