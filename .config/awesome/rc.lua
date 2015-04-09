@@ -12,10 +12,8 @@ local naughty = require("naughty")
 -- local menubar = require("menubar")
 local vicious = require("vicious")
 local revelation = require("revelation")
+local capi = { dbus = dbus }
 
-local ldbus = require("ldbus")
-local conn = ldbus.bus.get ( "session" )
-  
 require("menu")
 require("vfunction")
 os.setlocale("zh_CN.UTF-8")
@@ -69,7 +67,8 @@ awful.layout.layouts =
     awful.layout.suit.tile.right,
     awful.layout.suit.max,
     awful.layout.suit.fair,
-    awful.layout.suit.floating
+    awful.layout.suit.floating,
+    awful.layout.suit.xterm
 --[[    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
@@ -104,7 +103,7 @@ local vars = {
    layout = { 
       awful.layout.layouts[1], 
       awful.layout.layouts[1], 
-      awful.layout.layouts[1], 
+      awful.layout.layouts[6], 
       awful.layout.layouts[1], 
       awful.layout.layouts[4],
       awful.layout.layouts[3], 
@@ -485,7 +484,7 @@ awful.rules.rules = {
     { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Blender"} , name = { "LibreOffice", "XMind", "Pencil"} },
        properties = { tag = tags[1][4], switchtotag=true } },
     { rule_any = { class = {"XTerm", 'Sakura', "URxvt"} },
-       properties = { tag = tags[1][3], switchtotag=true , border_width = 0 } },
+       properties = { tag = tags[1][3], switchtotag=true } },
     { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang", "Gmchess", "Wine"} },
        properties = { tag = tags[1][2], switchtotag=true } },
     { rule_any = { class = {"Chromium", "Firefox", "Opera", "Google-chrome-unstable", "Google-chrome-beta", "Google-chrome"} },
@@ -587,38 +586,15 @@ end)
 
 require("vconky")
 
-client.connect_signal("focus", function(c) 
-    if c.class == nil then return end
-    local msg = ldbus.message.new_method_call ( "org.freedesktop.AwesomeWidget" , "/org/freedesktop/AwesomeWidget/Log" , "org.freedesktop.AwesomeWidget.Log" , "focus" ) 
-    local iter = ldbus.message.iter.new ( )
-    msg:iter_init_append ( iter )
-    iter:append_basic ( c.class )
-    conn:send ( msg )
-    
-    c.border_color = beautiful.border_focus 
-  end)
-  
-client.connect_signal("unfocus", function(c) 
-    if c.class == nil then return end
-    local msg = ldbus.message.new_method_call ( "org.freedesktop.AwesomeWidget" , "/org/freedesktop/AwesomeWidget/Log" , "org.freedesktop.AwesomeWidget.Log" , "unfocus" ) 
-    local iter = ldbus.message.iter.new ( )
-    msg:iter_init_append ( iter )
-    iter:append_basic ( c.class )
-    conn:send ( msg )
-    
-    c.border_color = beautiful.border_normal 
-  end)
-  
 -- }}}
 
 autorun = true
 autorunApps =
 {
     "ps -e | grep fcitx || fcitx",
-    "/usr/bin/start-pulseaudio-x11",
+    "ps -e | grep pulseaudio || /usr/bin/start-pulseaudio-x11",
     "ps -e | grep compton || /usr/bin/compton  --config ~/.compton.conf -b"
 --  "ps -e | grep gnote || gnote" 
---  "python2 /home/wxg/work/soft/python/myagtd-cli.py updateWidgetTask"
 }
 if autorun then
     for app = 1, #autorunApps do
