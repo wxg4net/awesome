@@ -15,7 +15,6 @@ local revelation = require("revelation")
 local capi = { dbus = dbus }
 
 require("menu")
-require("vfunction")
 os.setlocale("zh_CN.UTF-8")
 
 -- {{{ Error handling
@@ -88,9 +87,9 @@ awful.layout.layouts =
 -- {{{ Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
-        -- gears.wallpaper.set('#444444')
+        -- gears.wallpaper.set('#211626')
         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-        --gears.wallpaper.centered(beautiful.wallpaper, s, '#242424')
+        -- gears.wallpaper.centered(beautiful.wallpaper, s, '#242424')
     end
 end
 -- }}}
@@ -166,24 +165,32 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock(" %eD %VW %a %I:%M")
-mytextclock:buttons( 
+
+working_mode = 1
+local working_tip = {'hhh', '<span color=\"red\">wxg</span>'}
+local workwidget = wibox.widget.textbox()
+workwidget:buttons( 
     awful.util.table.join(
         awful.button({ }, 1, 
           function() 
-            date = awful.util.pread('cdate');  
+            working_mode = (working_mode + 1) % 2
+            local index=working_mode+1
+            workwidget:set_markup(working_tip[index])
             naughty.notify({ 
-                             icon =  os.getenv("HOME")..'/Pictures/cdate',
-                             title = "农历日期",
-                             timeout = 9,
-                             text = date })
+                             title = "模式状态",
+                             timeout = 1,
+                             text = "当前处于：".. working_tip[index] })
           end)
     ))
+workwidget:set_markup(working_tip[working_mode+1])
+
 --
 -- Initialize widget
-volumewidget = wibox.widget.textbox()
-netwidget = wibox.widget.textbox()
-cpuwidget = wibox.widget.textbox()
+local mytextclock = awful.widget.textclock("  %eD %VW %a %I:%M")
+local volumewidget = wibox.widget.textbox()
+local netwidget = wibox.widget.textbox()
+local cpuwidget = wibox.widget.textbox()
+
 
 -- -- Register widget
 vicious.register(volumewidget, vicious.widgets.volume, "  $1% ", 2, "Master")
@@ -266,6 +273,7 @@ for s = 1, screen.count() do
     right_layout:add(volumewidget)
     right_layout:add(netlayout)
     right_layout:add(cpulayout)
+    right_layout:add(workwidget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -305,7 +313,7 @@ globalkeys = awful.util.table.join(
             awful.client.focus.byidx(-1)
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
+    awful.key({ modkey,           }, "w", function () mymainmenu:toggle() end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
@@ -584,7 +592,7 @@ client.connect_signal("manage", function (c, startup)
     end
 end)
 
-require("vconky")
+require("conky")
 
 -- }}}
 
@@ -592,8 +600,10 @@ autorun = true
 autorunApps =
 {
     "ps -e | grep fcitx || fcitx",
-    "ps -e | grep pulseaudio || /usr/bin/start-pulseaudio-x11",
-    "ps -e | grep compton || /usr/bin/compton  --config ~/.compton.conf -b"
+    "xset s 0",
+    "xset dpms 0 0 0",
+    "ps -e | grep pulseaudio || /usr/bin/start-pulseaudio-x11" 
+--    "ps -e | grep compton || /usr/bin/compton  --config ~/.compton.conf -b"
 --  "ps -e | grep gnote || gnote" 
 }
 if autorun then
