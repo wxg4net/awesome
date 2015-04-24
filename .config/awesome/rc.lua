@@ -87,16 +87,16 @@ awful.layout.layouts =
 -- {{{ Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
-        -- gears.wallpaper.set('#211626')
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        gears.wallpaper.set('#468966')
+        -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
         -- gears.wallpaper.centered(beautiful.wallpaper, s, '#242424')
     end
 end
 -- }}}
 
 local vars = {
-   -- names  = {" ➊ ", " ➋ ", " ➌ ", " ➍ ", " ➎ ", " ➏ ", " ➐ "},
-   names = { "  ", "  ","  ", "  ", "  ", " ", "  " },
+   names  = {" ➊ ", " ➋ ", " ➌ ", " ➍ ", " ➎ ", " ➏ ", " ➐ "},
+   -- names = { "  ", "  ","  ", "  ", "  ", " ", "  " },
    -- names  = { ' 1 ', ' 2 ', ' 3 ', ' 4 ', ' 5 ', ' 6 ', ' 7 '},
    -- names  = { '网络', '聊天', '终端', '编辑','文件', '阅读', '其它'},
    layout = { 
@@ -147,7 +147,7 @@ mymainmenu = awful.menu({ items = {
                                     { "音乐播放", "work/soft/bash/mocp" },
                                     { "音乐恢复", "mocp --unpause" },
                                     { "音乐暂停", "mocp --pause" },
-                                    { "启动Window Xp", "VBoxManage startvm winxp"},
+                                    { "启动Window Xp", "VBoxManage startvm 'windows 7'"},
                                     { "注销", awesome.quit },
                                     { "挂起", 'systemctl suspend'},
                                     { "休眠", 'systemctl hibernate'},
@@ -353,19 +353,19 @@ globalkeys = awful.util.table.join(
       mypromptbox[mouse.screen]:run() 
     end),
     awful.key({ modkey },            "z",     function () 
-      awful.util.spawn("work/soft/bash/contact-for-me.sh") 
-      awful.util.spawn("firefox file:///home/wxg/work/data/task/task.html") 
-      awful.tag.viewonly(awful.tag.gettags(mouse.screen)[1])
+      --- awful.util.spawn("work/soft/bash/contact-for-me.sh") 
+      -- awful.util.spawn("firefox file:///home/wxg/work/data/task/task.html") 
+      -- awful.tag.viewonly(awful.tag.gettags(mouse.screen)[1])
       -- mypromptbox[mouse.screen]:run() 
     end),
     awful.key({ modkey },            "a",   revelation ),
     awful.key({ modkey }, "t", 
               function ()  
-                awful.util.spawn(terminal .." -e /usr/bin/myagtd.py -c work/archiving/todo") 
+                awful.util.spawn(terminal .." -e /usr/bin/myagtd.py -c Work/archiving/todo") 
               end),
     awful.key({ modkey }, "q", 
               function ()  
-                awful.util.spawn(terminal .." -e work/soft/bash/post-qqweibo.sh") 
+                awful.util.spawn(terminal .." -e Work/soft/bash/post-qqweibo.sh") 
               end),
     awful.key({ modkey }, "p", 
               function ()  
@@ -599,11 +599,11 @@ require("conky")
 autorun = true
 autorunApps =
 {
-    "ps -e | grep fcitx || fcitx",
     "xset s 0",
     "xset dpms 0 0 0",
-    "ps -e | grep pulseaudio || /usr/bin/start-pulseaudio-x11" 
---    "ps -e | grep compton || /usr/bin/compton  --config ~/.compton.conf -b"
+    "/usr/bin/fcitx",
+    "/usr/bin/start-pulseaudio-x11",
+    "/usr/bin/compton  --config ~/.compton.conf -b"
 --  "ps -e | grep gnote || gnote" 
 }
 if autorun then

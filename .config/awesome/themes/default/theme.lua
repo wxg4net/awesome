@@ -21,24 +21,27 @@ theme.fg_normal                     = "#bbbbbb"
 theme.fg_focus                      = "#F6784F"
 theme.fg_urgent                     = "#F6784F"
 theme.fg_minimize                   = "#bbbbbb"
-theme.bg_normal                     = "#111111"
-theme.bg_focus                      = "#111111"
-theme.bg_urgent                     = "#111111"
-theme.bg_minimize                   = "#111111"
+theme.bg_normal                     = "#222222"
+theme.bg_focus                      = "#222222"
+theme.bg_urgent                     = "#222222"
+theme.bg_systray                    = "#172E22"
+
 theme.border_width                  = "1"
 theme.border_normal                 = "#232424"
-theme.border_focus                  = "#98203B"
+theme.border_focus                  = "#777777"
 theme.border_marked                 = "#F44336"
 --theme.taglist_fg_focus               = "#F6784F"
---theme.taglist_bg_focus               = "png:" .. theme.icon_dir .. "/taglist/taglist_bg_focus.png"
---theme.tasklist_bg_normal             = "#22222200"
---theme.tasklist_bg_urgent             = "#22222200"
---theme.tasklist_bg_focus              = "#22222200"
+theme.taglist_bg_focus               = "#11111100"
+theme.taglist_bg_urgent              = "#11111100"
+theme.tasklist_bg_normal             = "#11111100"
+theme.tasklist_bg_urgent             = "#11111100"
+theme.tasklist_bg_focus              = "#11111100"
+theme.tasklist_bg_minimize           = "#11111100"
 -- }}}
 
 -- {{{ Titlebars
-theme.titlebar_bg_focus  = "#22222299"
-theme.titlebar_bg_normal = "#22222299"
+theme.titlebar_bg_focus  = "#222222"
+theme.titlebar_bg_normal = "#222222"
 -- }}}
 
 -- There are other variable sets
@@ -78,8 +81,8 @@ theme.mouse_finder_color = "#CC9393"
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_bg_normal    = "22222288"
-theme.menu_bg_focus     = "22222288"
+theme.menu_bg_normal    = "#222222bb"
+theme.menu_bg_focus     = "#222222bb"
 theme.menu_border_width = "0"
 theme.menu_height = "20"
 theme.menu_width  = "150"
