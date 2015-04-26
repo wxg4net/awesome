@@ -10,21 +10,22 @@ local db = sqlite3.open('./Work/data/awesome.sqlite')
 local naughty = require("naughty")
 conky = wibox({ fg = '#ffffff99',bg = '#ffffff00',type = "desktop" })
 -- my screen size 1440x900
-conky:geometry({ width = 700, height = 300, x = 220, y = 600 })
+conky:geometry({ width = 700, height = 100, x = 100, y = 700 })
 conky.visible = true
 conky.ontop = false
 
+-- local tb_todo = wibox.widget.textbox()
 local tb_kiss = wibox.widget.textbox()
 local tb_pbar = awful.widget.progressbar()
+-- local tb_todo_margin = wibox.layout.constraint(tb_todo, 'exact', 700, 400)
 local tb_kiss_margin = wibox.layout.margin()
 local tb_pbar_margin = wibox.layout.margin()
 
 tb_pbar:set_height(8)
-tb_pbar:set_value(0.1)
+tb_pbar:set_value(0)
 
-tb_pbar:set_border_color('#B5D0C2')
-tb_pbar:set_color('#B5D0C2')
-tb_pbar:set_background_color('#468966')
+tb_pbar:set_color('#cc6666')
+tb_pbar:set_background_color('#B5D0C2')
 
 tb_pbar_margin:set_margins(10)
 tb_pbar_margin:set_widget(tb_pbar)
@@ -47,6 +48,7 @@ conky:buttons(util.table.join(
 ))
 
 local layout = wibox.layout.fixed.vertical()
+-- layout:add(tb_todo_margin)
 layout:add(tb_kiss_margin)
 layout:add(tb_pbar_margin)
 conky:set_widget(layout)
@@ -59,7 +61,6 @@ client.connect_signal("focus", function(c)
 
 client.connect_signal("unfocus", function(c) 
     if c.class == nil then return end
-    
     db:exec('INSERT INTO log (app, type) VALUES ("'..string.gsub(c.class, " ", "_") ..'", "0")')
     c.border_color = beautiful.border_normal 
   end)

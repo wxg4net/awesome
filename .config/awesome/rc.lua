@@ -135,7 +135,7 @@ mymainmenu = awful.menu({ items = {
                                     { "文件浏览器p", "pcmanfm" },
                                     { "Firefox", "firefox" },
                                     { "Chrome", "google-chrome" },
-                                    { "TM2009", "work/soft/wine-tm2009.sh" },
+                                    { "TM2009", "Work/soft/wine-tm2009.sh" },
                                     { "Weechat", "sakura -e weechat" },
                                     { "网络电视", "gsopcast" },
                                     { "Skype", "skype" },
@@ -143,8 +143,7 @@ mymainmenu = awful.menu({ items = {
                                     { "矢量设计", "inkscape" },
                                     { "便笺", "gnote" },
                                     { "百度云", "bcloud-gui" },
-                                    { "任务", "work/soft/python/zbj_net.py" },
-                                    { "音乐播放", "work/soft/bash/mocp" },
+                                    { "音乐播放", "Work/soft/bash/mocp" },
                                     { "音乐恢复", "mocp --unpause" },
                                     { "音乐暂停", "mocp --pause" },
                                     { "启动Window Xp", "VBoxManage startvm 'windows 7'"},
@@ -177,7 +176,7 @@ workwidget:buttons(
             local index=working_mode+1
             workwidget:set_markup(working_tip[index])
             naughty.notify({ 
-                             title = "模式状态",
+                             title = "模式",
                              timeout = 1,
                              text = "当前处于：".. working_tip[index] })
           end)
@@ -290,8 +289,8 @@ end
 -- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 1, function () mymainmenu:toggle() end),
-    awful.button({ }, 2, function () awful.util.spawn_with_shell("~/work/soft/bash/clock.sh")   end),
-    awful.button({ }, 3, function () awful.util.spawn_with_shell("~/work/soft/bash/weather.sh")   end)
+    awful.button({ }, 2, function () awful.util.spawn_with_shell("~/Work/soft/bash/clock.sh")   end),
+    awful.button({ }, 3, function () awful.util.spawn_with_shell("~/Work/soft/bash/weather.sh")   end)
     -- awful.button({ }, 4, awful.tag.viewnext),
     -- awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -389,6 +388,7 @@ globalkeys = awful.util.table.join(
         awful.util.spawn_with_shell("cd /tmp/; scrot -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") 
       end),
     awful.key({ "" }, "Print", false, function () 
+        --awful.util.spawn_with_shell("scrot -s -e 'mv $f /tmp/'") 
         awful.util.spawn_with_shell("cd /tmp/; scrot -s -e 'weibo4pic.py -f /tmp/$f | xsel -ib'") 
         -- awful.util.spawn_with_shell("cd /tmp/; scrot -s -e 'curl -F \"name=@/tmp/$f\" https://img.vim-cn.com/ | xsel -ib'") 
       end),
@@ -499,7 +499,7 @@ awful.rules.rules = {
        properties = { tag = tags[1][1], switchtotag=true } },
     { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "Pgadmin3", "Bcloud-gui"}},
        properties = { tag = tags[1][5], switchtotag=true, sticky=false} },
-    { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop", "Xchm"}, name = { "newsbeuter" } },
+    { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop", "Xchm"} },
        properties = { tag = tags[1][6], switchtotag=true } },
     { rule_any = { class = {"Transmission", "Planner", "VirtualBox", "Gsopcast", "Homebank"} },
        properties = { tag = tags[1][7], switchtotag=true } },
