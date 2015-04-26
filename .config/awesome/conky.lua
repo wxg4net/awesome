@@ -7,19 +7,22 @@ local capi = { screen = screen,
 local beautiful = require("beautiful")
 local sqlite3 = require("lsqlite3")
 local db = sqlite3.open('./Work/data/awesome.sqlite')
-local naughty = require("naughty")
+-- local timer = require("gears.timer")
+
 conky = wibox({ fg = '#ffffff99',bg = '#ffffff00',type = "desktop" })
 -- my screen size 1440x900
 conky:geometry({ width = 700, height = 100, x = 100, y = 700 })
 conky.visible = true
 conky.ontop = false
 
+
 -- local tb_todo = wibox.widget.textbox()
 local tb_kiss = wibox.widget.textbox()
 local tb_pbar = awful.widget.progressbar()
--- local tb_todo_margin = wibox.layout.constraint(tb_todo, 'exact', 700, 400)
-local tb_kiss_margin = wibox.layout.margin()
-local tb_pbar_margin = wibox.layout.margin()
+
+-- local tb_todo_margin = wibox.layout.constraint(tb_todo, 'exact', 700, 600)
+local tb_kiss_margin = wibox.layout.margin(tb_kiss, 0, 0, 10, 10)
+local tb_pbar_margin = wibox.layout.margin(tb_pbar, 0, 0, 10, 0)
 
 tb_pbar:set_height(8)
 tb_pbar:set_value(0)
@@ -27,14 +30,10 @@ tb_pbar:set_value(0)
 tb_pbar:set_color('#cc6666')
 tb_pbar:set_background_color('#B5D0C2')
 
-tb_pbar_margin:set_margins(10)
-tb_pbar_margin:set_widget(tb_pbar)
-
 tb_kiss:set_font('WenQuanYi Micro Hei Mono 18')
 tb_kiss:set_align('left')
 tb_kiss:set_text("  Keep It Simple, Stupid ")
-tb_kiss_margin:set_margins(10)
-tb_kiss_margin:set_widget(tb_kiss)
+
 
 conky:buttons(util.table.join(
   button({ }, 1, function(c) 

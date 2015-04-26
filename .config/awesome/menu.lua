@@ -1,11 +1,13 @@
  local menuc8205c7636e728d448c2774e6a4a944b = {
      {"Avahi SSH服务器浏览器", "/usr/bin/bssh", "/usr/share/icons/gnome/16x16/devices/network-wired.png" },
      {"Avahi VNC服务器浏览器", "/usr/bin/bvnc", "/usr/share/icons/gnome/16x16/devices/network-wired.png" },
-     {"Dropbox", "dropboxd", "/usr/share/pixmaps/dropbox.png" },
      {"Ettercap", "ettercap-pkexec -G", "/usr/share/pixmaps/ettercap.svg" },
      {"FileZilla", "filezilla", "/usr/share/icons/hicolor/16x16/apps/filezilla.png" },
-     {"Firefox", "/usr/lib/firefox/firefox ", "/usr/share/icons/hicolor/16x16/apps/firefox.png" },
+     {"Firefox", "firefox ", "/usr/share/icons/hicolor/16x16/apps/firefox.png" },
+     {"Firefox Beta", "firefox-beta-bin ", "/usr/share/icons/hicolor/16x16/apps/firefox-beta-bin.png" },
+     {"Firefox Beta - Safe Mode", "firefox-beta-bin -safe-mode ", "/usr/share/icons/hicolor/16x16/apps/firefox-beta-bin.png" },
      {"Google Chrome (beta)", "/usr/bin/google-chrome-beta ", "/usr/share/icons/hicolor/16x16/apps/google-chrome-beta.png" },
+     {"Google Chrome (unstable)", "/usr/bin/google-chrome-unstable ", "/usr/share/icons/hicolor/16x16/apps/google-chrome-unstable.png" },
      {"Google Earth", "/opt/google/earth/free/google-earth ", "/usr/share/icons/hicolor/16x16/apps/google-earth.png" },
      {"Pidgin 互联网通讯程序", "pidgin", "/usr/share/icons/hicolor/16x16/apps/pidgin.png" },
      {"Skype", "skype ", "/usr/share/icons/hicolor/16x16/apps/skype.png" },
@@ -19,7 +21,6 @@
      {"aMuleGUI", "amulegui", "/usr/share/pixmaps/amulegui.xpm" },
      {"bcloud", "bcloud-gui", "/usr/share/icons/hicolor/16x16/apps/bcloud.png" },
      {"wxCas", "wxcas", "/usr/share/pixmaps/wxcas.xpm" },
-     {"xmradio", "xmradio", "/usr/share/icons/hicolor/16x16/apps/xmradio.png" },
      {"豆瓣FM", "doubanfm-qt", "///usr/share/pixmaps/QDoubanFM.png" },
      {"远程桌面查看器", "vinagre ", "/usr/share/icons/gnome/16x16/apps/preferences-desktop-remote-desktop.png" },
      {"阿里旺旺", "AliWangWang", "/usr/share/pixmaps/AliWangWang.png" },
@@ -64,8 +65,11 @@
 
  local menu526fe18cc54d217db3fdb0bf6c5e9bc8 = {
      {"Adobe Flash Player", "flashplayer", "/usr/share/icons/hicolor/16x16/apps/flash.png" },
-     {"Audacity", "audacity ", "/usr/share/icons/hicolor/16x16/apps/audacity.png" },
+     {"Audacity", "env UBUNTU_MENUPROXY=0 audacity ", "/usr/share/icons/hicolor/16x16/apps/audacity.png" },
      {"DeaDBeeF", "deadbeef ", "/usr/share/icons/hicolor/16x16/apps/deadbeef.png" },
+     {"Drumstick Drum Grid", "drumstick-drumgrid", "/usr/share/icons/hicolor/16x16/apps/drumstick.png" },
+     {"Drumstick MIDI Player", "drumstick-guiplayer", "/usr/share/icons/hicolor/16x16/apps/drumstick.png" },
+     {"Drumstick Virtual Piano", "drumstick-vpiano", "/usr/share/icons/hicolor/16x16/apps/drumstick.png" },
      {"GNOME MPlayer", "gnome-mplayer ", "/usr/share/icons/hicolor/16x16/apps/gnome-mplayer.png" },
      {"Gsopcast", "gsopcast", "/usr/share/pixmaps/gsopcast.png" },
      {"KW 音乐", "kwplayer", "/usr/share/icons/hicolor/16x16/apps/kwplayer.png" },
@@ -73,10 +77,10 @@
      {"PulseAudio 音量控制", "pavucontrol", "/usr/share/icons/gnome/16x16/apps/multimedia-volume-control.png" },
      {"Qt V4L2 test Utility", "qv4l2", "/usr/share/icons/hicolor/16x16/apps/qv4l2.png" },
      {"Radio Tray", "radiotray", "/usr/share/pixmaps/radiotray.png" },
-     {"Rhythmbox", "rhythmbox ", "/usr/share/icons/hicolor/16x16/apps/rhythmbox.png" },
      {"VLC media player", "/usr/bin/vlc --started-from-file ", "/usr/share/icons/hicolor/16x16/apps/vlc.png" },
+     {"VMPK", "vmpk", "/usr/share/icons/hicolor/16x16/apps/vmpk.png" },
      {"gtk-recordMyDesktop", "gtk-recordMyDesktop", "/usr/share/pixmaps/gtk-recordmydesktop.png" },
-     {"xmradio", "xmradio", "/usr/share/icons/hicolor/16x16/apps/xmradio.png" },
+     {"mpv Media Player", "mpv --profile=pseudo-gui -- ", "/usr/share/icons/hicolor/16x16/apps/mpv.png" },
      {"录音机", "gnome-sound-recorder", "/usr/share/icons/hicolor/16x16/apps/gnome-sound-recorder.png" },
      {"茄子", "cheese", "/usr/share/icons/hicolor/16x16/apps/cheese.png" },
      {"视频", "totem ", "/usr/share/icons/hicolor/16x16/apps/totem.png" },
@@ -84,10 +88,15 @@
 
  local menu8640cb1581c2ae2de5a1462405b2943b = {
      {"Cycle", "cycle", "/usr/share/pixmaps/cycle.xpm" },
+     {"Drumstick Drum Grid", "drumstick-drumgrid", "/usr/share/icons/hicolor/16x16/apps/drumstick.png" },
+     {"Drumstick MIDI Player", "drumstick-guiplayer", "/usr/share/icons/hicolor/16x16/apps/drumstick.png" },
+     {"Drumstick Virtual Piano", "drumstick-vpiano", "/usr/share/icons/hicolor/16x16/apps/drumstick.png" },
      {"LibreOffice Math", "libreoffice --math ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-math.png" },
      {"Marble", "marble-qt ", "/usr/share/icons/hicolor/16x16/apps/marble.png" },
      {"Marble", "marble-touch ", "/usr/share/icons/hicolor/16x16/apps/marble.png" },
      {"Marble", "marble-mobile ", "/usr/share/icons/hicolor/16x16/apps/marble.png" },
+     {"VMPK", "vmpk", "/usr/share/icons/hicolor/16x16/apps/vmpk.png" },
+     {"VYM - 绘制你的思维", "vym", "/usr/share/pixmaps/vym.png" },
  }
 
  local menuba08216f13dd1742157412386eee1225 = {
@@ -116,6 +125,7 @@
      {"urxvt (tabbed)", "urxvt-tabbed", "/usr/share/icons/gnome/16x16/apps/utilities-terminal.png" },
      {"打印机管理", "/usr/bin/xdg-open http://localhost:631/", "/usr/share/icons/hicolor/16x16/apps/cups.png" },
      {"文件管理器 PCManFM", "pcmanfm ", "/usr/share/icons/gnome/16x16/apps/system-file-manager.png" },
+     {"虚拟系统管理器", "virt-manager", "/usr/share/icons/hicolor/16x16/apps/virt-manager.png" },
      {"配置编辑器", "gconf-editor", "/usr/share/icons/hicolor/16x16/apps/gconf-editor.png" },
  }
 
@@ -143,7 +153,6 @@
  }
 
  local menuc9a6ee90f5d43732e3f6cf4dcaa8493c = {
-     {"7-Zip FM", "7zFM", "/usr/share/icons/hicolor/32x32/apps/p7zip.png" },
      {"Byobu Terminal", "xterm -e env TERM=xterm-256color byobu"},
      {"Catfish File Search", "catfish", "/usr/share/pixmaps/catfish.svg" },
      {"Galculator", "galculator", "/usr/share/icons/hicolor/48x48/apps/galculator.png" },

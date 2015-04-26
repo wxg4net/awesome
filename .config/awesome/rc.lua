@@ -45,7 +45,6 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init(awful.util.getdir("config").."/themes/default/theme.lua")
-revelation.init()
 
 -- This is used later as the default terminal and editor to run.
 terminal = "sakura"
@@ -85,9 +84,10 @@ awful.layout.layouts =
 -- }}}
 
 -- {{{ Wallpaper
-if beautiful.wallpaper then
+if beautiful.bg_color then
     for s = 1, screen.count() do
-        gears.wallpaper.set('#468966')
+        local bg_color = beautiful.bg_color[math.random(#beautiful.bg_color)]
+        gears.wallpaper.set(bg_color)
         -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
         -- gears.wallpaper.centered(beautiful.wallpaper, s, '#242424')
     end
@@ -290,9 +290,9 @@ end
 root.buttons(awful.util.table.join(
     awful.button({ }, 1, function () mymainmenu:toggle() end),
     awful.button({ }, 2, function () awful.util.spawn_with_shell("~/Work/soft/bash/clock.sh")   end),
-    awful.button({ }, 3, function () awful.util.spawn_with_shell("~/Work/soft/bash/weather.sh")   end)
-    -- awful.button({ }, 4, awful.tag.viewnext),
-    -- awful.button({ }, 5, awful.tag.viewprev)
+    awful.button({ }, 3, function () awful.util.spawn_with_shell("~/Work/soft/bash/weather.sh")   end),
+    awful.button({ }, 4, awful.tag.viewnext),
+    awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
 
@@ -300,7 +300,7 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
+    awful.key({ modkey,           }, ",", awful.tag.history.restore),
 
     awful.key({ modkey,           }, "j",
         function ()
@@ -357,7 +357,7 @@ globalkeys = awful.util.table.join(
       -- awful.tag.viewonly(awful.tag.gettags(mouse.screen)[1])
       -- mypromptbox[mouse.screen]:run() 
     end),
-    awful.key({ modkey },            "a",   revelation ),
+    -- awful.key({ modkey },            "a",   revelation ),
     awful.key({ modkey }, "t", 
               function ()  
                 awful.util.spawn(terminal .." -e /usr/bin/myagtd.py -c Work/archiving/todo") 

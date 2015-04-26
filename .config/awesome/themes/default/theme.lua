@@ -17,6 +17,8 @@ theme.icon_dir  = os.getenv("HOME") .. "/.config/awesome/themes/default"
 
 theme.font      = "WenQuanYi Micro Hei 11"
 -- {{{ Colors
+theme.bg_color                      = {"#468966", "#46478a", "#8a4669", "#8a8946"}
+
 theme.fg_normal                     = "#bbbbbb"
 theme.fg_focus                      = "#cc6666"
 theme.fg_urgent                     = "#cc6666"
