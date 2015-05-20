@@ -17,7 +17,14 @@ theme.icon_dir  = os.getenv("HOME") .. "/.config/awesome/themes/default"
 
 theme.font      = "WenQuanYi Micro Hei 11"
 -- {{{ Colors
-theme.bg_color                      = {"#468966", "#46478a", "#8a4669", "#8a8946"}
+--[[
+theme.bg_color                      = {
+  "#468966", "#46478a", "#8a4669", "#8a8946", "#6b5499",
+  "#2e664a", "#cc709e", "#269986", "#ffa640", "#995460",
+  "#79973F", "#ed814e", "#6f6b92", "#758851"
+}
+]]--
+theme.bg_color                      = "#758851" 
 
 theme.fg_normal                     = "#bbbbbb"
 theme.fg_focus                      = "#cc6666"
@@ -26,7 +33,7 @@ theme.fg_minimize                   = "#bbbbbb"
 theme.bg_normal                     = "#222222"
 theme.bg_focus                      = "#222222"
 theme.bg_urgent                     = "#222222"
-theme.bg_systray                    = "#172E22"
+theme.bg_systray                    = "#222222"
 
 theme.border_width                  = "0"
 theme.border_normal                 = "#232424"
@@ -84,8 +91,8 @@ theme.mouse_finder_color = "#CC9393"
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_bg_normal    = "#222222bb"
-theme.menu_bg_focus     = "#222222bb"
+theme.menu_bg_normal    = "#222222dd"
+theme.menu_bg_focus     = "#222222dd"
 theme.menu_border_width = "0"
 theme.menu_height = "20"
 theme.menu_width  = "150"

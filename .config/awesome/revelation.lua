@@ -20,6 +20,7 @@ local setmetatable = setmetatable
 local naughty      = require("naughty")
 local table        = table
 local tostring     = tostring
+local timer        = require('gears.timer')
 local capi         = {
     tag            = tag,
     client         = client,
@@ -37,7 +38,7 @@ hintbox = {} -- Table of letter wiboxes with characters as the keys
 
 revelation = {
     -- Name of expose tag.
-    tag_name = "All",
+    tag_name = "Revelation",
 
     -- Match function can be defined by user.
     -- Must accept a `rule` and `client` and return `boolean`.
@@ -100,13 +101,14 @@ local function match_clients(rule, clients, t, is_excluded)
                 end
 
             end
-
+  
             for k,v in pairs(revelation.property_to_watch) do
                 clientData[c][k] = c[k]
                 c[k] = v
 
             end
             awful.client.toggletag(t, c)
+            
         end
     end
     return clients
@@ -130,7 +132,7 @@ function revelation.expose(args)
     local t={}
     local zt={}
 
-
+    
     for scr=1,capi.screen.count() do
 
         all_tags = awful.tag.gettags(scr)
@@ -151,20 +153,17 @@ function revelation.expose(args)
 
         awful.tag.viewonly(t[scr], t.screen)
     end
-
-
+    
+    timer.delayed_call(function ()  -- BEGIN OF HACK
+    
     local hintindex = {} -- Table of visible clients with the hint letter as the keys
     local clientlist = awful.client.visible()
-    
     for i,thisclient in pairs(clientlist) do
         -- Move wiboxes to center of visible windows and populate hintindex
         local char = charorder:sub(i,i)
-             
         if char and char ~= '' then
-
             hintindex[char] = thisclient
             local geom = thisclient.geometry(thisclient)
-
             hintbox[char].visible = true
             hintbox[char].x = geom.x + geom.width/2 - hintsize/2
             hintbox[char].y = geom.y + geom.height/2 - hintsize/2
@@ -315,6 +314,8 @@ function revelation.expose(args)
         --stole it from
         --https://github.com/Elv13/awesome-configs/blob/master/widgets/layout/desktopLayout.lua#L175
     end,"fleur")
+    
+    end)  -- END OF HACK
 end
 
 -- Create the wiboxes, but don't show them
@@ -347,7 +348,7 @@ function revelation.init(args)
     end
 end
 
-function debuginfo( message )
+local function debuginfo( message )
 
     mm = message
 

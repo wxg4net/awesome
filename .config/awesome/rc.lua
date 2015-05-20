@@ -15,6 +15,9 @@ local revelation = require("revelation")
 local capi = { dbus = dbus }
 
 require("menu")
+require("unit")
+require("revelation")
+
 os.setlocale("zh_CN.UTF-8")
 
 -- {{{ Error handling
@@ -45,6 +48,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init(awful.util.getdir("config").."/themes/default/theme.lua")
+revelation.init()
 
 -- This is used later as the default terminal and editor to run.
 terminal = "sakura"
@@ -84,10 +88,11 @@ awful.layout.layouts =
 -- }}}
 
 -- {{{ Wallpaper
+-- math.randomseed(tostring(os.time()):reverse():sub(1, 6))  
 if beautiful.bg_color then
     for s = 1, screen.count() do
-        local bg_color = beautiful.bg_color[math.random(#beautiful.bg_color)]
-        gears.wallpaper.set(bg_color)
+        -- local bg_color = beautiful.bg_color[math.random(#beautiful.bg_color)]
+        gears.wallpaper.set(beautiful.bg_color)
         -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
         -- gears.wallpaper.centered(beautiful.wallpaper, s, '#242424')
     end
@@ -166,7 +171,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 -- Create a textclock widget
 
 working_mode = 1
-local working_tip = {'hhh', '<span color=\"red\">wxg</span>'}
+local working_tip = {'hhh', '<span color=\"#cc6666\">wxg</span>'}
 local workwidget = wibox.widget.textbox()
 workwidget:buttons( 
     awful.util.table.join(
@@ -190,11 +195,17 @@ local volumewidget = wibox.widget.textbox()
 local netwidget = wibox.widget.textbox()
 local cpuwidget = wibox.widget.textbox()
 
+mytextclock:buttons( 
+    awful.util.table.join(
+        awful.button({ }, 1, 
+          function() 
+            naughty.notify({ text = get_calendar() })
+          end)
+    ))
 
 -- -- Register widget
 vicious.register(volumewidget, vicious.widgets.volume, "  $1% ", 2, "Master")
 vicious.register(netwidget, vicious.widgets.net, ' ${eth0 down_kb}  ${eth0 up_kb} Kb')
--- vicious.register(netwidget, vicious.widgets.net, '↑${wlan0 up_kb} ↓${wlan0 down_kb}')
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1%")
 
 local netlayout = wibox.layout.constraint()
@@ -357,7 +368,7 @@ globalkeys = awful.util.table.join(
       -- awful.tag.viewonly(awful.tag.gettags(mouse.screen)[1])
       -- mypromptbox[mouse.screen]:run() 
     end),
-    -- awful.key({ modkey },            "a",   revelation ),
+    awful.key({ modkey },            "a",   revelation ),
     awful.key({ modkey }, "t", 
               function ()  
                 awful.util.spawn(terminal .." -e /usr/bin/myagtd.py -c Work/archiving/todo") 
@@ -368,7 +379,7 @@ globalkeys = awful.util.table.join(
               end),
     awful.key({ modkey }, "p", 
               function ()  
-                awful.util.spawn("planner") 
+                awful.util.spawn("planner Work/now.planner") 
               end),
     awful.key({ modkey }, "v", 
               function ()  
@@ -376,7 +387,7 @@ globalkeys = awful.util.table.join(
               end),
     awful.key({ modkey }, "s", 
               function ()  
-                awful.util.spawn(terminal .." -e offlineimap -o -q ") 
+                awful.util.spawn(terminal .." -e offlineimap -o ") 
               end),
 
     awful.key({ modkey }, "r",
@@ -489,7 +500,7 @@ awful.rules.rules = {
         properties = { floating = true } },
     { rule_any = { name={"TM2009", "TM2013"} }, except_any = { role={"smiley_dialog"}, name={"表情"} } , 
         properties = { floating=false } },
-    { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Blender"} , name = { "LibreOffice", "XMind", "Pencil"} },
+    { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia", "Inkscape", "Gimp", "Xulrunner-bin", "Blender"} , name = { "LibreOffice", "XMind", "Pencil","jetbrains-idea-ce"} },
        properties = { tag = tags[1][4], switchtotag=true } },
     { rule_any = { class = {"XTerm", 'Sakura', "URxvt"} },
        properties = { tag = tags[1][3], switchtotag=true } },
@@ -602,8 +613,8 @@ autorunApps =
     "xset s 0",
     "xset dpms 0 0 0",
     "/usr/bin/fcitx",
-    "/usr/bin/start-pulseaudio-x11",
-    "/usr/bin/compton  --config ~/.compton.conf -b"
+    "/usr/bin/start-pulseaudio-x11"
+--    "/usr/bin/compton  --config ~/.compton.conf -b"
 --  "ps -e | grep gnote || gnote" 
 }
 if autorun then
@@ -613,6 +624,5 @@ if autorun then
 end
 
 naughty.config.defaults.timeout = 10
-naughty.config.defaults.icon_size = 900
--- naughty.config.defaults.font = "WenQuanYi Micro Hei 14"
+naughty.config.defaults.font = "WenQuanYi Micro Hei Mono 11"
 naughty.config.defaults.position = "top_right"

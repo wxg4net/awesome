@@ -4,8 +4,6 @@
      {"Ettercap", "ettercap-pkexec -G", "/usr/share/pixmaps/ettercap.svg" },
      {"FileZilla", "filezilla", "/usr/share/icons/hicolor/16x16/apps/filezilla.png" },
      {"Firefox", "firefox ", "/usr/share/icons/hicolor/16x16/apps/firefox.png" },
-     {"Firefox Beta", "firefox-beta-bin ", "/usr/share/icons/hicolor/16x16/apps/firefox-beta-bin.png" },
-     {"Firefox Beta - Safe Mode", "firefox-beta-bin -safe-mode ", "/usr/share/icons/hicolor/16x16/apps/firefox-beta-bin.png" },
      {"Google Chrome (beta)", "/usr/bin/google-chrome-beta ", "/usr/share/icons/hicolor/16x16/apps/google-chrome-beta.png" },
      {"Google Chrome (unstable)", "/usr/bin/google-chrome-unstable ", "/usr/share/icons/hicolor/16x16/apps/google-chrome-unstable.png" },
      {"Google Earth", "/opt/google/earth/free/google-earth ", "/usr/share/icons/hicolor/16x16/apps/google-earth.png" },
@@ -55,7 +53,6 @@
      {"Geeqie", "geeqie -r ", "/usr/share/pixmaps/geeqie.png" },
      {"Inkscape", "inkscape ", "/usr/share/icons/hicolor/16x16/apps/inkscape.png" },
      {"LibreOffice Draw", "libreoffice --draw ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-draw.png" },
-     {"Pencil", "/usr/bin/pencil", "///usr/share/pencil/skin/classic/icon.svg" },
      {"Scribus", "scribus ", "///usr/share/scribus/icons/scribus.png" },
      {"Tiled", "tiled", "/usr/share/icons/hicolor/16x16/apps/tiled.png" },
      {"Viewnior", "viewnior ", "/usr/share/icons/hicolor/16x16/apps/viewnior.png" },
@@ -96,7 +93,6 @@
      {"Marble", "marble-touch ", "/usr/share/icons/hicolor/16x16/apps/marble.png" },
      {"Marble", "marble-mobile ", "/usr/share/icons/hicolor/16x16/apps/marble.png" },
      {"VMPK", "vmpk", "/usr/share/icons/hicolor/16x16/apps/vmpk.png" },
-     {"VYM - 绘制你的思维", "vym", "/usr/share/pixmaps/vym.png" },
  }
 
  local menuba08216f13dd1742157412386eee1225 = {
@@ -136,10 +132,11 @@
      {"Geany", "geany ", "/usr/share/icons/hicolor/16x16/apps/geany.png" },
      {"Giggle", "giggle ", "/usr/share/icons/hicolor/16x16/apps/giggle.png" },
      {"Glade", "glade ", "/usr/share/icons/hicolor/16x16/apps/glade.png" },
+     {"IntelliJ IDEA Community Edition", "idea.sh ", "/usr/share/pixmaps/idea.png" },
      {"OpenJDK Monitoring & Management Console", "/usr/bin/jconsole", "/usr/share/icons/hicolor/16x16/apps/java.png" },
      {"OpenJDK Policy Tool", "/usr/bin/policytool", "/usr/share/icons/hicolor/16x16/apps/java.png" },
-     {"Pencil", "/usr/bin/pencil", "///usr/share/pencil/skin/classic/icon.svg" },
      {"Qt Assistant", "/usr/lib/qt/bin/assistant", "/usr/share/icons/hicolor/32x32/apps/assistant.png" },
+     {"Qt Creator", "qtcreator ", "/usr/share/icons/hicolor/16x16/apps/QtProject-qtcreator.png" },
      {"Qt Designer", "/usr/lib/qt/bin/designer", "/usr/share/icons/hicolor/128x128/apps/QtProject-designer.png" },
      {"Qt Linguist", "/usr/lib/qt/bin/linguist", "/usr/share/icons/hicolor/16x16/apps/linguist.png" },
      {"Qt QDbusViewer ", "/usr/lib/qt/bin/qdbusviewer", "/usr/share/icons/hicolor/32x32/apps/qdbusviewer.png" },
