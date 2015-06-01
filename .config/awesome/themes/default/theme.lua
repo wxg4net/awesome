@@ -24,7 +24,7 @@ theme.bg_color                      = {
   "#79973F", "#ed814e", "#6f6b92", "#758851"
 }
 ]]--
-theme.bg_color                      = "#758851" 
+theme.bg_color                      = "#468966" 
 
 theme.fg_normal                     = "#bbbbbb"
 theme.fg_focus                      = "#cc6666"

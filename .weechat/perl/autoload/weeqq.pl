@@ -1,1 +1,0 @@
-/home/wxg/Source/weechat/weechat-webqq/weeqq.pl

@@ -43,7 +43,7 @@ tb_pbar:set_background_color('#B5D0C2')
 
 tb_kiss:set_font('WenQuanYi Micro Hei Mono 13')
 tb_kiss:set_align('left')
-tb_kiss:set_markup("  Keep It Simple, Stupid. Just Do It ")
+tb_kiss:set_markup("  Keep It Simple, Stupid. ")
 
 conky:buttons(util.table.join(
   button({ }, 1, function(c) 

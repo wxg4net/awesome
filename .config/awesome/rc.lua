@@ -171,7 +171,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 -- Create a textclock widget
 
 working_mode = 1
-local working_tip = {'hhh', '<span color=\"#cc6666\">wxg</span>'}
+local working_tip = {'  ', ' <span color="'..beautiful.fg_focus..'"></span> '}
 local workwidget = wibox.widget.textbox()
 workwidget:buttons( 
     awful.util.table.join(
@@ -180,17 +180,13 @@ workwidget:buttons(
             working_mode = (working_mode + 1) % 2
             local index=working_mode+1
             workwidget:set_markup(working_tip[index])
-            naughty.notify({ 
-                             title = "模式",
-                             timeout = 1,
-                             text = "当前处于：".. working_tip[index] })
           end)
     ))
 workwidget:set_markup(working_tip[working_mode+1])
 
 --
 -- Initialize widget
-local mytextclock = awful.widget.textclock("  %eD %VW %a %I:%M")
+local mytextclock = awful.widget.textclock("%eD %VW %a %I:%M")
 local volumewidget = wibox.widget.textbox()
 local netwidget = wibox.widget.textbox()
 local cpuwidget = wibox.widget.textbox()
@@ -280,10 +276,10 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(workwidget)
     right_layout:add(volumewidget)
     right_layout:add(netlayout)
     right_layout:add(cpulayout)
-    right_layout:add(workwidget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
