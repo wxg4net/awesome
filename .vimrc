@@ -172,5 +172,5 @@ set guifont=文泉驿等宽微米黑\ 12
 au FileType php setlocal dict+=/home/wxg/.vim/dic/php-function.txt
 au FileType php se complete+=k
 
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
+let g:calendar_google_calendar = 0
+let g:calendar_google_task = 0

@@ -40,3 +40,4 @@ export VDPAU_NVIDIA_NO_OVERLAY=1
 # /usr/bin/xscreensaver -no-splash &
 # /usr/bin/start-pulseaudio-x11 
 exec  awesome
+
