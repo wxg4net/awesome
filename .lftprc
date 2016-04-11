@@ -1,0 +1,8 @@
+debug 3
+set dns:cache-enable "no"
+set dns:order "inet"
+set ftp:charset UTF-8
+set file:charset UTF-8
+set ssl:verify-certificate no
+
+alias acd 'source -e ! /home/wxg/Work/soft/bash/lftp-acd'
