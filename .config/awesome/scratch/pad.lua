@@ -61,8 +61,8 @@ function pad.set(c, width, height, sticky, screen)
 
     local function setscratch(c)
 	    -- Scratchpad is floating and has no titlebar
-	    awful.client.floating.set(c, true); awful.titlebar.toggle(c)
-
+	    awful.client.floating.set(c, true); 
+	    
 	    -- Scratchpad client properties
 	    toggleprop(c, {ontop=true, above=true, task=true, stick=sticky})
 

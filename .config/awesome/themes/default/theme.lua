@@ -20,9 +20,9 @@ theme.fg_focus      = "#D15D59"
 theme.fg_urgent     = "#bbbbbb"
 theme.fg_minimize   = "#999999"
 
-theme.border_width  = 0
+theme.border_width  = 1
 theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
+theme.border_focus  = "#D15D59"
 theme.border_marked = "#91231c"
 
 theme.tasklist_bg_normal             = "#222222"
@@ -59,7 +59,7 @@ theme.taglist_squares_unsel = "~/.config/awesome/themes/default/taglist/squarew.
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = "~/.config/awesome/themes/default/submenu.png"
-theme.menu_bg_normal = theme.bg_normal.."bb"
+theme.menu_bg_normal = theme.bg_normal
 theme.menu_height = 20
 theme.menu_width  = 150
 

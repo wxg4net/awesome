@@ -55,6 +55,6 @@ URxvt.saveLines:3000
 !!边框
 URxvt.borderLess:False
 !!字体设置
-Xft.dpi:96
+Xft.dpi:91
 URxvt.font: xft:WenQuanYi Micro Hei Mono:size=12
 

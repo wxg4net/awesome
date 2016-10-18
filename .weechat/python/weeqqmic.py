@@ -8,7 +8,7 @@ from tweibo import *
 APP_KEY = "801068466"
 APP_SECRET = "2ca7cb35d44d9de896ad0a07cabe47b7"
 CALLBACK_URL = "http://127.0.0.1:8090/do/"
-ACCESS_TOKEN = "ca3c39682311e7b6222da279a3e1ce4a"
+ACCESS_TOKEN = "5b70a1a531f0f6ff80a39f54a97868bb"
 OPENID = "7414551EF0BDB5C42C2BC03B1E54E88E"
 
 
@@ -26,7 +26,7 @@ script_options = {
 def access_token_test():
   oauth = OAuth2Handler()
   oauth.set_app_key_secret(APP_KEY, APP_SECRET, CALLBACK_URL)
-  print oauth.get_access_token_url()
+  return oauth.get_access_token_url()
     
 def tweibo_init():
   oauth = OAuth2Handler()
@@ -37,10 +37,14 @@ def tweibo_init():
   return api
   
 def tweibo_post(buffer, message):
-  tweet2 = api.post.t__add(format="json", content=message, clientip="127.0.0.1")
-  msg = ">> time=%s, http://t.qq.com/p/t/%s" % (tweet2.data.time, tweet2.data.id)
-  weechat.prnt(buffer, "<--\t"+message)
-  weechat.prnt(buffer, "-->\t"+msg)
+  try:
+    tweet2 = api.post.t__add(format="json", content=message, clientip="127.0.0.1")
+    msg = ">> time=%s, http://t.qq.com/p/t/%s" % (tweet2.data.time, tweet2.data.id)
+    weechat.prnt(buffer, "<--\t"+message)
+    weechat.prnt(buffer, "-->\t"+msg)
+  except:
+    _url = access_token_test()
+    weechat.prnt(buffer, "<--\t"+_url)
 
 def setup_buffer(buffer):
   # set title
@@ -125,6 +129,6 @@ if __name__ == "__main__":
   buf = weechat.buffer_new("腾讯微博", "buffer_input_cb", "", "buffer_close_cb", "")
   setup_buffer(buf)
   api = tweibo_init()
-#  print_aboutme_data(buf)
-#  weechat.hook_timer(60*30*1000, 60, 0, "print_aboutme_data", buf)
+  print_aboutme_data(buf)
+  weechat.hook_timer(60*30*1000, 60, 0, "print_aboutme_data", buf)
   

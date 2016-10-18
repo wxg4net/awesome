@@ -32,8 +32,6 @@ if awesome.startup_errors then
                      text = awesome.startup_errors })
 end
 
-local function scratch_pad_client (c) scratch.pad.set(c, 0.5, 0.5, true) end
-
 -- Handle runtime errors after startup
 do
     local in_error = false
@@ -44,16 +42,18 @@ do
 
         naughty.notify({ preset = naughty.config.presets.critical,
                          title = "Oops, an error happened!",
-                         text = err })
+                         text = tostring(err) })
         in_error = false
     end)
 end
 -- }}}
 
--- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
+local function scratch_pad_client (c) scratch.pad.set(c, 0.5, 0.5, true) end
 
 revelation.init()
+
+-- {{{ Variable definitions
+-- Themes define colours, icons, font and wallpapers.
 
 -- This is used later as the default terminal and editor to run.
 terminal = "termite"
@@ -95,15 +95,6 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- {{{ Wallpaper
-if beautiful.wallpaper then
-    for s = 1, screen.count() do
-        gears.wallpaper.maximized(beautiful.wallpaper, s, true)
-        -- gears.wallpaper.set(beautiful.Wallpaper_color)
-    end
-end
--- }}}
-
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {}
@@ -118,15 +109,10 @@ myscreen = {
       awful.layout.layouts[4],
       awful.layout.layouts[3], 
       awful.layout.layouts[3], 
-      awful.layout.layouts[4], 
+      awful.layout.layouts[1], 
       awful.layout.layouts[1]
     }
 }
-for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag(myscreen.name, s, myscreen.layout)
-end
--- }}}
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
@@ -135,8 +121,8 @@ mymainmenu = awful.menu({
       { "选择软件", xdgmenu },
       { "文件浏览器r", "rox" },
       { "文件浏览器p", "pcmanfm" },
-      { "Firefox", "firefox" },
       { "Chrome", "google-chrome" },
+      { "Firefox", "firefox" },
       { "Weechat", terminal.." -e weechat -t Weechat" },
       { "Skype", "skype" },
       { "账单管理", "homebank" },
@@ -144,11 +130,12 @@ mymainmenu = awful.menu({
       { "便笺", "gnote" },
       { "hotkeys", function() return false, hotkeys_popup.show_help end},
       { "百度云", "bcloud-gui" },
-      { "TM2009", "Work/soft/wine-tm2009.sh" },
+      { "TM2009", "bin/wine-tm2009.sh" },
       { "音乐播放", "Work/soft/bash/mocp" },
       { "音乐恢复", "mocp --unpause" },
       { "音乐暂停", "mocp --pause" },
       { "启动Window Xp", "VBoxManage startvm 'win7'"},
+      { "电影", "mplayer http://150.138.8.143/00/SNM/CHANNEL00000404/index.m3u8"},
       { "注销", awesome.quit },
       { "挂起", 'systemctl suspend'},
       { "关机", 'systemctl poweroff'}
@@ -205,8 +192,21 @@ mytasklist.buttons = awful.util.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
-for s = 1, screen.count() do
-    -- Create a promptbox for each screen
+awful.screen.connect_for_each_screen(function(s)
+    -- Wallpaper
+    if beautiful.wallpaper then
+        local wallpaper = beautiful.wallpaper
+        -- If wallpaper is a function, call it with the screen
+        if type(wallpaper) == "function" then
+            wallpaper = wallpaper(s)
+        end
+        gears.wallpaper.maximized(wallpaper, s, true)
+    end
+    
+    -- Each screen has its own tag table.
+    awful.tag(myscreen.name, s, myscreen.layout)
+    
+        -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
@@ -223,30 +223,28 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibar({ position = "top", screen = s })
 
-    -- Widgets that are aligned to the left
-    local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(mylauncher)
-    left_layout:add(mytaglist[s])
-    left_layout:add(mypromptbox[s])
-
-    -- Widgets that are aligned to the right
-    local right_layout = wibox.layout.fixed.horizontal()
-    right_layout:add(mykeyboardlayout)
-
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(mytextclock)
-    right_layout:add(mylayoutbox[s])
-
-    -- Now bring it all together (with the tasklist in the middle)
-    local layout = wibox.layout.align.horizontal()
-    layout:set_left(left_layout)
-    layout:set_middle(mytasklist[s])
-    layout:set_right(right_layout)
-
-    mywibox[s]:set_widget(layout)
-end
+    -- Add widgets to the wibox
+    mywibox[s]:setup {
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+            layout = wibox.layout.fixed.horizontal,
+            mylauncher,
+            mytaglist[s],
+            mypromptbox[s],
+        },
+        mytasklist[s], -- Middle widget
+        { -- Right widgets
+            layout = wibox.layout.fixed.horizontal,
+            mykeyboardlayout,
+            wibox.widget.systray(),
+            mytextclock,
+            mylayoutbox[s],
+        },
+    }
+  end
+)
 -- }}}
 
 local function noemptytag_viewidx(i, screen) 
@@ -333,6 +331,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   function() noemptytag_viewidx(-1)  end),
   --awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Right",  function() noemptytag_viewidx(1)   end),
+    awful.key({ modkey,           }, "Tab",    function() noemptytag_viewidx(1)   end),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
     awful.key({ modkey,           }, "j",
@@ -524,8 +523,6 @@ clientbuttons = awful.util.table.join(
 root.keys(globalkeys)
 -- }}}
 
-titlebar_clients = {"Gcolor2", "MPlayer", "Gnome-mplayer", "Xmradio", "Gnote"}
-
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
@@ -537,6 +534,7 @@ awful.rules.rules = {
                      raise = true,
                      keys = clientkeys,
                      size_hints_honor = false,
+                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
                      buttons = clientbuttons } },
     { rule_any = { class = {"Xephyr", "Lightsoff", "Firefox", "Xulrunner", "rdesktop", "Inkscape"} } , 
         properties = { floating=false } },
@@ -547,98 +545,81 @@ awful.rules.rules = {
         properties = { floating=false } },
     { rule_any = { class={"Gnote"} }, 
         callback = scratch_pad_client },
+    { rule_any = {class = { "Gcolor2", "MPlayer", "Gnome-mplayer", "Xmradio" } }, 
+       properties = { titlebars_enabled = true , border_width = 1} },
     { rule_any = { class = {"Geany", "Scribus", "Gvim", "Dia"} , name = { "LibreOffice", "XMind", "Pencil","jetbrains-idea-ce"} },
-       properties = { tag = tags[1][2], switchtotag=true } },
+       properties = { screen = 1, tag = " 2 ", switchtotag=true } },
     { rule_any = { class = {"XTerm", 'Sakura', "URxvt", "Termite"} }, except_any = { name={"dropshell"} },
-       properties = { tag = tags[1][3], switchtotag=true } },
+       properties = { screen = 1, tag = " 3 ", switchtotag=true } },
     { rule_any = { class = {"Pidgin", "Skype", "Openfetion", "AliWangWang", "Gmchess", "Wine"}, name = {"Weechat"} },
-       properties = { tag = tags[1][8], switchtotag=true } },
-    { rule_any = { class = {"Chromium", "google-chrome-unstable", "Google-chrome-beta", "google-chrome", "Firefox"} },
-       properties = { tag = tags[1][1], switchtotag=true } },
+       properties = { screen = 1, tag = " 8 ", switchtotag=true } },
+    { rule_any = { class = {"Chromium", "Google-chrome-unstable", "Google-chrome-beta", "google-chrome", "Firefox"} },
+       properties = { screen = 1, tag = " reborn ", switchtotag=true } },
     { rule_any = { class = {"Pcmanfm", "Nautilus", "File-roller", "Thunar", "ROX-Filer", "Pgadmin3", "Bcloud-gui"}},
-       properties = { tag = tags[1][5], switchtotag=true, sticky=false} },
+       properties = { screen = 1, tag = " 5 ", switchtotag=true, sticky=false} },
     { rule_any = { class = {"Evince", "Liferea", "Genymotion", "rdesktop", "Xchm"} },
-       properties = { tag = tags[1][6], switchtotag=true } },
+       properties = {screen = 1, tag = " 6 ", switchtotag=true } },
     { rule_any = { class = {"Transmission", "Planner", "VirtualBox", "Gsopcast", "Homebank"} },
-       properties = { tag = tags[1][7], switchtotag=true } },
+       properties = { screen = 1, tag = " 7 ", switchtotag=true } },
     { rule_any = { class = {"Inkscape", "Gimp", "Blender"} , name = { "LibreOffice", "XMind", "Pencil","jetbrains-idea-ce"} },
-       properties = { tag = tags[1][6], switchtotag=true } },
+       properties = { screen = 1, tag = " 2 ", switchtotag=true } },
     { rule_any = { class = {"Unkown"} },
-       properties = { maximized_vertical = true, maximized_horizontal = true  } },
-    { rule_any = { class = titlebars_clients },
-       properties = { border_width = 1 } },
+       properties = { maximized_vertical = true, maximized_horizontal = true  } }
 }
 -- }}}
+
+
+-- Add a titlebar if titlebars_enabled is set to true in the rules.
+client.connect_signal("request::titlebars", function(c)
+    -- buttons for the titlebar
+    local buttons = awful.util.table.join(
+        awful.button({ }, 1, function()
+            client.focus = c
+            c:raise()
+            awful.mouse.client.move(c)
+        end),
+        awful.button({ }, 3, function()
+            client.focus = c
+            c:raise()
+            awful.mouse.client.resize(c)
+        end)
+    )
+
+    awful.titlebar(c) : setup {
+        { -- Left
+            awful.titlebar.widget.iconwidget(c),
+            buttons = buttons,
+            layout  = wibox.layout.fixed.horizontal
+        },
+        { -- Middle
+            { -- Title
+                align  = "center",
+                widget = awful.titlebar.widget.titlewidget(c)
+            },
+            buttons = buttons,
+            layout  = wibox.layout.flex.horizontal
+        },
+        { -- Right
+            awful.titlebar.widget.floatingbutton (c),
+            awful.titlebar.widget.maximizedbutton(c),
+            awful.titlebar.widget.stickybutton   (c),
+            awful.titlebar.widget.ontopbutton    (c),
+            awful.titlebar.widget.closebutton    (c),
+            layout = wibox.layout.fixed.horizontal()
+        },
+        layout = wibox.layout.align.horizontal
+    }
+end)
+
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
-    if not awesome.startup then
-        -- Set the windows at the slave,
-        -- i.e. put it at the end of others instead of setting it master.
-        -- awful.client.setslave(c)
-
-        -- Put windows in a smart way, only if they does not set an initial position.
-        if not c.size_hints.user_position and not c.size_hints.program_position then
-            awful.placement.no_overlap(c)
-            awful.placement.no_offscreen(c)
-        end
-    elseif not c.size_hints.user_position and not c.size_hints.program_position then
-        -- Prevent clients from being unreachable after screen count change
+   if awesome.startup and
+      not c.size_hints.user_position
+      and not c.size_hints.program_position then
+        -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
-    end
-
-    local titlebars_enabled = false
-
-    for _, tc in pairs(titlebar_clients) do
-      if c.class == tc then
-        titlebars_enabled = true
-        break
-      end
-    end
-    
-    if titlebars_enabled  then
-        -- buttons for the titlebar
-        local buttons = awful.util.table.join(
-                awful.button({ }, 1, function()
-                    client.focus = c
-                    c:raise()
-                    awful.mouse.client.move(c)
-                end),
-                awful.button({ }, 3, function()
-                    client.focus = c
-                    c:raise()
-                    awful.mouse.client.resize(c)
-                end)
-                )
-
-        -- Widgets that are aligned to the left
-        local left_layout = wibox.layout.fixed.horizontal()
-        left_layout:add(awful.titlebar.widget.iconwidget(c))
-        left_layout:buttons(buttons)
-
-        -- Widgets that are aligned to the right
-        local right_layout = wibox.layout.fixed.horizontal()
-        right_layout:add(awful.titlebar.widget.floatingbutton(c))
-        right_layout:add(awful.titlebar.widget.maximizedbutton(c))
-        right_layout:add(awful.titlebar.widget.stickybutton(c))
-        right_layout:add(awful.titlebar.widget.ontopbutton(c))
-        right_layout:add(awful.titlebar.widget.closebutton(c))
-
-        -- The title goes in the middle
-        local middle_layout = wibox.layout.flex.horizontal()
-        local title = awful.titlebar.widget.titlewidget(c)
-        title:set_align("center")
-        middle_layout:add(title)
-        middle_layout:buttons(buttons)
-
-        -- Now bring it all together
-        local layout = wibox.layout.align.horizontal()
-        layout:set_left(left_layout)
-        layout:set_right(right_layout)
-        layout:set_middle(middle_layout)
-
-        awful.titlebar(c):set_widget(layout)
     end
 end)
 
@@ -669,6 +650,3 @@ for app = 1, #autorunapps do
     awful.util.spawn_with_shell(autorunapps[app])
 end
 
-naughty.config.defaults.timeout = 10
-naughty.config.defaults.font = "WenQuanYi Micro Hei Mono 11"
-naughty.config.defaults.position = "top_right"

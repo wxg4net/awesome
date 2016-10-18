@@ -1,7 +1,6 @@
  local menuc8205c7636e728d448c2774e6a4a944b = {
      {"Avahi SSH 服务器的浏览器", "/usr/bin/bssh", "/usr/share/icons/gnome/16x16/devices/network-wired.png" },
      {"Avahi VNC 服务器的浏览器", "/usr/bin/bvnc", "/usr/share/icons/gnome/16x16/devices/network-wired.png" },
-     {"BCloud", "bcloud-gui", "/usr/share/icons/hicolor/16x16/apps/bcloud.png" },
      {"FileZilla", "filezilla", "/usr/share/icons/hicolor/16x16/apps/filezilla.png" },
      {"Firefox", "firefox ", "/usr/share/icons/hicolor/16x16/apps/firefox.png" },
      {"Google Chrome", "/usr/bin/google-chrome-stable ", "/usr/share/icons/hicolor/16x16/apps/google-chrome.png" },
@@ -10,7 +9,9 @@
      {"Pidgin 互联网通讯程序", "pidgin", "/usr/share/icons/hicolor/16x16/apps/pidgin.png" },
      {"SftpMan", "sftpman-gtk", "/usr/share/pixmaps/sftpman-gtk.png" },
      {"Skype", "skype ", "/usr/share/icons/hicolor/16x16/apps/skype.png" },
+     {"Steam", "/usr/bin/steam ", "/usr/share/icons/hicolor/16x16/apps/steam.png" },
      {"Transmission", "transmission-gtk ", "/usr/share/icons/hicolor/16x16/apps/transmission.png" },
+     {"X11VNC Server", "x11vnc -gui tray=setpass -rfbport PROMPT -bg -o %HOME/.x11vnc.log.%VNCDISPLAY", "/usr/share/icons/gnome/16x16/devices/computer.png" },
      {"Zenmap", "zenmap ", "///usr/share/zenmap/pixmaps/zenmap.png" },
      {"Zenmap (as root)", "/usr/share/zenmap/su-to-zenmap.sh ", "///usr/share/zenmap/pixmaps/zenmap.png" },
      {"gFTP", "gftp ", "/usr/share/pixmaps/gftp.png" },
@@ -22,6 +23,7 @@
      {"Edit E-book", "ebook-edit --detach ", "/usr/share/icons/hicolor/16x16/apps/calibre-ebook-edit.png" },
      {"FBReader", "FBReader ", "/usr/share/pixmaps/FBReader.png" },
      {"GnuCash", "gnucash ", "/usr/share/icons/hicolor/16x16/apps/gnucash-icon.png" },
+     {"HomeBank", "homebank ", "/usr/share/icons/hicolor/16x16/apps/homebank.png" },
      {"KchmViewer", "kchmviewer ", "/usr/share/pixmaps/kchmviewer.png" },
      {"LibreOffice", "libreoffice ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-startcenter.png" },
      {"LibreOffice Base", "libreoffice --base ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-base.png" },
@@ -32,6 +34,9 @@
      {"LibreOffice Writer", "libreoffice --writer ", "/usr/share/icons/hicolor/16x16/apps/libreoffice-writer.png" },
      {"Lucidor E-book Reader", "lucidor ", "/usr/share/pixmaps/lucidor.xpm" },
      {"Planner", "planner ", "/usr/share/pixmaps/gnome-planner.png" },
+     {"WPS 文字", "/usr/bin/wps ", "/usr/share/icons/hicolor/48x48/apps/wps-office-wpsmain.png" },
+     {"WPS 演示", "/usr/bin/wpp ", "/usr/share/icons/hicolor/48x48/apps/wps-office-wppmain.png" },
+     {"WPS 表格", "/usr/bin/et ", "/usr/share/icons/hicolor/48x48/apps/wps-office-etmain.png" },
      {"文档查看器", "evince ", "/usr/share/icons/hicolor/16x16/apps/evince.png" },
      {"星际译王", "stardict", "/usr/share/pixmaps/stardict.png" },
  }
@@ -39,7 +44,6 @@
  local menue1b7cee794666669f55acead93513971 = {
      {"Blender", "blender ", "/usr/share/icons/hicolor/16x16/apps/blender.png" },
      {"E-book Viewer", "ebook-viewer --detach ", "/usr/share/icons/hicolor/16x16/apps/calibre-viewer.png" },
-     {"Feh", "feh ", "///usr/share/feh/images/feh.png" },
      {"GNU 图像处理程序", "gimp-2.8 ", "/usr/share/icons/hicolor/16x16/apps/gimp.png" },
      {"Gcolor2", "gcolor2", "///usr/share/pixmaps/gcolor2/icon.png" },
      {"LRF Viewer", "lrfviewer ", "/usr/share/icons/hicolor/16x16/apps/calibre-viewer.png" },
@@ -57,6 +61,8 @@
      {"HDSPConf", "hdspconf", "/usr/share/pixmaps/hdspconf.png" },
      {"HDSPMixer", "hdspmixer", "/usr/share/pixmaps/hdspmixer.png" },
      {"KW 音乐", "kwplayer", "/usr/share/icons/hicolor/16x16/apps/kwplayer.png" },
+     {"Kodi media center", "kodi", "/usr/share/icons/hicolor/16x16/apps/kodi.png" },
+     {"PulseAudio 音量控制", "pavucontrol", "/usr/share/icons/gnome/16x16/apps/multimedia-volume-control.png" },
      {"Qt V4L2 test Utility", "qv4l2", "/usr/share/icons/hicolor/16x16/apps/qv4l2.png" },
      {"Radio Tray", "radiotray", "/usr/share/pixmaps/radiotray.png" },
      {"VLC media player", "/usr/bin/vlc --started-from-file ", "/usr/share/icons/hicolor/16x16/apps/vlc.png" },
@@ -70,7 +76,7 @@
  }
 
  local menuba08216f13dd1742157412386eee1225 = {
-     {"Urban Terror", "urbanterror", "/usr/share/pixmaps/urbanterror.png" },
+     {"Steam", "/usr/bin/steam ", "/usr/share/icons/hicolor/16x16/apps/steam.png" },
  }
 
  local menude71492af019157e5a5ef958b570e760 = {
@@ -93,10 +99,15 @@
  }
 
  local menu41282bf95e43c64d579757573a03cdde = {
+     {"Android SDK", "android", "/usr/share/pixmaps/android-sdk.png" },
+     {"Android Studio", "android-studio ", "/usr/share/pixmaps/android-studio.png" },
      {"CMake", "cmake-gui ", "/usr/share/icons/hicolor/32x32/apps/CMakeSetup.png" },
      {"Geany", "geany ", "/usr/share/icons/hicolor/16x16/apps/geany.png" },
      {"Genymotion", "/usr/bin/genymotion", "///opt/genymotion/icons/icon.png" },
      {"Glade", "glade ", "/usr/share/icons/hicolor/16x16/apps/glade.png" },
+     {"Java Mission Control", "/usr/lib/jvm/java-8-jdk/bin/jmc", "/usr/share/icons/hicolor/16x16/apps/sun-java-jdk8.png" },
+     {"Java Monitoring and Management Console", "/usr/lib/jvm/java-8-jdk/bin/jconsole", "/usr/share/icons/hicolor/16x16/apps/sun-java-jdk8.png" },
+     {"Java VisualVM", "/usr/lib/jvm/java-8-jdk/bin/jvisualvm", "/usr/share/icons/hicolor/16x16/apps/sun-java-jdk8.png" },
      {"Qt Assistant", "/usr/lib/qt/bin/assistant", "/usr/share/icons/hicolor/32x32/apps/assistant.png" },
      {"Qt Designer", "/usr/lib/qt/bin/designer", "/usr/share/icons/hicolor/128x128/apps/QtProject-designer.png" },
      {"Qt Linguist", "/usr/lib/qt/bin/linguist", "/usr/share/icons/hicolor/16x16/apps/linguist.png" },
@@ -117,6 +128,7 @@
      {"Xchm", "xchm ", "/usr/share/pixmaps/xchm-48.png" },
      {"Xpad", "xpad"},
      {"Zim 桌面维基", "zim ", "/usr/share/pixmaps/zim.png" },
+     {"compton", "compton", "/usr/share/icons/hicolor/48x48/apps/compton.png" },
      {"归档管理器", "file-roller ", "/usr/share/icons/hicolor/16x16/apps/file-roller.png" },
      {"星际译王", "stardict", "/usr/share/pixmaps/stardict.png" },
  }

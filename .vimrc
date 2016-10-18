@@ -112,11 +112,13 @@ vmap <C-v> c<ESC>"+p
 imap <C-v> <ESC>"+pa
 
 "一些不错的映射转换语法（如果在一个文件中混合了不同语言时有用）
-nmap <leader>1 :set filetype=xhtml<CR>
-nmap <leader>2 :set filetype=php<CR>
+
+nmap <leader>1 :set filetype=php<CR>
+nmap <leader>2 :set filetype=xhtml<CR>
 nmap <leader>3 :set filetype=css<CR>
-nmap <leader>4 :set filetype=sql<CR>
-nmap <leader>5 :set filetype=javascript<CR>
+nmap <leader>4 :set filetype=javascript<CR>
+nmap <leader>5 :set filetype=sql<CR>
+
 
 map <Leader>mbe :MBEOpen<cr>
 map <Leader>mbc :MBEClose<cr>
@@ -142,9 +144,6 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(so|dll)$',
   \ 'link': '',
   \ }
-
-" Python 依赖 python-jedi
-let g:jedi#completions_command = "<C-N>"
 
 let g:indent_guides_auto_colors = 1
 let g:indent_guides_guide_size = 1
@@ -172,5 +171,5 @@ set guifont=文泉驿等宽微米黑\ 12
 au FileType php setlocal dict+=/home/wxg/.vim/dic/php-function.txt
 au FileType php se complete+=k
 
-let g:calendar_google_calendar = 0
-let g:calendar_google_task = 0
+
+let g:indent_guides_enable_on_vim_startup = 1
